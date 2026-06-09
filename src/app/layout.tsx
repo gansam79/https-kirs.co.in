@@ -30,6 +30,14 @@ export const metadata: Metadata = {
   title: "KIRS | Recovering Forgotten Wealth & Unclaimed Investments",
   description: "India's trusted partner for IEPF claims, lost shares, duplicate share certificates, transmission of shares, physical to demat conversion, and NRI investment recovery. Kalavati Investment & Recovery Services.",
   keywords: "IEPF Claim Recovery, Lost Shares Recovery India, Unclaimed Dividend Recovery, Share Transmission Services, Physical Share to Demat, NRI Share Recovery, Investor Claim Assistance",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

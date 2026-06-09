@@ -1,0 +1,37 @@
+<svg
+  viewBox="0 0 200 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {/* Dark Navy Circle Background for high contrast in both dark and light browser themes */}
+  <circle cx="100" cy="100" r="95" fill="#0F172A" />
+
+  {/* Centered & Scaled Logo Icon */}
+  <g transform="translate(20, 20) scale(0.8)">
+    {/* 1. Serif Vertical Stem of the K in clean white */}
+    <path
+      d="M 34,30 L 94,30 L 94,38 L 80,38 L 80,162 L 94,162 L 94,170 L 34,170 L 34,162 L 48,162 L 48,38 L 34,38 Z"
+      fill="#FFFFFF"
+    />
+
+    {/* 2. Lower Diagonal Leg in clean white */}
+    <path
+      d="M 80,95 L 146,162 L 126,162 L 126,170 L 186,170 L 186,162 L 166,162 L 105,95 Z"
+      fill="#FFFFFF"
+    />
+
+    {/* 3. Gold Diagonal Arrow pointing Up-Right */}
+    <g transform="rotate(-45 100 100)">
+      {/* Shaft */}
+      <path
+        d="M 15,90 L 152,90 L 152,110 L 15,110 Z"
+        fill="#D4AF37"
+      />
+      {/* Arrowhead */}
+      <polygon
+        points="145,70 185,100 145,130 152,100"
+        fill="#D4AF37"
+      />
+    </g>
+  </g>
+</svg>

@@ -370,7 +370,7 @@ export default function Home() {
             <div className="lg:col-span-7 space-y-6">
               <span className="text-xs font-semibold uppercase tracking-wider text-secondary">The Face of Trust & Authority</span>
               <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold leading-tight">
-                Built on 25+ Years of Corporate & Investment Auditing
+                Built on 30+ Years of Share Market & Investment Auditing
               </h2>
               <div className="w-16 h-[2px] bg-secondary"></div>
               
@@ -426,7 +426,7 @@ export default function Home() {
               <p className="text-xs text-slate-400 uppercase tracking-widest">Document Audit Accuracy</p>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">25+ Years</div>
+              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">30+ Years</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest">Consulting Experience</p>
             </div>
           </div>

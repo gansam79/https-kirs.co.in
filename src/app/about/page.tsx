@@ -93,7 +93,7 @@ export default function AboutPage() {
             <h2 className="font-serif text-2xl font-bold text-primary">Chief Consultant profile</h2>
             <div className="w-16 h-[1px] bg-slate-200"></div>
             <p className="text-slate-650 text-xs leading-relaxed">
-              Our chief advisor, Mr. P.D. Samgir, brings over 25 years of investment analysis, corporate registers research, and document vetting expertise. His extensive experience auditing folio discrepancies and navigating RTA checklists serves as the foundation for the KIRS processing framework.
+              Our chief advisor, Mr. P.D. Samgir, brings over 30 years of investment analysis, corporate registers research, and document vetting expertise. His extensive experience auditing folio discrepancies and navigating RTA checklists serves as the foundation for the KIRS processing framework.
             </p>
             <p className="text-slate-650 text-xs leading-relaxed">
               Under his guidance, our documentation team reviews matching metrics, drafts complex affidavits, tracks MCA compliance revisions, and acts as the liaison with Registrars (RTAs) and bank managers. We ensure that our dossiers are audit-ready before submission, keeping rejections to an absolute minimum.
@@ -102,8 +102,47 @@ export default function AboutPage() {
             <div className="pt-2 flex items-center gap-2.5">
               <Award className="w-5 h-5 text-secondary shrink-0" />
               <span className="text-xs font-semibold text-slate-800">
-                25+ Years of Unclaimed Asset Auditing & Estate Documentation
+                30+ Years of Share Market & Unclaimed Asset Auditing
               </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Career Timeline from the old website */}
+        <div className="bg-white border border-slate-200 rounded-lg p-6 sm:p-10 shadow-sm space-y-8">
+          <div className="text-center max-w-xl mx-auto space-y-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Our Journey</span>
+            <h2 className="font-serif text-2xl font-bold text-primary">Professional Career Timeline</h2>
+            <div className="w-12 h-[1.5px] bg-secondary mx-auto"></div>
+          </div>
+          
+          <div className="relative border-l border-slate-200 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-8 py-2">
+            <div className="relative">
+              {/* Circle dot marker */}
+              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4.5 h-4.5 rounded-full bg-white border-2 border-secondary flex items-center justify-center">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+              </div>
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-secondary font-mono">1990 – 2015</span>
+                <h4 className="font-serif text-base font-bold text-primary">Share Market Broker & Portfolio Manager</h4>
+                <p className="text-slate-500 text-xs leading-relaxed max-w-3xl">
+                  Managed retail client portfolios and executed market strategies for institutional and high-net-worth individuals. Built strong relationships and developed deep expertise in risk management, stock market dynamics, and corporate registry analysis in Pune.
+                </p>
+              </div>
+            </div>
+            
+            <div className="relative">
+              {/* Circle dot marker */}
+              <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4.5 h-4.5 rounded-full bg-white border-2 border-secondary flex items-center justify-center">
+                <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+              </div>
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-secondary font-mono">2015 – PRESENT</span>
+                <h4 className="font-serif text-base font-bold text-primary">Independent Financial Consultant & Founder</h4>
+                <p className="text-slate-500 text-xs leading-relaxed max-w-3xl">
+                  Established an independent consulting practice specializing in IEPF claim processing, demat account assistance, investment recovery, and personalized financial counselling. Led successful unclaimed share recoveries for over 1,000 clients across India.
+                </p>
+              </div>
             </div>
           </div>
         </div>
