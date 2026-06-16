@@ -25,7 +25,7 @@ export default function ServicesPage() {
           </h1>
           <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
           <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Choose from our 12 specialized areas of asset restoration and documentation consulting. We help clear mismatches and compile compliance files.
+            Choose from our 5 specialized areas of asset restoration and documentation consulting. We help clear mismatches and compile compliance files.
           </p>
         </div>
 

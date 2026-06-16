@@ -177,7 +177,7 @@ export default function AboutPage() {
           <div className="space-y-1">
             <h4 className="text-xs font-semibold text-primary uppercase tracking-wider">Disclaimer & Transparency Commitment</h4>
             <p className="text-[10px] text-slate-500 leading-normal">
-              KIRS (Kalavati Investment & Recovery Services) operates strictly as an independent consultancy and documentation assistance provider. We are not a government office and have no official affiliations with the IEPF Authority, SEBI, MCA, RBI, depositories (NSDL/CDSL), or RTAs. The service fees charged represent physical documentation drafts, record reviews, and procedural advisories.
+              KIRS (Kalavati Investment & Recovery Services) operates strictly as an independent consultancy and documentation assistance provider. We are not a government office and have no official affiliations with the IEPF Authority, SEBI, MCA, or RBI. The service fees charged represent physical documentation drafts, record reviews, and procedural advisories.
             </p>
           </div>
         </div>

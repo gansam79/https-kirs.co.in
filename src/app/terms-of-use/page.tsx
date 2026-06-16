@@ -30,7 +30,7 @@ export default function TermsOfUsePage() {
             <span>2. No Government Affiliations</span>
           </div>
           <p>
-            You explicitly acknowledge that KIRS is a private corporate advisory entity. KIRS has no partnerships, approvals, or official affiliations with the IEPF Authority, Ministry of Corporate Affairs (MCA), Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), or Registrars & Transfer Agents (RTAs) like Link Intime or KFin Tech.
+            You explicitly acknowledge that KIRS is a private corporate advisory entity. KIRS has no partnerships, approvals, or official affiliations with the IEPF Authority, Ministry of Corporate Affairs (MCA), Securities and Exchange Board of India (SEBI), or Reserve Bank of India (RBI).
           </p>
 
           <div className="flex items-center gap-2 text-primary font-bold text-sm pb-2 border-b border-slate-100 pt-4">

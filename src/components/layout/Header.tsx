@@ -43,7 +43,7 @@ export default function Header() {
             Compliance Notice:
           </span>
           <span>
-            KIRS is a consultancy & documentation assistance service provider. KIRS is not affiliated with SEBI, RBI, IEPF Authority, NSDL, CDSL, RTAs or any Government Authority.
+            KIRS is a consultancy & documentation assistance service provider. KIRS is not affiliated with SEBI, RBI, IEPF Authority or any Government Authority.
           </span>
         </div>
       </div>

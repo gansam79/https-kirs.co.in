@@ -6,12 +6,11 @@ import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck } fr
 import Logo from "./Logo";
 
 const recoveryServices = [
-  { name: "IEPF Claim Recovery", href: "/services/iepf-claim-recovery" },
-  { name: "Lost Share Recovery", href: "/services/lost-share-recovery" },
-  { name: "Share Transmission", href: "/services/transmission-of-shares" },
-  { name: "Duplicate Share Certificates", href: "/services/duplicate-share-certificates" },
-  { name: "Demat Conversion Assistance", href: "/services/demat-conversion" },
-  { name: "NRI Share Recovery", href: "/services/nri-share-recovery" },
+  { name: "IEPF Process", href: "/services/iepf-process-assistance" },
+  { name: "Lost of Shares & Mutual Fund Recovery", href: "/services/lost-shares-mutual-fund-recovery" },
+  { name: "Unclaimed Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit-recovery" },
+  { name: "Unclaimed Insurance Recovery", href: "/services/unclaimed-insurance-recovery" },
+  { name: "Unclaimed Pension & Retirement Benefits Recovery", href: "/services/unclaimed-pension-retirement-benefits-recovery" },
 ];
 
 const quickLinks = [
@@ -173,7 +172,7 @@ export default function Footer() {
             <div className="space-y-1">
               <p className="font-semibold text-slate-200">Legal Disclaimer & Compliance</p>
               <p className="leading-relaxed">
-                KIRS (Kalavati Investment & Recovery Services) is an independent consultancy and documentation assistance service provider. KIRS is not affiliated with the Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), Investor Education and Protection Fund (IEPF) Authority, National Securities Depository Limited (NSDL), Central Depository Services Limited (CDSL), Registrar and Transfer Agents (RTAs) or any other Government Authority or regulatory body in India.
+                KIRS (Kalavati Investment & Recovery Services) is an independent consultancy and documentation assistance service provider. KIRS is not affiliated with the Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), Investor Education and Protection Fund (IEPF) Authority or any other Government Authority or regulatory body in India.
               </p>
               <p className="leading-relaxed mt-1.5">
                 We assist investors with procedural advisory, records tracking, and compilation of standard legal documentation (succession applications, duplicate bond declarations, demat checklists, etc.). KIRS does not guarantee the approval or final resolution of claims, as approvals are strictly subject to review, audits, and verification by the respective corporate registries, RTAs, and governmental regulatory entities.

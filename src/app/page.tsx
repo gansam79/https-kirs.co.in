@@ -60,25 +60,25 @@ const chooseReasons = [
 
 const caseStudies = [
   {
-    company: "Reliance Industries Shares",
+    company: "Blue-chip Equity Shares",
     category: "Physical Share Recovery",
-    problem: "A client inherited 200 physical shares of Reliance Industries from their grandfather. The certificates were damaged, signatures mismatched, and dividends unclaimed for 12 years (transferred to IEPF).",
+    problem: "A client inherited 200 physical shares of a leading blue-chip company from their grandfather. The certificates were damaged, signatures mismatched, and dividends unclaimed for 12 years (transferred to IEPF).",
     solution: "KIRS filed Form ISR-2 for bank signature updates, obtained duplicate share certificates, processed succession paperwork, and submitted Form IEPF-5 with RTA representation.",
-    outcome: "Recovered shares valued at ₹5.8 Lakhs and credited ₹84,000 in accrued dividends directly to the client's demat account.",
+    outcome: "Recovered shares valued significantly and credited accrued dividends directly to the client's demat account.",
   },
   {
-    company: "Tata Group Holdings",
+    company: "Large Cap Auto & Chemical Shares",
     category: "Legal Heir Transmission",
-    problem: "Following a shareholder's sudden demise, family members discovered physical shares of Tata Motors and Tata Chemicals with no nominee registered. The total value exceeded ₹15 Lakhs.",
+    problem: "Following a shareholder's sudden demise, family members discovered physical shares of top-tier auto and chemical companies with no nominee registered. The total value was substantial.",
     solution: "We drafted the legal heir representation, coordinated the filing for a Succession Certificate in the civil court, compiled RTA-compliant surety bonds, and guided them through final transmission.",
-    outcome: "Successfully dematerialized and transferred shares worth ₹18.4 Lakhs to the legal heirs in 7 months.",
+    outcome: "Successfully dematerialized and transferred the shares to the legal heirs in 7 months.",
   },
   {
     company: "NRI Investor Recovery",
     category: "Embassy Coordination",
-    problem: "An OCI holder residing in the UK possessed shares in ITC Ltd under their old Indian address. They faced rejections from the RTA due to KYC mismatches and non-resident status.",
+    problem: "An OCI holder residing in the UK possessed shares in a leading FMCG company under their old Indian address. They faced rejections from the RTA due to KYC mismatches and non-resident status.",
     solution: "We drafted a custom Power of Attorney (POA), guided them through London consulate attestation, updated passport/address records with the RTA, and registered a new NRO bank account.",
-    outcome: "Recovered shares and accumulated dividends worth ₹12.5 Lakhs without the client needing to fly to India.",
+    outcome: "Recovered shares and accumulated dividends without the client needing to fly to India.",
   },
 ];
 
@@ -193,7 +193,7 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4 py-6">
                 <div className="bg-slate-900/80 p-3.5 rounded border border-slate-800/80">
                   <span className="text-[10px] text-slate-400 uppercase tracking-wider">Unclaimed Value</span>
-                  <div className="text-lg font-bold text-white font-serif mt-1">₹1.48 Crores</div>
+                  <div className="text-lg font-bold text-white font-serif mt-1">₹XX.XX L</div>
                   <span className="text-[9px] text-[#D4AF37] font-semibold mt-1 block">RTA Folio Verified</span>
                 </div>
                 <div className="bg-slate-900/80 p-3.5 rounded border border-slate-800/80">
@@ -207,16 +207,16 @@ export default function Home() {
               <div className="space-y-3 pt-2">
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Recent Audited Portfolios</span>
                 <div className="flex justify-between items-center text-xs p-2.5 bg-slate-900/40 rounded border border-slate-800/50">
-                  <span className="font-medium">Reliance Industries Ltd (250 Shares)</span>
-                  <span className="text-secondary font-bold font-serif">₹7.25 L</span>
+                  <span className="font-medium">Blue-chip Equity (250 Shares)</span>
+                  <span className="text-secondary font-bold font-serif">Valuation Pending</span>
                 </div>
                 <div className="flex justify-between items-center text-xs p-2.5 bg-slate-900/40 rounded border border-slate-800/50">
-                  <span className="font-medium">Tata Motors Ltd (Folio Transmission)</span>
-                  <span className="text-secondary font-bold font-serif">₹12.40 L</span>
+                  <span className="font-medium">Auto Sector Shares (Transmission)</span>
+                  <span className="text-secondary font-bold font-serif">Valuation Pending</span>
                 </div>
                 <div className="flex justify-between items-center text-xs p-2.5 bg-slate-900/40 rounded border border-slate-800/50">
-                  <span className="font-medium">ITC Ltd (Signature Correction)</span>
-                  <span className="text-secondary font-bold font-serif">₹3.80 L</span>
+                  <span className="font-medium">FMCG Sector Shares (Signature)</span>
+                  <span className="text-secondary font-bold font-serif">Valuation Pending</span>
                 </div>
               </div>
 
@@ -305,7 +305,7 @@ export default function Home() {
             ))}
           </div>
           <p className="text-[9px] text-slate-400 text-center mt-4 italic">
-            *Disclaimer: Educational representation of the Indian corporate registrar registry systems. KIRS has no official affiliation with MCA, SEBI, NSDL, CDSL or IEPF.
+            *Disclaimer: Educational representation of the Indian corporate registrar registry systems. KIRS has no official affiliation with MCA, SEBI or IEPF.
           </p>
         </div>
       </section>
@@ -357,7 +357,7 @@ export default function Home() {
               href="/services"
               className="inline-flex items-center gap-1.5 bg-primary text-white hover:bg-slate-900 font-bold px-6 py-3 rounded text-xs uppercase tracking-wider shadow transition-colors"
             >
-              Explore All 12 Recovery Services
+              Explore All Recovery Services
               <ChevronRight className="w-4 h-4 text-secondary" />
             </Link>
           </div>
