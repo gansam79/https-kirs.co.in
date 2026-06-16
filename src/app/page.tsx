@@ -230,6 +230,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Flyers and Specific Focus Areas */}
+      <section className="bg-white py-16 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Our Core Expertise</span>
+            <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold mt-2">
+              Individual, Corporate & NRI Investment
+            </h2>
+            <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
+              We provide dedicated solutions to track, consolidate, and retrieve lost wealth across multiple financial asset classes for individuals and NRIs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-16">
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2">1) Unclaimed Shares & Mutual Fund</h4>
+              <p className="text-xs text-slate-500">Transmission of shares and conversion from Physical to Demat, along with mutual fund recovery.</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <Building className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2">2) Unclaimed Bank Deposits</h4>
+              <p className="text-xs text-slate-500">Recovery of forgotten Fixed Deposits (FD) and inactive Savings accounts from bank registries.</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2">3) Unclaimed Insurance</h4>
+              <p className="text-xs text-slate-500">Retrieval of maturity proceeds and death benefits from forgotten or misplaced Life insurance policies.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
+            <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
+              <Image src="/flyer1.png" alt="Recovery Services Flyer 1" width={400} height={500} className="w-full h-auto object-cover" />
+            </div>
+            <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
+              <Image src="/flyer2.png" alt="Recovery Services Flyer 2" width={400} height={500} className="w-full h-auto object-cover" />
+            </div>
+            <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
+              <Image src="/flyer3.png" alt="Recovery Services Flyer 3" width={400} height={500} className="w-full h-auto object-cover" />
+            </div>
+            <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200 bg-slate-900 flex items-center justify-center p-4 h-full min-h-[300px]">
+              <Image src="/logo4.png" alt="KIRS Logo 4" width={300} height={300} className="w-full h-auto object-contain" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 2. Authority Bar */}
       <section className="bg-slate-50 border-b border-slate-200 py-8 select-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -269,7 +324,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesData.slice(0, 6).map((service) => (
+            {servicesData.slice(0, 10).map((service) => (
               <div
                 key={service.slug}
                 className="bg-slate-50 rounded p-6 shadow-sm border border-slate-200/80 hover:shadow-lg hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between"

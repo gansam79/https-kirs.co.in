@@ -304,5 +304,62 @@ export const servicesData: Service[] = [
         answer: "A Succession Certificate is a document issued by a civil court in India certifying the legal heirs of a deceased person authorized to inherit debts and securities."
       }
     ]
+  },
+  {
+    slug: "unclaimed-bank-deposits",
+    title: "Unclaimed Bank Deposits – FD, Savings",
+    shortDesc: "Recover forgotten fixed deposits and inactive savings account balances.",
+    longDesc: "Bank accounts and fixed deposits that have not been operated for 10 years are classified as unclaimed, and the funds are transferred to the RBI's Depositor Education and Awareness (DEA) Fund. We assist individuals and legal heirs in tracking these dormant accounts, completing the necessary KYC, and reclaiming the funds from the respective banks.",
+    timeline: "2 - 4 Months",
+    eligibility: [
+      "Account holders who have forgotten their old savings accounts or FDs.",
+      "Legal heirs of deceased individuals who held unrecorded bank deposits."
+    ],
+    documents: [
+      "Old bank passbooks, FD receipts, or account statements",
+      "Claim form prescribed by the respective bank",
+      "KYC documents (PAN and Aadhaar)",
+      "Death certificate and legal heirship proof (in case of deceased holder)",
+      "Indemnity bond and surety (if required by the bank)"
+    ],
+    faqs: [
+      {
+        question: "What happens to bank deposits unclaimed for 10 years?",
+        answer: "Banks transfer deposits inactive for 10 or more years to the RBI's DEA Fund. However, depositors or their legal heirs can still claim these funds from the bank."
+      },
+      {
+        question: "Can I claim a fixed deposit without the original receipt?",
+        answer: "Yes, you can claim it by submitting an indemnity bond and fulfilling the bank's procedural requirements for lost FD receipts."
+      }
+    ]
+  },
+  {
+    slug: "unclaimed-insurance-life",
+    title: "Unclaimed Insurance – Life",
+    shortDesc: "Retrieve maturity proceeds and death benefits from forgotten life insurance policies.",
+    longDesc: "Millions of rupees remain unclaimed with life insurance companies like LIC and private insurers due to lost policy documents, change of address, or families being unaware of the deceased's policies. We help trace these policies, prepare the required claim forms, and secure the payouts.",
+    timeline: "1 - 3 Months",
+    eligibility: [
+      "Policyholders whose maturity benefits have remained unclaimed.",
+      "Nominees or legal heirs of a deceased policyholder."
+    ],
+    documents: [
+      "Original policy bond (if available) or indemnity for lost bond",
+      "Claim discharge form",
+      "Death certificate (for death claims)",
+      "Bank account details (cancelled cheque)",
+      "KYC documents of the claimant"
+    ],
+    faqs: [
+      {
+        question: "How do I know if my deceased parent had a life insurance policy?",
+        answer: "We can help you trace potential policies by checking old bank statements for premium deductions or directly inquiring with major insurers using the deceased's details."
+      },
+      {
+        question: "Is there a time limit to claim life insurance benefits?",
+        answer: "While it is best to claim as soon as possible, you can still claim past-due maturity or death benefits. Unclaimed amounts are held by the insurer and eventually transferred to the Senior Citizens' Welfare Fund, but remain claimable."
+      }
+    ]
   }
 ];
+

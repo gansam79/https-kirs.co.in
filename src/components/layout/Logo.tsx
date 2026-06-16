@@ -17,39 +17,8 @@ export default function Logo({ className = "", variant = "full", light = false }
   const textGray = light ? "#E2E8F0" : "#475569";
 
   const renderIcon = (sizeClass = "w-12 h-12") => (
-    <div className={`${sizeClass} shrink-0 relative`}>
-      <svg
-        viewBox="0 0 200 200"
-        className="w-full h-full"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* 1. Serif Vertical Stem of the K */}
-        <path
-          d="M 34,30 L 94,30 L 94,38 L 80,38 L 80,162 L 94,162 L 94,170 L 34,170 L 34,162 L 48,162 L 48,38 L 34,38 Z"
-          fill={blueColor}
-        />
-
-        {/* 2. Navy Blue Lower Diagonal Leg */}
-        <path
-          d="M 80,95 L 146,162 L 126,162 L 126,170 L 186,170 L 186,162 L 166,162 L 105,95 Z"
-          fill={blueColor}
-        />
-
-        {/* 3. Gold Diagonal Arrow pointing Up-Right */}
-        <g transform="rotate(-45 100 100)">
-          {/* Shaft */}
-          <path
-            d="M 15,90 L 152,90 L 152,110 L 15,110 Z"
-            fill={goldColor}
-          />
-          {/* Arrowhead */}
-          <polygon
-            points="145,70 185,100 145,130 152,100"
-            fill={goldColor}
-          />
-        </g>
-      </svg>
+    <div className={`${sizeClass} shrink-0 relative flex items-center justify-center bg-white rounded-md overflow-hidden`}>
+      <img src="/logo4.png" alt="KI&RS Logo" className="w-full h-full object-contain" />
     </div>
   );
 
@@ -74,7 +43,7 @@ export default function Logo({ className = "", variant = "full", light = false }
               className="text-[9px] font-sans tracking-widest uppercase font-semibold hidden sm:block mt-0.5"
               style={{ color: textGray }}
             >
-              Kalavati Investment & Recovery
+              Kalavati Investment & Recovery Services
             </span>
           </div>
         </div>

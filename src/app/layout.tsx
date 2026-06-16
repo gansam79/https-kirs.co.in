@@ -27,16 +27,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "KIRS | Recovering Forgotten Wealth & Unclaimed Investments",
+  title: "KI&RS | Kalavati Investment & Recovery Services | Recovering Forgotten Wealth",
   description: "India's trusted partner for IEPF claims, lost shares, duplicate share certificates, transmission of shares, physical to demat conversion, and NRI investment recovery. Kalavati Investment & Recovery Services.",
   keywords: "IEPF Claim Recovery, Lost Shares Recovery India, Unclaimed Dividend Recovery, Share Transmission Services, Physical Share to Demat, NRI Share Recovery, Investor Claim Assistance",
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" }
-    ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 
@@ -49,8 +46,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${playfair.variable} ${inter.variable} ${poppins.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-slate-800">
+      <body className="min-h-full flex flex-col font-sans bg-white text-slate-800" suppressHydrationWarning>
         <Header />
         <main className="flex-1 flex flex-col">
           {children}
