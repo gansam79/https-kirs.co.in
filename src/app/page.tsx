@@ -240,7 +240,7 @@ export default function Home() {
             </h2>
             <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
             <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-              We provide dedicated solutions to track, consolidate, and retrieve lost wealth across multiple financial asset classes for individuals and NRIs.
+              With millions of accounts remaining inactive, regulatory bodies like the RBI and IEPF encourage citizens to actively trace their forgotten assets. We provide dedicated solutions to track, consolidate, and retrieve lost wealth across multiple financial asset classes for individuals, corporates, and NRIs, ensuring your rightful legacy is secured.
             </p>
           </div>
 
@@ -249,22 +249,22 @@ export default function Home() {
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <TrendingUp className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">1) Unclaimed Shares & Mutual Fund</h4>
-              <p className="text-xs text-slate-500">Transmission of shares and conversion from Physical to Demat, along with mutual fund recovery.</p>
+              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Shares & Mutual Fund</h4>
+              <p className="text-xs text-slate-500">Transmission, Physical to Demat, and complete portfolio recovery.</p>
             </div>
             <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <Building className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">2) Unclaimed Bank Deposits</h4>
-              <p className="text-xs text-slate-500">Recovery of forgotten Fixed Deposits (FD) and inactive Savings accounts from bank registries.</p>
+              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Bank Deposits</h4>
+              <p className="text-xs text-slate-500">FD, Saving, and dormant account retrieval following central bank (DEA Fund) guidelines.</p>
             </div>
             <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">3) Unclaimed Insurance</h4>
-              <p className="text-xs text-slate-500">Retrieval of maturity proceeds and death benefits from forgotten or misplaced Life insurance policies.</p>
+              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Insurance</h4>
+              <p className="text-xs text-slate-500">Life insurance maturity, death benefits, and survival claims.</p>
             </div>
           </div>
 

@@ -27,7 +27,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "KI&RS | Kalavati Investment & Recovery Services | Recovering Forgotten Wealth",
+  title: "KI&RS | Kalavati Investment & Recovery Services | Your Money, Your Rights - Our Responsibility",
   description: "India's trusted partner for IEPF claims, lost shares, duplicate share certificates, transmission of shares, physical to demat conversion, and NRI investment recovery. Kalavati Investment & Recovery Services.",
   keywords: "IEPF Claim Recovery, Lost Shares Recovery India, Unclaimed Dividend Recovery, Share Transmission Services, Physical Share to Demat, NRI Share Recovery, Investor Claim Assistance",
   icons: {

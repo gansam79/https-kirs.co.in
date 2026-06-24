@@ -45,6 +45,12 @@ export default function Logo({ className = "", variant = "full", light = false }
             >
               Kalavati Investment & Recovery Services
             </span>
+            <span
+              className="text-[8px] font-sans tracking-widest uppercase font-semibold hidden sm:block mt-0.5"
+              style={{ color: goldColor }}
+            >
+              Your Money, Your Rights - Our Responsibility
+            </span>
           </div>
         </div>
       </div>
@@ -81,6 +87,13 @@ export default function Logo({ className = "", variant = "full", light = false }
         style={{ color: light ? "#ECEFF1" : "#334155" }}
       >
         Kalavati Investment & Recovery Services
+      </p>
+      {/* Tagline */}
+      <p
+        className="text-[9px] sm:text-[10px] font-serif tracking-wide mt-1"
+        style={{ color: goldColor }}
+      >
+        Your Money, Your Rights - Our Responsibility
       </p>
     </div>
   );
