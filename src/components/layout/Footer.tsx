@@ -17,7 +17,8 @@ const quickLinks = [
   { name: "Regulatory Awareness Hub", href: "/regulatory-awareness" },
   { name: "Eligibility Checker Tool", href: "/eligibility-checker" },
   { name: "Document Checklist Generator", href: "/document-checklist" },
-  { name: "About KIRS Experts", href: "/about" },
+  { name: "About KIRS", href: "/about" },
+  { name: "Client Reviews & Feedback", href: "/reviews" },
   { name: "Knowledge Center / Blog", href: "/knowledge-center" },
   { name: "Contact Consultation", href: "/contact" },
 ];
@@ -68,9 +69,9 @@ export default function Footer() {
       </div>
 
       {/* Main Links Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
         {/* About Column */}
-        <div className="space-y-4">
+        <div className="md:col-span-6 lg:col-span-4 space-y-4">
           <Link href="/" className="inline-block text-left" aria-label="KIRS - Kalavati Investment & Recovery Services">
             <Logo variant="horizontal" light={true} className="!items-start" />
           </Link>
@@ -109,7 +110,7 @@ export default function Footer() {
         </div>
 
         {/* Services Column */}
-        <div>
+        <div className="md:col-span-6 lg:col-span-3">
           <h4 className="font-serif text-base text-white font-medium mb-4">Recovery Services</h4>
           <ul className="space-y-2 text-sm">
             {recoveryServices.map((service) => (
@@ -123,7 +124,7 @@ export default function Footer() {
         </div>
 
         {/* Quick Links Column */}
-        <div>
+        <div className="md:col-span-6 lg:col-span-2">
           <h4 className="font-serif text-base text-white font-medium mb-4">Resources</h4>
           <ul className="space-y-2 text-sm">
             {quickLinks.map((link) => (
@@ -137,13 +138,13 @@ export default function Footer() {
         </div>
 
         {/* Contact Column */}
-        <div className="space-y-4">
+        <div className="md:col-span-6 lg:col-span-3 space-y-4">
           <h4 className="font-serif text-base text-white font-medium mb-4">Expert Office</h4>
           <ul className="space-y-3.5 text-sm">
             <li className="flex gap-2.5 items-start">
               <MapPin className="w-4 h-4 text-secondary shrink-0 mt-1" />
               <span className="text-slate-400">
-                Dattanagar, Katraj,
+                33/1B/1, Dattanagar, Katraj,
                 <br />
                 Pune, Maharashtra, 411046, India
               </span>
@@ -172,7 +173,7 @@ export default function Footer() {
             <div className="space-y-1">
               <p className="font-semibold text-slate-200">Legal Disclaimer & Compliance</p>
               <p className="leading-relaxed">
-                KIRS (Kalavati Investment & Recovery Services) is an independent consultancy and documentation assistance service provider. KIRS is not affiliated with the Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), Investor Education and Protection Fund (IEPF) Authority or any other Government Authority or regulatory body in India.
+                KIRS (Kalavati Investment & Recovery Services) is an independent consultancy and documentation assistance service provider. KIRS is not affiliated with the Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), Insurance Regulatory and Development Authority of India (IRDA), Pension Fund Regulatory and Development Authority (PFRDA), Investor Education and Protection Fund (IEPF) Authority or any other Government Authority or regulatory body in India.
               </p>
               <p className="leading-relaxed mt-1.5">
                 We assist investors with procedural advisory, records tracking, and compilation of standard legal documentation (succession applications, duplicate bond declarations, demat checklists, etc.). KIRS does not guarantee the approval or final resolution of claims, as approvals are strictly subject to review, audits, and verification by the respective corporate registries, RTAs, and governmental regulatory entities.
@@ -184,6 +185,7 @@ export default function Footer() {
             <div className="flex gap-4">
               <Link href="/privacy-policy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
               <Link href="/terms-of-use" className="hover:text-slate-300 transition-colors">Terms of Use</Link>
+              <Link href="/compliance-notice" className="hover:text-slate-300 transition-colors">Compliance Notice</Link>
               <Link href="/cookie-policy" className="hover:text-slate-300 transition-colors">Cookie Settings</Link>
             </div>
           </div>

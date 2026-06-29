@@ -31,9 +31,9 @@ export const metadata: Metadata = {
   description: "India's trusted partner for IEPF claims, lost shares, duplicate share certificates, transmission of shares, physical to demat conversion, and NRI investment recovery. Kalavati Investment & Recovery Services.",
   keywords: "IEPF Claim Recovery, Lost Shares Recovery India, Unclaimed Dividend Recovery, Share Transmission Services, Physical Share to Demat, NRI Share Recovery, Investor Claim Assistance",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-header.jpeg`,
+    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-header.jpeg`,
+    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-header.jpeg`,
   },
 };
 

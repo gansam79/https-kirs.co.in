@@ -120,12 +120,12 @@ export default function Home() {
               <Award className="w-3.5 h-3.5" />
               <span>India's Leading Investor Wealth Restoration Experts</span>
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-              Recover Your Lost Shares, <br />
-              <span className="text-gradient-gold font-serif">IEPF Claims</span> & Hidden Investments
+              Recover Your Lost Shares, Dividends, Deposites, Insurance <br />
+              {/* <span className="text-gradient-gold font-serif">IEPF Claims</span> & Hidden Investments */}
             </h1>
-            
+
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
               India's trusted partner for physical share dematerialization, deceased inheritance transmission, signature updates, and complex documentation services.
             </p>
@@ -177,7 +177,7 @@ export default function Home() {
               className="glass-panel-dark p-6 rounded-lg relative shadow-2xl overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/10 blur-xl rounded-full"></div>
-              
+
               {/* Fake dashboard headers */}
               <div className="flex justify-between items-center pb-4 border-b border-slate-800">
                 <div>
@@ -240,7 +240,7 @@ export default function Home() {
             </h2>
             <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
             <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-              With millions of accounts remaining inactive, regulatory bodies like the RBI and IEPF encourage citizens to actively trace their forgotten assets. We provide dedicated solutions to track, consolidate, and retrieve lost wealth across multiple financial asset classes for individuals, corporates, and NRIs, ensuring your rightful legacy is secured.
+              With millions of accounts remaining inactive, regulatory bodies like the RBI, IEPF, IRDA and PFRDA encourage citizens to actively trace their forgotten assets. We provide dedicated solutions to track, consolidate, and retrieve lost wealth across multiple financial asset classes for individuals, corporates, and NRIs, ensuring your rightful legacy is secured.
             </p>
           </div>
 
@@ -270,16 +270,16 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
             <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
-              <Image src="/flyer1.png" alt="Recovery Services Flyer 1" width={400} height={500} className="w-full h-auto object-cover" />
+              <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/flyer1.png`} alt="Recovery Services Flyer 1" width={400} height={500} className="w-full h-auto object-cover" />
             </div>
             <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
-              <Image src="/flyer2.png" alt="Recovery Services Flyer 2" width={400} height={500} className="w-full h-auto object-cover" />
+              <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/flyer2.png`} alt="Recovery Services Flyer 2" width={400} height={500} className="w-full h-auto object-cover" />
             </div>
             <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
-              <Image src="/flyer3.png" alt="Recovery Services Flyer 3" width={400} height={500} className="w-full h-auto object-cover" />
+              <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/flyer3.png`} alt="Recovery Services Flyer 3" width={400} height={500} className="w-full h-auto object-cover" />
             </div>
             <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200 bg-slate-900 flex items-center justify-center p-4 h-full min-h-[300px]">
-              <Image src="/logo4.png" alt="KIRS Logo 4" width={300} height={300} className="w-full h-auto object-contain" />
+              <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo4.png`} alt="KIRS Logo 4" width={300} height={300} className="w-full h-auto object-contain" />
             </div>
           </div>
         </div>
@@ -404,8 +404,8 @@ export default function Home() {
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-80 h-96 border-4 border-secondary rounded shadow-2xl overflow-hidden bg-primary">
                 <Image
-                  src="/founder.png"
-                  alt="Mr. P.D. Samgir - Founder & Chief Consultant"
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/founder.png`}
+                  alt="Mr. Pradip Samgir - Founder & Chief Consultant"
                   fill
                   sizes="(max-width: 768px) 100vw, 320px"
                   className="object-cover object-top"
@@ -413,7 +413,7 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-slate-900/10 to-transparent z-10 flex flex-col justify-end p-6 text-white text-center">
                   <span className="text-[10px] text-secondary font-bold uppercase tracking-widest">Founder & Chief Consultant</span>
-                  <h3 className="font-serif text-xl font-bold mt-1">Mr. P.D. Samgir</h3>
+                  <h3 className="font-serif text-xl font-bold mt-1">Mr. Pradip Samgir</h3>
                   <p className="text-[11px] text-slate-350 mt-1">Investment & Share Recovery Expert</p>
                 </div>
               </div>
@@ -425,14 +425,14 @@ export default function Home() {
             <div className="lg:col-span-7 space-y-6">
               <span className="text-xs font-semibold uppercase tracking-wider text-secondary">The Face of Trust & Authority</span>
               <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold leading-tight">
-                Built on 30+ Years of Share Market & Investment Auditing
+                Built on 30+ Years of Indian Capital Market
               </h2>
               <div className="w-16 h-[2px] bg-secondary"></div>
-              
+
               <p className="text-slate-600 text-sm leading-relaxed">
                 "Over the past two decades, trillions of rupees in shares and dividends have accumulated unclaimed in corporate registries and government funds due to spelling errors, misplaced paper certificates, and changing family generations. Our mission is to restore this forgotten wealth back to the families who earned it."
               </p>
-              
+
               <p className="text-slate-500 text-xs leading-relaxed">
                 As a senior investment specialist, Mr. Samgir has dedicated his career to tracking corporate registries, dematerializing old share folios, and structuring ironclad legal documentation. He acts as the guiding expert behind our team of document auditors, helping families navigate the complex maze of Registrars (RTAs), corporate offices, and regulatory authorities with ease.
               </p>
@@ -541,7 +541,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* 8. Verified Reviews / Testimonials */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -554,6 +553,15 @@ export default function Home() {
             <p className="text-slate-500 text-sm">
               Real reviews from families who successfully recovered their ancestral shareholdings through our support.
             </p>
+            <div className="mt-5">
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-2 bg-primary hover:bg-slate-900 hover:scale-[1.02] text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded shadow transition-all duration-200"
+              >
+                View & Submit Reviews
+                <ArrowRight className="w-3.5 h-3.5 text-secondary" />
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -563,7 +571,7 @@ export default function Home() {
                   <span key={i} className="text-secondary text-lg">★</span>
                 ))}
               </div>
-              <p className="text-slate-600 text-xs italic leading-relaxed">
+              <p className="text-slate-655 text-xs italic leading-relaxed">
                 "Our family had 500 physical shares of Tata Motors from 1996. After my father passed, we had no idea how to demat them without a Will. KIRS drafted all succession bonds and guided us through court certification. Absolute experts!"
               </p>
               <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
@@ -578,7 +586,7 @@ export default function Home() {
                   <span key={i} className="text-secondary text-lg">★</span>
                 ))}
               </div>
-              <p className="text-slate-600 text-xs italic leading-relaxed">
+              <p className="text-slate-655 text-xs italic leading-relaxed">
                 "I was living in New Jersey and trying to claim my deceased uncle's Reliance dividends from IEPF. The RTA rejected my documents twice due to spelling mismatches. The NRI desk at KIRS managed everything with embassy notarizations. Outstanding."
               </p>
               <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
@@ -593,7 +601,7 @@ export default function Home() {
                   <span key={i} className="text-secondary text-lg">★</span>
                 ))}
               </div>
-              <p className="text-slate-600 text-xs italic leading-relaxed">
+              <p className="text-slate-655 text-xs italic leading-relaxed">
                 "Highly professional work. My physical share certificate had signature differences from my bank account. They resolved the signature mismatch via Form ISR-2 updates and helped me convert everything to Demat in 2 months."
               </p>
               <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
@@ -610,7 +618,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary text-white rounded-lg shadow-2xl overflow-hidden border border-secondary/20 relative">
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/15 blur-xl rounded-full"></div>
-            
+
             <div className="p-8 sm:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               <div className="md:col-span-7 space-y-4">
                 <div className="inline-block bg-slate-800 text-secondary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded border border-secondary/20">

@@ -100,7 +100,7 @@ export default function ContactPage() {
                   <div className="space-y-0.5">
                     <span className="font-semibold block text-slate-800">Corporate Head Office</span>
                     <p className="text-slate-500 leading-relaxed">
-                      Dattanagar, Katraj,
+                      33/1B/1, Dattanagar, Katraj,
                       <br />
                       Pune, Maharashtra, 411046, India
                     </p>

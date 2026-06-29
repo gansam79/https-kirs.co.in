@@ -5,7 +5,7 @@ export default function TermsOfUsePage() {
   return (
     <div className="bg-slate-50 min-h-screen py-12 font-sans select-none">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
-        
+
         {/* Title */}
         <div className="text-center space-y-3">
           <h1 className="font-serif text-3xl font-bold text-primary">Terms of Use</h1>
@@ -30,7 +30,7 @@ export default function TermsOfUsePage() {
             <span>2. No Government Affiliations</span>
           </div>
           <p>
-            You explicitly acknowledge that KIRS is a private corporate advisory entity. KIRS has no partnerships, approvals, or official affiliations with the IEPF Authority, Ministry of Corporate Affairs (MCA), Securities and Exchange Board of India (SEBI), or Reserve Bank of India (RBI).
+            You explicitly acknowledge that KIRS is a private corporate advisory entity. KIRS has no partnerships, approvals, or official affiliations with the IEPF Authority, Ministry of Corporate Affairs (MCA), Securities and Exchange Board of India (SEBI), Reserve Bank of India (RBI), Insurance Regulatory and Development Authority of India (IRDA), or Pension Fund Regulatory and Development Authority (PFRDA).
           </p>
 
           <div className="flex items-center gap-2 text-primary font-bold text-sm pb-2 border-b border-slate-100 pt-4">
