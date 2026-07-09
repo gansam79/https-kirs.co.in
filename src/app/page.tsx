@@ -542,6 +542,7 @@ export default function Home() {
         </div>
       </section>
       {/* 8. Verified Reviews / Testimonials */}
+      {false && (
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -612,6 +613,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 9. Advanced Lead Generation Box (Guide Download Magnet) */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">

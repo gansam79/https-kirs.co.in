@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIRS - Coming Soon</title>
+    <title>KI&RS | Coming Soon - Kalavati Investment & Recovery Services</title>
+
+    <!-- Meta Descriptions for SEO -->
+    <meta name="description"
+        content="India's premier financial consultancy specializing in the recovery of lost assets, IEPF claims, dividends, and forgotten inheritance shares. Launching July 11, 2026 at 7:11 PM IST.">
+    <meta name="keywords"
+        content="KIRS, Kalavati Investment, asset recovery, IEPF claims, lost shares, unclaimed dividends, sharemarket, coming soon">
+    <meta name="author" content="KI&RS Team">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="KI&RS | Coming Soon">
+    <meta property="og:description"
+        content="Recovering your forgotten wealth. Immersive financial consultation and asset recovery services.">
+    <meta property="og:type" content="website">
+
+    <!-- Stylesheets / Google Fonts -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --bg: #040814;
+            --card-bg: rgba(8, 17, 40, 0.55);
+            --card-border: rgba(212, 175, 55, 0.15);
+            --primary: #d4af37;
+            /* Metallic Gold */
+            --primary-glow: rgba(212, 175, 55, 0.25);
+            --secondary: #2563eb;
+            /* Navy Royal Blue */
+            --secondary-glow: rgba(37, 99, 235, 0.2);
+            --accent: #10b981;
+            /* Green indicator */
+            --danger: #ef4444;
+            /* Red indicator */
+            --text: #f9fafb;
+            --text-muted: #9ca3af;
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'Share Tech Mono', monospace;
+        }
 
         * {
             margin: 0;
@@ -13,165 +50,1180 @@
             box-sizing: border-box;
         }
 
+        html,
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            height: 100vh;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* Disable scrolling completely */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100dvh;
+            /* Dynamic viewport height to prevent keyboard issues */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* 3D Canvas Background Container */
+        #threejs-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        /* Ambient background gradient to blend canvas */
+        .bg-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(4, 8, 20, 0.85) 80%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+
+
+        /* Main Container layout */
+        .main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 10;
+            min-height: 0;
+            /* Prevents overflow in flex layout */
+        }
+
+        .container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            /* Fits within viewport dimensions */
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
+            overflow-y: auto;
+            /* Fallback for very small custom viewports */
+            scrollbar-width: none;
         }
 
-        /* Background Effects */
-        .bg-glow {
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Top glow line inside container */
+        .container::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 80vw;
-            max-width: 800px;
-            max-height: 800px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
-            border-radius: 50%;
-            z-index: 1;
-            animation: pulse 4s infinite alternate ease-in-out;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 15%, var(--primary) 50%, transparent 85%);
         }
 
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .container {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 2rem;
-            max-width: 800px;
-            width: 100%;
+        /* Logo badge */
+        .logo-box {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #ffffff;
+            padding: 8px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
+        .logo-box:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        .logo-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Brand details */
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
             font-weight: 700;
-            color: #D4AF37;
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            letter-spacing: 2px;
-        }
-
-        .logo span {
             color: #ffffff;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+            line-height: 1.1;
         }
 
-        .subtitle {
-            font-size: 1rem;
-            color: #94a3b8;
-            text-transform: uppercase;
+        .brand-name span {
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
             letter-spacing: 3px;
-            margin-bottom: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+        }
+
+        .brand-motto {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #cbd5e1;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.8rem;
+            position: relative;
+            display: inline-block;
+            padding: 0 1.5rem;
+        }
+
+        .brand-motto::before,
+        .brand-motto::after {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--primary);
+            position: absolute;
+            top: -0.4rem;
+        }
+
+        .brand-motto::before {
+            left: 0;
+        }
+
+        .brand-motto::after {
+            right: 0;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-family: var(--font-display);
+            font-size: 2.2rem;
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         p.desc {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #cbd5e1;
             line-height: 1.6;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             font-weight: 300;
         }
 
-        .launch-date {
+        /* Countdown Components */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .countdown-card {
+            background: rgba(6, 11, 28, 0.75);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            width: 100px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .countdown-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.8;
+        }
+
+        .countdown-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.2);
+        }
+
+        .countdown-val {
+            font-family: var(--font-mono);
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .countdown-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-top: 0.4rem;
+            font-weight: 600;
+        }
+
+        /* Launch info text */
+        .launch-info {
             display: inline-flex;
             align-items: center;
-            gap: 1rem;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 1rem 2rem;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-display);
+        }
+
+        .launch-info .glow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+        }
+
+        /* Features Badge layout */
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(31, 41, 55, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 0.5rem 1rem;
             border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .feature-badge:hover {
+            color: #ffffff;
+            border-color: var(--primary-glow);
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-1px);
+        }
+
+        .feature-icon {
+            width: 14px;
+            height: 14px;
+            color: var(--primary);
+        }
+
+        /* Form Controls */
+        .notify-form {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-group {
+            display: flex;
+            background: rgba(6, 11, 28, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            padding: 4px 4px 4px 18px;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
-        .launch-date .label {
-            color: #94a3b8;
+        .form-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .notify-form input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        .notify-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .notify-form button {
+            background: linear-gradient(135deg, var(--primary), #b58d1b);
+            color: #0d1527;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 22px;
+            font-family: var(--font-display);
             font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .launch-date .date {
-            color: #D4AF37;
-            font-size: 1.5rem;
             font-weight: 700;
-            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
         }
 
+        .notify-form button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #e5c158, #d4af37);
+        }
+
+        .notify-form button i {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .notify-form button:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Success Message styling */
+        .success-message {
+            max-width: 480px;
+            margin: 0 auto;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .success-message.hidden {
+            display: none !important;
+        }
+
+        .success-icon {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            padding: 8px;
+            flex-shrink: 0;
+        }
+
+        .success-icon i {
+            width: 24px;
+            height: 24px;
+        }
+
+        .success-text h3 {
+            font-family: var(--font-display);
+            color: #ffffff;
+            font-size: 1.05rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .success-text p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .success-text .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer styling */
         .footer {
-            position: absolute;
-            bottom: 2rem;
-            left: 0;
             width: 100%;
             text-align: center;
+            padding: 2rem 0;
             z-index: 10;
-            color: #64748b;
-            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(4, 8, 20, 0.95);
+            backdrop-filter: blur(8px);
         }
 
-        .footer a {
-            color: #94a3b8;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-left {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-center {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-center a {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        .footer a:hover {
-            color: #D4AF37;
+        .footer-center a:hover {
+            color: var(--primary);
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .logo { font-size: 2rem; }
-            .launch-date { flex-direction: column; gap: 0.5rem; text-align: center; }
+        .footer-center a i {
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+        }
+
+        .social-link i {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Responsiveness adjustments */
+        @media (max-width: 600px),
+        (max-height: 780px) {
+            .container {
+                padding: 1.25rem 1rem;
+                max-height: 95%;
+            }
+
+            .logo-box {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 0.75rem;
+                border-radius: 16px;
+                padding: 4px;
+            }
+
+            .brand-name {
+                font-size: 1.8rem;
+                margin-bottom: 0.1rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+                margin-bottom: 0.4rem;
+            }
+
+            .brand-motto {
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+                padding: 0 1rem;
+            }
+
+            .brand-motto::before,
+            .brand-motto::after {
+                font-size: 1.2rem;
+                top: -0.2rem;
+            }
+
+            h1 {
+                font-size: 1.35rem;
+                margin-bottom: 0.75rem;
+                line-height: 1.2;
+            }
+
+            p.desc {
+                font-size: 0.85rem;
+                line-height: 1.4;
+                margin-bottom: 1.25rem;
+            }
+
+            .countdown-container {
+                gap: 0.5rem;
+                margin: 1rem 0;
+            }
+
+            .countdown-card {
+                width: 65px;
+                height: 75px;
+                border-radius: 12px;
+            }
+
+            .countdown-val {
+                font-size: 1.6rem;
+            }
+
+            .countdown-label {
+                font-size: 0.55rem;
+                letter-spacing: 1px;
+                margin-top: 0.2rem;
+            }
+
+            .launch-info {
+                font-size: 0.75rem;
+                margin-bottom: 1rem;
+            }
+
+            .features-grid {
+                gap: 0.4rem;
+                margin: 1rem 0;
+            }
+
+            .feature-badge {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.7rem;
+            }
+
+            .feature-icon {
+                width: 11px;
+                height: 11px;
+            }
+
+            .notify-form {
+                max-width: 100%;
+            }
+
+            .form-group {
+                padding: 2px 2px 2px 14px;
+            }
+
+            .notify-form input {
+                font-size: 0.85rem;
+                padding: 6px 0;
+            }
+
+            .notify-form button {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+            }
+
+            .success-message {
+                padding: 0.75rem 1rem;
+                gap: 0.75rem;
+            }
+
+            .success-icon i {
+                width: 18px;
+                height: 18px;
+            }
+
+            .success-text h3 {
+                font-size: 0.9rem;
+            }
+
+            .success-text p {
+                font-size: 0.75rem;
+            }
+
+            .footer {
+                padding: 1rem 0;
+            }
+
+            .footer-content {
+                gap: 0.5rem;
+            }
+
+            .footer-left {
+                font-size: 0.7rem;
+            }
+
+            .footer-center {
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            .footer-center a {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="bg-glow"></div>
-    
-    <div class="container">
-        <div class="logo">KIRS<span>.</span></div>
-        <div class="subtitle">Kalavati Investment & Recovery Services</div>
-        
-        <h1>We Are Launching Soon</h1>
-        
-        <p class="desc">
-            India's premier financial consultancies dedicated to recovering lost assets, IEPF claims, dividends, and forgotten inheritance shares. We are putting the final touches on our new website.
-        </p>
 
-        <div class="launch-date">
-            <span class="label">Expected Launch Date</span>
-            <span class="date">July 11th</span>
+<body>
+
+
+    <!-- 3D Interactive Scene Container -->
+    <div id="threejs-container"></div>
+    <div class="bg-gradient-overlay"></div>
+
+    <!-- Main Content Box -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Company Logo Image -->
+            <div class="logo-box">
+                <img src="logo.jpeg" alt="KI&RS Logo" class="logo-image">
+            </div>
+
+            <!-- Title & Subtitle / Motto -->
+            <div class="brand-name"><span>KI&RS</span></div>
+            <div class="brand-subtitle">Kalavati Investment & Recovery Services</div>
+            <div class="brand-motto">Your Money, Your Rights - Our Responsibility</div>
+
+            <h1 id="main-heading">Recovering Your Forgotten Wealth</h1>
+            <p class="desc">
+                India's premier financial consultancies dedicated to recovering lost assets, IEPF claims, forgotten
+                dividends, and inheritance shares. We are launching our state-of-the-art claim tracking portal.
+            </p>
+
+            <!-- Digital Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-card">
+                    <span class="countdown-val" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-card">
+                    <span class="countdown-val" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-card">
+                    <span class="countdown-val" id="mins">00</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-card">
+                    <span class="countdown-val" id="secs">00</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+
+            <!-- Launch Dot -->
+            <div class="launch-info">
+                <div class="glow-dot"></div>
+                <span>Launching July 11, 2026 @ 07:11 PM IST</span>
+            </div>
+
+            <!-- Feature Tags -->
+            <div class="features-grid">
+                <div class="feature-badge">
+                    <i data-lucide="check-circle" class="feature-icon"></i>
+                    <span>IEPF Claim recovery</span>
+                </div>
+                <div class="feature-badge">
+                    <i data-lucide="shield-check" class="feature-icon"></i>
+                    <span>Lost Shares search</span>
+                </div>
+                <div class="feature-badge">
+                    <i data-lucide="banknote" class="feature-icon"></i>
+                    <span>Unclaimed dividends</span>
+                </div>
+                <div class="feature-badge">
+                    <i data-lucide="users" class="feature-icon"></i>
+                    <span>Inheritance shares</span>
+                </div>
+            </div>
+
+            <!-- Call to Action Email Signup -->
+            <form id="notify-form" class="notify-form">
+                <div class="form-group">
+                    <input type="email" id="email-input" placeholder="Enter your email to schedule a consult" required
+                        autocomplete="email">
+                    <button type="submit">
+                        <span>Get Notified</span>
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div id="success-message" class="success-message hidden">
+                <div class="success-icon">
+                    <i data-lucide="check"></i>
+                </div>
+                <div class="success-text">
+                    <h3>Appointment request received!</h3>
+                    <p>We'll contact you at <span id="submitted-email" class="highlight"></span> to schedule a free
+                        consult the moment we launch.</p>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Sticky Bottom Footer -->
     <div class="footer">
-        <p>For urgent inquiries, please email us at <a href="mailto:info@kirs.co.in">info@kirs.co.in</a> or call <a href="tel:+919823662901">+91 98236 62901</a>.</p>
-        <p style="margin-top: 0.5rem;">&copy; 2026 KIRS. All Rights Reserved.</p>
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Kalavati Investment & Recovery Services. All rights reserved.</p>
+            </div>
+            <div class="footer-center">
+                <a href="mailto:info@kirs.co.in"><i data-lucide="mail"></i> info@kirs.co.in</a>
+                <a href="tel:+919823662901"><i data-lucide="phone"></i> +91 98236 62901</a>
+            </div>
+            <div class="footer-right">
+                <a href="#" class="social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="#" class="social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="#" class="social-link" aria-label="Github"><i data-lucide="github"></i></a>
+            </div>
+        </div>
     </div>
+
+    <!-- Scripts: Three.js and Lucide Icons via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        // Initialize Lucide Icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // ==========================================
+        // 3D SHARE MARKET VISUALIZATION (THREE.JS)
+        // ==========================================
+        if (typeof THREE !== 'undefined') {
+            const container = document.getElementById('threejs-container');
+            const scene = new THREE.Scene();
+
+            // Fog to enhance depth
+            scene.fog = new THREE.FogExp2(0x040814, 0.012);
+
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 12, 38);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.22);
+            scene.add(ambientLight);
+
+            const primaryLight = new THREE.DirectionalLight(0xd4af37, 1.4); // Gold light
+            primaryLight.position.set(30, 40, 20);
+            scene.add(primaryLight);
+
+            const accentLight = new THREE.DirectionalLight(0x2563eb, 1.1); // Blue light
+            accentLight.position.set(-30, -20, -10);
+            scene.add(accentLight);
+
+            // Glowing Grid floor - themed with gold line coloring
+            const gridHelper = new THREE.GridHelper(120, 60, 0xd4af37, 0x1f2937);
+            gridHelper.position.y = -8;
+            gridHelper.material.opacity = 0.18;
+            gridHelper.material.transparent = true;
+            scene.add(gridHelper);
+
+            // Generating 3D candlesticks along a curve
+            const candlesCount = 20;
+            const points = [];
+            const candleGroup = new THREE.Group();
+
+            for (let i = 0; i < candlesCount; i++) {
+                const x = (i - candlesCount / 2) * 3.8;
+                // An upward financial trend with realistic fluctuations
+                const trendHeight = (i / candlesCount) * 11 - 4;
+                const fluctuation = Math.sin(i * 1.1) * 2.2 + Math.cos(i * 0.7) * 1.2;
+                const y = trendHeight + fluctuation;
+
+                let prevY = (i > 0) ? points[i - 1].y : -4;
+                const isBullish = y >= prevY;
+                const colorHex = isBullish ? 0x10b981 : 0xef4444; // Green vs Red
+
+                points.push(new THREE.Vector3(x, y, 0));
+
+                // 1. Candle Wick (thin box)
+                const wickLen = 3.5 + Math.random() * 3.5;
+                const wickGeo = new THREE.BoxGeometry(0.08, wickLen, 0.08);
+                const wickMat = new THREE.MeshBasicMaterial({
+                    color: colorHex,
+                    transparent: true,
+                    opacity: 0.45
+                });
+                const wick = new THREE.Mesh(wickGeo, wickMat);
+                wick.position.set(x, y, 0);
+                candleGroup.add(wick);
+
+                // 2. Candle Body (neon-glowing block)
+                const bodyLen = 1.8 + Math.random() * 2.2;
+                const bodyGeo = new THREE.BoxGeometry(1.1, bodyLen, 1.1);
+                const bodyMat = new THREE.MeshStandardMaterial({
+                    color: colorHex,
+                    roughness: 0.1,
+                    metalness: 0.9,
+                    emissive: colorHex,
+                    emissiveIntensity: 0.65
+                });
+                const body = new THREE.Mesh(bodyGeo, bodyMat);
+                body.position.set(x, y, 0);
+
+                // Set scale to 0 initially for a subtle animation entry
+                body.scale.y = 0.01;
+                candleGroup.add(body);
+            }
+            scene.add(candleGroup);
+
+            // Glowing gold trend curve connecting the stock heights
+            const spline = new THREE.CatmullRomCurve3(points);
+            const splineGeo = new THREE.TubeGeometry(spline, 120, 0.16, 8, false);
+            const splineMat = new THREE.MeshStandardMaterial({
+                color: 0xd4af37, // Gold trendline
+                emissive: 0xd4af37,
+                emissiveIntensity: 1.0,
+                roughness: 0.1,
+                transparent: true,
+                opacity: 0.8
+            });
+            const trendLine = new THREE.Mesh(splineGeo, splineMat);
+            scene.add(trendLine);
+
+            // Floating Wealth / Gold particles
+            const particleCount = 150;
+            const particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const particleSpeeds = [];
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 110;     // X
+                positions[i + 1] = (Math.random() - 0.5) * 80 + 10; // Y
+                positions[i + 2] = (Math.random() - 0.5) * 80;    // Z
+
+                particleSpeeds.push({
+                    x: (Math.random() - 0.5) * 0.012,
+                    y: Math.random() * 0.018 + 0.006,
+                    z: (Math.random() - 0.5) * 0.012
+                });
+            }
+
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            // Generate circular texture dynamically for the particles
+            const getCircleTexture = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 16;
+                canvas.height = 16;
+                const ctx = canvas.getContext('2d');
+                const grad = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
+                grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 16, 16);
+                return new THREE.CanvasTexture(canvas);
+            };
+
+            const particleMat = new THREE.PointsMaterial({
+                size: 0.6,
+                map: getCircleTexture(),
+                transparent: true,
+                opacity: 0.55,
+                color: 0xd4af37, // Gold particles representing unclaimed wealth
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            const particles = new THREE.Points(particleGeo, particleMat);
+            scene.add(particles);
+
+            // Parallax Interaction Variables
+            let mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+            });
+
+            // Core Animation Loop
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsed = clock.getElapsedTime();
+
+                // Gentle rotation of the visualization components
+                candleGroup.rotation.y = Math.sin(elapsed * 0.12) * 0.08;
+                trendLine.rotation.y = Math.sin(elapsed * 0.12) * 0.08;
+
+                // Scale up candles on entry
+                candleGroup.children.forEach(child => {
+                    if (child.scale.y < 1 && child.geometry.type === 'BoxGeometry') {
+                        child.scale.y += 0.012;
+                    }
+                });
+
+                // Particle simulation physics
+                const posArr = particles.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    const i3 = i * 3;
+                    posArr[i3] += particleSpeeds[i].x;
+                    posArr[i3 + 1] += particleSpeeds[i].y;
+                    posArr[i3 + 2] += particleSpeeds[i].z;
+
+                    // Reset when floating out of camera view
+                    if (posArr[i3 + 1] > 40) {
+                        posArr[i3 + 1] = -40;
+                        posArr[i3] = (Math.random() - 0.5) * 110;
+                    }
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+
+                // Camera follow smoothing (Parallax)
+                const targetCamX = mouseX * 22;
+                const targetCamY = 12 - (mouseY * 18);
+                camera.position.x += (targetCamX - camera.position.x) * 0.04;
+                camera.position.y += (targetCamY - camera.position.y) * 0.04;
+                camera.lookAt(0, 1, 0);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle browser resizing
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+        } else {
+            // Fallback particles inside pure HTML Canvas
+            initFallbackCanvas();
+        }
+
+        function initFallbackCanvas() {
+            const container = document.getElementById('threejs-container');
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'absolute';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.opacity = '0.3';
+            canvas.style.zIndex = '0';
+            container.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            });
+
+            const dots = [];
+            for (let i = 0; i < 80; i++) {
+                dots.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 2.5 + 0.5,
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: -Math.random() * 0.6 - 0.1,
+                    color: Math.random() > 0.5 ? '#d4af37' : '#2563eb'
+                });
+            }
+
+            function renderDots() {
+                ctx.clearRect(0, 0, w, h);
+                dots.forEach(d => {
+                    ctx.beginPath();
+                    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+                    ctx.fillStyle = d.color;
+                    ctx.fill();
+                    d.x += d.vx;
+                    d.y += d.vy;
+                    if (d.y < 0) {
+                        d.y = h;
+                        d.x = Math.random() * w;
+                    }
+                });
+                requestAnimationFrame(renderDots);
+            }
+            renderDots();
+        }
+
+        // ==========================================
+        // COUNTDOWN TIMER LOGIC
+        // ==========================================
+        // Target: July 11, 2026 @ 7:11 PM India Standard Time (UTC+5:30)
+        const targetDate = new Date("2026-07-11T19:11:00+05:30").getTime();
+
+        const dVal = document.getElementById('days');
+        const hVal = document.getElementById('hours');
+        const mVal = document.getElementById('mins');
+        const sVal = document.getElementById('secs');
+        const mainHeading = document.getElementById('main-heading');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                // Countdown reached launch target
+                dVal.textContent = "00";
+                hVal.textContent = "00";
+                mVal.textContent = "00";
+                sVal.textContent = "00";
+                mainHeading.innerHTML = "Redirecting to Portal... 🚀";
+                document.querySelector('.launch-info span').textContent = "Launch successful!";
+
+                // Automatically redirect to the updated website in the stagging folder
+                setTimeout(() => {
+                    window.location.href = "/stagging/";
+                }, 1000);
+                return;
+            }
+
+            // Calculation math
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format numbers to always show two digits
+            dVal.textContent = days.toString().padStart(2, '0');
+            hVal.textContent = hours.toString().padStart(2, '0');
+            mVal.textContent = minutes.toString().padStart(2, '0');
+            sVal.textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Run countdown calculation instantly and trigger updates every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+
+
+        // ==========================================
+        // CALL TO ACTION NEWSLETTER CAPTURE MOCK
+        // ==========================================
+        const notifyForm = document.getElementById('notify-form');
+        const emailInput = document.getElementById('email-input');
+        const successBox = document.getElementById('success-message');
+        const userEmailSpan = document.getElementById('submitted-email');
+
+        notifyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            if (email) {
+                userEmailSpan.textContent = email;
+                notifyForm.classList.add('hidden');
+
+                // Smoothly switch display classes
+                notifyForm.style.display = 'none';
+                successBox.classList.remove('hidden');
+
+                // Run analytical event dispatch mock
+                console.log(`Successfully registered consultation lead: ${email}`);
+            }
+        });
+    </script>
 </body>
+
 </html>
