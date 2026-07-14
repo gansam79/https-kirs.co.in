@@ -29,13 +29,13 @@ export default async function BlogPostPage({ params }: PageProps) {
             <ArrowLeft className="w-4 h-4" />
             Back to Knowledge Center
           </Link>
-          <div className="text-[10px] text-slate-400 font-medium select-none">
+          <div className="text-[10px] text-slate-400 font-medium">
             Blog / <span className="text-slate-600">{post.category}</span>
           </div>
         </div>
 
         {/* Blog Article Core Container */}
-        <article className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden select-none">
+        <article className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
           
           {/* Cover Header info */}
           <div className="bg-primary text-white p-6 sm:p-10 border-b border-slate-800 space-y-4 relative">
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
           {/* Meta Keywords & Action footer */}
           <div className="p-6 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex flex-wrap gap-1.5 items-center select-none">
+            <div className="flex flex-wrap gap-1.5 items-center">
               <Bookmark className="w-3.5 h-3.5 text-secondary shrink-0" />
               <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mr-1">Tags:</span>
               {post.keywords.map((kw, idx) => (

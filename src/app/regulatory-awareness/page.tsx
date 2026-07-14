@@ -105,7 +105,7 @@ export default function RegulatoryAwarenessPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Navigation Tabs (Col span 4) */}
-          <div className="lg:col-span-4 bg-white border border-slate-200 rounded-lg p-4 shadow-sm space-y-2 select-none">
+          <div className="lg:col-span-4 bg-white border border-slate-200 rounded-lg p-4 shadow-sm space-y-2">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 block mb-3">
               Awareness Categories
             </span>

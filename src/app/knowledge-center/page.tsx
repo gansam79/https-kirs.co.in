@@ -23,7 +23,7 @@ export default function KnowledgeCenterPage() {
   });
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12 font-sans select-none">
+    <div className="bg-slate-50 min-h-screen py-12 font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Title */}

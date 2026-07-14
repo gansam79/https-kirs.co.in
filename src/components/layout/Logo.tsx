@@ -41,13 +41,13 @@ export default function Logo({ className = "", variant = "full", light = false }
             </span>
             <div className="hidden sm:flex flex-col gap-0.5 mt-0.5">
               <span
-                className="text-[8.5px] sm:text-[9px] font-sans tracking-widest uppercase font-semibold"
+                className="text-[8.5px] sm:text-[9px] font-serif tracking-widest uppercase font-semibold"
                 style={{ color: textGray }}
               >
                 Kalavati Investment & Recovery Services
               </span>
               <span
-                className="text-[7.5px] sm:text-[8px] font-sans tracking-wider uppercase font-semibold"
+                className="text-[7.5px] sm:text-[8px] font-serif tracking-wider uppercase font-semibold"
                 style={{ color: goldColor }}
               >
                 Your Money, Your Rights - Our Responsibility

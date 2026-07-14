@@ -72,44 +72,105 @@ export default function ReviewsPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Fetch reviews from the database on page load
+  React.useEffect(() => {
+    async function fetchReviews() {
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/reviews/`);
+        if (response.ok) {
+          const data = await response.json();
+          // Fallback to initial reviews if db is empty
+          if (data && data.length > 0) {
+            setReviews(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load reviews from database:", err);
+      }
+    }
+    fetchReviews();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email || !comment) {
       setError("Please fill out all fields.");
       return;
     }
     
-    // Simulate submission
-    const newReview: Review = {
-      id: Date.now(),
-      name,
-      rating,
-      category,
-      comment,
-      date: "Just now (Pending Moderation)",
-      likes: 0,
-    };
-    
-    // For local UI update (optional, but shows responsiveness)
-    setReviews([newReview, ...reviews]);
-    setIsSubmitted(true);
-    setError("");
-    
-    // Reset Form
-    setName("");
-    setEmail("");
-    setComment("");
-    setRating(5);
+    try {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+      const response = await fetch(`${basePath}/api/reviews/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          rating,
+          category,
+          comment
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to post review.");
+      }
+
+      // Re-fetch updated reviews list from database
+      const fetchResponse = await fetch(`${basePath}/api/reviews/`);
+      if (fetchResponse.ok) {
+        const data = await fetchResponse.json();
+        if (data && data.length > 0) {
+          setReviews(data);
+        }
+      } else {
+        // Fallback: update local state if fetch fails
+        const newReview: Review = {
+          id: Date.now(),
+          name,
+          rating,
+          category,
+          comment,
+          date: "Just now (Pending Moderation)",
+          likes: 0,
+        };
+        setReviews([newReview, ...reviews]);
+      }
+
+      setIsSubmitted(true);
+      setError("");
+      
+      // Reset Form
+      setName("");
+      setEmail("");
+      setComment("");
+      setRating(5);
+    } catch (err) {
+      console.error("Error submitting review:", err);
+      setError("Failed to submit review. Please try again.");
+    }
   };
 
-  const handleLike = (id: number) => {
+  const handleLike = async (id: number) => {
+    // Optimistic local state update
     setReviews(
       reviews.map((r) => (r.id === id ? { ...r, likes: r.likes + 1 } : r))
     );
+
+    try {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+      await fetch(`${basePath}/api/reviews/?id=${id}`, {
+        method: "PATCH"
+      });
+    } catch (err) {
+      console.error("Failed to register review like:", err);
+    }
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12 font-sans select-none">
+    <div className="bg-slate-50 min-h-screen py-12 font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Title */}

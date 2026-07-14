@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
-const basePath = "/stagging";
+const basePath = "";
 
 const nextConfig: NextConfig = {
-  output: "export",
   basePath,
   trailingSlash: true,
   env: {

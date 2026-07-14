@@ -51,7 +51,7 @@ export default function DocumentChecklistPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Navigation: Service Selector (print hidden) */}
-          <div className="lg:col-span-4 bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2 select-none print:hidden">
+          <div className="lg:col-span-4 bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2 print:hidden">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 block mb-3">
               Select Services
             </span>
@@ -102,7 +102,7 @@ export default function DocumentChecklistPage() {
                   <div
                     key={idx}
                     onClick={() => handleToggleItem(doc)}
-                    className={`p-3.5 rounded border flex gap-3 items-start cursor-pointer select-none transition-all ${
+                    className={`p-3.5 rounded border flex gap-3 items-start cursor-pointer transition-all ${
                       isChecked
                         ? "border-emerald-250 bg-emerald-50/20"
                         : "border-slate-200 hover:border-slate-350 bg-slate-50/50"

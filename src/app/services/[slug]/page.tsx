@@ -9,11 +9,13 @@ import {
   Clock,
   HelpCircle,
   ChevronDown,
-  AlertCircle
+  AlertCircle,
+  CalendarRange
 } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
 import { FaqSchema, BreadcrumbSchema } from "@/components/layout/JsonLd";
 import DownloadButton from "./DownloadButton";
+import ScheduleForm from "@/components/layout/ScheduleForm";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -112,7 +114,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <span className="w-1.5 h-6 bg-secondary rounded-full"></span>
                   Required Document List
                 </h2>
-                <DownloadButton />
+                {/* <DownloadButton /> */}
               </div>
               <p className="text-slate-500 text-xs">
                 Make sure you compile high-resolution, self-attested copies of the following documents:
@@ -155,28 +157,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           {/* Right Column: Lead Sidebar & Sticky Disclaimer */}
           <div className="space-y-6">
-            
-            {/* Quick Consultancy Query Form */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200 space-y-4">
-              <h3 className="font-serif text-base font-bold text-primary">Need Professional Drafting?</h3>
-              <p className="text-slate-500 text-xs leading-normal">
-                Our documentation specialists draft affidavits, indemnity bonds, and coordinate bank attestations.
-              </p>
-              
-              <Link
-                href="/eligibility-checker"
-                className="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs py-3 rounded text-center block uppercase tracking-wider transition-colors"
-              >
-                Analyze Eligibility Wizard
-              </Link>
-              
-              <Link
-                href="/contact"
-                className="w-full border border-slate-200 hover:border-slate-350 text-slate-700 font-bold text-xs py-3 rounded text-center block uppercase tracking-wider bg-slate-50 transition-colors"
-              >
-                Schedule Consultation
-              </Link>
-            </div>
+                        {/* Quick Consultancy Query Form (Replaced with common ScheduleForm component) */}
+             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200 space-y-4">
+               <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
+                 <CalendarRange className="w-5 h-5 text-secondary" />
+                 <h3 className="font-serif text-base font-bold text-primary">Schedule Expert Call</h3>
+               </div>
+               <ScheduleForm defaultService={service.title} compact={true} />
+             </div>
 
             {/* Compliance details sidebar */}
             <div className="bg-amber-50/60 border border-amber-200/80 rounded-lg p-5 space-y-3">

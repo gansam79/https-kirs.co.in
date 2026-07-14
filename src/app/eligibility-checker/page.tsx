@@ -149,7 +149,7 @@ export default function EligibilityCheckerPage() {
         </div>
 
         {/* Wizard Container */}
-        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-10 select-none">
+        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-10">
           {!isSubmitted ? (
             <div className="space-y-8">
               {/* Step indicator */}
@@ -398,7 +398,7 @@ export default function EligibilityCheckerPage() {
               </div>
 
               {/* Status Score */}
-              <div className={`p-5 border rounded-lg text-center ${report.scoreColor} border-dashed select-none`}>
+              <div className={`p-5 border rounded-lg text-center ${report.scoreColor} border-dashed`}>
                 <span className="text-[9px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Recoverability Score</span>
                 <span className="font-serif text-base sm:text-lg font-bold block">{report.score}</span>
               </div>

@@ -58,29 +58,6 @@ const chooseReasons = [
   },
 ];
 
-const caseStudies = [
-  {
-    company: "Blue-chip Equity Shares",
-    category: "Physical Share Recovery",
-    problem: "A client inherited 200 physical shares of a leading blue-chip company from their grandfather. The certificates were damaged, signatures mismatched, and dividends unclaimed for 12 years (transferred to IEPF).",
-    solution: "KIRS filed Form ISR-2 for bank signature updates, obtained duplicate share certificates, processed succession paperwork, and submitted Form IEPF-5 with RTA representation.",
-    outcome: "Recovered shares valued significantly and credited accrued dividends directly to the client's demat account.",
-  },
-  {
-    company: "Large Cap Auto & Chemical Shares",
-    category: "Legal Heir Transmission",
-    problem: "Following a shareholder's sudden demise, family members discovered physical shares of top-tier auto and chemical companies with no nominee registered. The total value was substantial.",
-    solution: "We drafted the legal heir representation, coordinated the filing for a Succession Certificate in the civil court, compiled RTA-compliant surety bonds, and guided them through final transmission.",
-    outcome: "Successfully dematerialized and transferred the shares to the legal heirs in 7 months.",
-  },
-  {
-    company: "NRI Investor Recovery",
-    category: "Embassy Coordination",
-    problem: "An OCI holder residing in the UK possessed shares in a leading FMCG company under their old Indian address. They faced rejections from the RTA due to KYC mismatches and non-resident status.",
-    solution: "We drafted a custom Power of Attorney (POA), guided them through London consulate attestation, updated passport/address records with the RTA, and registered a new NRO bank account.",
-    outcome: "Recovered shares and accumulated dividends without the client needing to fly to India.",
-  },
-];
 
 const steps = [
   { title: "Eligibility Check", desc: "We audit company and RTA records to confirm share ownership and claim eligibility." },
@@ -108,30 +85,29 @@ export default function Home() {
       <OrganizationSchema />
       <LocalBusinessSchema />
       {/* 1. Hero Section */}
-      <section className="bg-gradient-premium relative overflow-hidden py-20 lg:py-32 text-white select-none">
+      <section className="bg-gradient-premium relative overflow-hidden py-20 lg:py-32 text-white">
         {/* Background elements */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(212,175,55,0.08),transparent_50%)]"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4AF37] opacity-[0.03] blur-[120px] rounded-full"></div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Hero Left Content */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-8 lg:col-start-3 space-y-6 text-center">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-secondary/30 rounded-full px-4 py-1.5 text-xs text-[#D4AF37] font-medium tracking-wide">
               <Award className="w-3.5 h-3.5" />
               <span>India's Leading Investor Wealth Restoration Experts</span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-              Recover Your Lost Shares, Dividends, Deposites, Insurance <br />
+              Recover Your Lost Shares, Mutual Funds, Deposites, Insurance <br />
               {/* <span className="text-gradient-gold font-serif">IEPF Claims</span> & Hidden Investments */}
             </h1>
 
-            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
               India's trusted partner for physical share dematerialization, deceased inheritance transmission, signature updates, and complex documentation services.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 href="/eligibility-checker"
                 className="w-full sm:w-auto bg-secondary hover:bg-yellow-600 text-primary font-bold px-8 py-4 rounded shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all duration-200"
@@ -148,7 +124,7 @@ export default function Home() {
             </div>
 
             {/* Trust Indicators */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-slate-800/80 text-left max-w-lg sm:max-w-none mx-auto lg:mx-0">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-slate-800/80 text-left max-w-lg sm:max-w-none mx-auto">
               <div className="space-y-1">
                 <span className="text-xs font-semibold uppercase tracking-wider text-secondary">PAN India Service</span>
                 <p className="text-xs text-slate-400">All major RTAs & cities</p>
@@ -168,7 +144,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Right Visual: Dashboard Mockup */}
+          {/* Hero Right Visual: Dashboard Mockup (Commented Out)
           <div className="lg:col-span-5 hidden lg:block">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -178,7 +154,6 @@ export default function Home() {
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/10 blur-xl rounded-full"></div>
 
-              {/* Fake dashboard headers */}
               <div className="flex justify-between items-center pb-4 border-b border-slate-800">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase tracking-widest">Wealth Portfolio</span>
@@ -189,10 +164,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Fake metrics grid */}
               <div className="grid grid-cols-2 gap-4 py-6">
                 <div className="bg-slate-900/80 p-3.5 rounded border border-slate-800/80">
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider">Unclaimed Value</span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Unclaimed Value</span>
                   <div className="text-lg font-bold text-white font-serif mt-1">₹XX.XX L</div>
                   <span className="text-[9px] text-[#D4AF37] font-semibold mt-1 block">RTA Folio Verified</span>
                 </div>
@@ -203,7 +177,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Asset recovery list mockup */}
               <div className="space-y-3 pt-2">
                 <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Recent Audited Portfolios</span>
                 <div className="flex justify-between items-center text-xs p-2.5 bg-slate-900/40 rounded border border-slate-800/50">
@@ -220,13 +193,13 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Compliance footer on visual card */}
               <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 text-[10px] text-slate-400 leading-normal bg-slate-950/40 -mx-6 -mb-6 p-4">
                 <Scale className="w-4 h-4 text-secondary shrink-0" />
                 <span>IEPF claims require MCA verification audits. KIRS operates as documentation advisors only.</span>
               </div>
             </motion.div>
           </div>
+          */}
         </div>
       </section>
 
@@ -268,6 +241,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center">
             <div className="rounded shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-slate-200">
               <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/flyer1.png`} alt="Recovery Services Flyer 1" width={400} height={500} className="w-full h-auto object-cover" />
@@ -282,11 +256,12 @@ export default function Home() {
               <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo4.png`} alt="KIRS Logo 4" width={300} height={300} className="w-full h-auto object-contain" />
             </div>
           </div>
+          */}
         </div>
       </section>
 
       {/* 2. Authority Bar */}
-      <section className="bg-slate-50 border-b border-slate-200 py-8 select-none">
+      <section className="bg-slate-50 border-b border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[10px] font-bold text-center text-slate-400 uppercase tracking-widest mb-6">
             Educational Ecosystem Map – Guided Recovery Expertise
@@ -381,7 +356,7 @@ export default function Home() {
           {/* Interactive process list */}
           <div className="relative border-l border-slate-200 ml-4 md:ml-0 md:grid md:grid-cols-7 md:border-l-0 md:border-t md:pt-10 md:gap-4 space-y-8 md:space-y-0">
             {steps.map((step, idx) => (
-              <div key={step.title} className="relative pl-6 md:pl-0 text-left md:text-center space-y-2 select-none group">
+              <div key={step.title} className="relative pl-6 md:pl-0 text-left md:text-center space-y-2 group">
                 {/* Visual marker dot */}
                 <div className="absolute -left-[9px] top-1 md:left-1/2 md:-translate-x-1/2 md:-top-[49px] w-4.5 h-4.5 rounded-full bg-white border-2 border-secondary flex items-center justify-center shadow z-10 group-hover:bg-secondary transition-colors">
                   <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
@@ -464,16 +439,16 @@ export default function Home() {
       </section>
 
       {/* 6. Success Metrics Section */}
-      <section className="bg-primary text-white py-16 select-none relative overflow-hidden">
+      <section className="bg-primary text-white py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(212,175,55,0.06),transparent_40%)]"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">₹120+ Crores</div>
+              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">₹54+ Crores</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest">Unclaimed Assets Audited</p>
             </div>
             <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">10,000+</div>
+              <div className="text-3xl sm:text-4xl font-bold font-serif text-secondary">250+</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest">Investors Assisted</p>
             </div>
             <div className="space-y-1">
@@ -488,134 +463,81 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Case Studies Section */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Proven Outcomes</span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold mt-2">
-              Recent Wealth Recovery Case Studies
-            </h2>
-            <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
-            <p className="text-slate-500 text-sm">
-              Review our compiled summaries illustrating real problems, our custom drafting solutions, and actual client outcomes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study) => (
-              <div
-                key={study.company}
-                className="bg-white rounded shadow-sm border border-slate-200 overflow-hidden flex flex-col justify-between"
-              >
-                <div className="p-6 space-y-4">
-                  <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-                    <span className="font-serif text-sm font-semibold text-primary">{study.company}</span>
-                    <span className="bg-secondary/15 text-[#b38728] text-[9px] font-bold px-2 py-0.5 rounded border border-secondary/20 uppercase tracking-wide">
-                      {study.category}
-                    </span>
-                  </div>
-                  <div className="space-y-2 text-xs">
-                    <p className="leading-relaxed">
-                      <strong className="text-red-700 block font-medium uppercase text-[10px] tracking-wider mb-0.5">Problem:</strong>
-                      {study.problem}
-                    </p>
-                    <p className="leading-relaxed">
-                      <strong className="text-slate-800 block font-medium uppercase text-[10px] tracking-wider mb-0.5">Solution:</strong>
-                      {study.solution}
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-success">Result achieved:</span>
-                  <span className="font-serif text-xs font-bold text-slate-800">{study.outcome}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12 bg-amber-50 border border-amber-200/60 p-4 rounded max-w-2xl mx-auto">
-            <p className="text-[10px] text-amber-800 leading-normal">
-              *Note: Case values and details represent historical case files. Past achievements do not guarantee identical regulatory processing times or approvals. All claims are audited by RTAs.
-            </p>
-          </div>
-        </div>
-      </section>
       {/* 8. Verified Reviews / Testimonials */}
       {false && (
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Client Endorsements</span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold mt-2">
-              Investor Trust & Google Reviews
-            </h2>
-            <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
-            <p className="text-slate-500 text-sm">
-              Real reviews from families who successfully recovered their ancestral shareholdings through our support.
-            </p>
-            <div className="mt-5">
-              <Link
-                href="/reviews"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-slate-900 hover:scale-[1.02] text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded shadow transition-all duration-200"
-              >
-                View & Submit Reviews
-                <ArrowRight className="w-3.5 h-3.5 text-secondary" />
-              </Link>
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Client Endorsements</span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-primary font-bold mt-2">
+                Investor Trust & Google Reviews
+              </h2>
+              <div className="w-16 h-[2px] bg-secondary mx-auto mt-4 mb-4"></div>
+              <p className="text-slate-500 text-sm">
+                Real reviews from families who successfully recovered their ancestral shareholdings through our support.
+              </p>
+              <div className="mt-5">
+                <Link
+                  href="/reviews"
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-slate-900 hover:scale-[1.02] text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded shadow transition-all duration-200"
+                >
+                  View & Submit Reviews
+                  <ArrowRight className="w-3.5 h-3.5 text-secondary" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-secondary text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-655 text-xs italic leading-relaxed">
+                  "Our family had 500 physical shares of Tata Motors from 1996. After my father passed, we had no idea how to demat them without a Will. KIRS drafted all succession bonds and guided us through court certification. Absolute experts!"
+                </p>
+                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-800">Amitesh Sen</span>
+                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Heir</span>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-secondary text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-655 text-xs italic leading-relaxed">
+                  "I was living in New Jersey and trying to claim my deceased uncle's Reliance dividends from IEPF. The RTA rejected my documents twice due to spelling mismatches. The NRI desk at KIRS managed everything with embassy notarizations. Outstanding."
+                </p>
+                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-800">Dr. Rajesh Patel</span>
+                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified NRI Desk</span>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-secondary text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-slate-655 text-xs italic leading-relaxed">
+                  "Highly professional work. My physical share certificate had signature differences from my bank account. They resolved the signature mismatch via Form ISR-2 updates and helped me convert everything to Demat in 2 months."
+                </p>
+                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-800">Kavitha Sharma</span>
+                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Owner</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-secondary text-lg">★</span>
-                ))}
-              </div>
-              <p className="text-slate-655 text-xs italic leading-relaxed">
-                "Our family had 500 physical shares of Tata Motors from 1996. After my father passed, we had no idea how to demat them without a Will. KIRS drafted all succession bonds and guided us through court certification. Absolute experts!"
-              </p>
-              <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-800">Amitesh Sen</span>
-                <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Heir</span>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-secondary text-lg">★</span>
-                ))}
-              </div>
-              <p className="text-slate-655 text-xs italic leading-relaxed">
-                "I was living in New Jersey and trying to claim my deceased uncle's Reliance dividends from IEPF. The RTA rejected my documents twice due to spelling mismatches. The NRI desk at KIRS managed everything with embassy notarizations. Outstanding."
-              </p>
-              <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-800">Dr. Rajesh Patel</span>
-                <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified NRI Desk</span>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-secondary text-lg">★</span>
-                ))}
-              </div>
-              <p className="text-slate-655 text-xs italic leading-relaxed">
-                "Highly professional work. My physical share certificate had signature differences from my bank account. They resolved the signature mismatch via Form ISR-2 updates and helped me convert everything to Demat in 2 months."
-              </p>
-              <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-800">Kavitha Sharma</span>
-                <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Owner</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
       )}
 
-      {/* 9. Advanced Lead Generation Box (Guide Download Magnet) */}
+      {/* 9. Advanced Lead Generation Box (Guide Download Magnet) (Commented Out)
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary text-white rounded-lg shadow-2xl overflow-hidden border border-secondary/20 relative">
@@ -648,7 +570,6 @@ export default function Home() {
                 </ul>
               </div>
 
-              {/* Form panel */}
               <div className="md:col-span-5 bg-slate-900 p-6 rounded border border-slate-850 shadow-inner">
                 {guideSubmitted ? (
                   <div className="text-center py-8 space-y-3">
@@ -713,6 +634,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
     </div>
   );
 }

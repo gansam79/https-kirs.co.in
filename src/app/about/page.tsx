@@ -23,7 +23,7 @@ const coreValues = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-slate-50 min-h-screen py-12 font-sans select-none">
+    <div className="bg-slate-50 min-h-screen py-12 font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
         {/* Title and Pitch */}
@@ -48,7 +48,7 @@ export default function AboutPage() {
               Our company KI&RS is India's largest & only listed platform for unclaimed investment recovery. Envisioned on 11.11.11, our company is a one-stop solution, aimed at helping clients to protect and retrieve their investments/money.
             </p>
             <p className="text-slate-650 text-xs leading-relaxed">
-              These services include Investment Retrieval, Wealth Protection, and litigation funding solutions thereby assisting in resolving various disputes regarding blocked investments in Shares, Mutual Funds, PFs, Insurance, Bank Deposits, etc., largely on a success fees model. So far, the group company has dealt with over 50,000+ prospects and recovered investments worth over ₹250 crores, demonstrating our broad influence and trusted reputation in the market. We are based out in Pune.
+              These services include Investment Retrieval and litigation funding solutions thereby assisting in resolving various disputes regarding blocked investments in Shares, Mutual Funds, PFs, Insurance, Bank Deposits, etc., largely on a success fees model. So far, the group company has dealt with over 50,000+ prospects and recovered investments worth over ₹54 crores, demonstrating our broad influence and trusted reputation in the market. We are based out in Pune.
             </p>
 
             <div className="pt-4 border-t border-slate-100 space-y-3">
@@ -68,21 +68,21 @@ export default function AboutPage() {
             <div>
               <h3 className="font-serif text-base font-bold text-secondary">Our Mission</h3>
               <p className="text-[11px] text-slate-300 leading-relaxed mt-1.5">
-                KI&RS is committed to offering comprehensive solutions for asset recovery, unclaimed investments, and total wealth protection. By increasing awareness, incorporating technology, and providing consulting services that go beyond simple financial recovery, we hope to pave the way for a more promising and equitable future.
+                KI&RS is committed to offering comprehensive solutions for asset recovery and unclaimed investments. By increasing awareness, incorporating technology, and providing consulting services that go beyond simple financial recovery, we hope to pave the way for a more promising and equitable future.
               </p>
             </div>
 
             <div className="pt-3 border-t border-slate-800">
               <h3 className="font-serif text-base font-bold text-secondary">Our Vision</h3>
               <p className="text-[11px] text-slate-300 leading-relaxed mt-1.5">
-                Envisioning a society where every individual has total wealth protection, KI&RS aims to lead a revolution in the recovery of unclaimed investments and assets, guaranteeing that no one is left behind due to financial constraints. Our vision is to create a society that prioritizes financial justice, allowing individuals to regain what is rightly theirs.
+                Envisioning a society where every individual recovers their rightful investments, KI&RS aims to lead a revolution in the recovery of unclaimed investments and assets, guaranteeing that no one is left behind due to financial constraints. Our vision is to create a society that prioritizes financial justice, allowing individuals to regain what is rightly theirs.
               </p>
             </div>
 
             <div className="pt-3 border-t border-slate-800">
               <h3 className="font-serif text-base font-bold text-secondary">Our Goal</h3>
               <p className="text-[11px] text-slate-300 leading-relaxed mt-1.5">
-                Our goal at KI&RS is two-fold: to lead the industry in the recovery of unclaimed investments while providing holistic solutions for complete wealth protection. We aim to enable investors all over the world to effectively recover their assets through Share Samadhan. To achieve this goal, we work to continually enhance our processes, and broaden our reach, whilst remaining up-to-date on industry trends and innovations.
+                Our goal at KI&RS is to lead the industry in the recovery of unclaimed investments. We aim to enable investors all over the world to effectively recover their assets. To achieve this goal, we work to continually enhance our processes and broaden our reach, whilst remaining up-to-date on industry trends and innovations.
               </p>
             </div>
 

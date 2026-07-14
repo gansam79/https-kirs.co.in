@@ -3,7 +3,7 @@ import { ShieldCheck, Info } from "lucide-react";
 
 export default function ComplianceNoticePage() {
   return (
-    <div className="bg-slate-50 min-h-screen py-12 font-sans select-none">
+    <div className="bg-slate-50 min-h-screen py-12 font-sans">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
         
         {/* Title */}
