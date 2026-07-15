@@ -69,9 +69,37 @@ const steps = [
   { title: "Wealth Restored", desc: "Shares are dematerialized and credited directly into your active Demat portfolio." },
 ];
 
+interface Review {
+  id: number;
+  name: string;
+  rating: number;
+  category: string;
+  comment: string;
+  likes: number;
+}
+
 export default function Home() {
   const [guideForm, setGuideForm] = useState({ name: "", email: "", phone: "" });
   const [guideSubmitted, setGuideSubmitted] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  React.useEffect(() => {
+    async function fetchReviews() {
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/reviews/`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setReviews(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load reviews from database:", err);
+      }
+    }
+    fetchReviews();
+  }, []);
 
   const handleGuideSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -464,7 +492,7 @@ export default function Home() {
       </section>
 
       {/* 8. Verified Reviews / Testimonials */}
-      {false && (
+      {reviews.length > 0 && (
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
@@ -488,50 +516,24 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-secondary text-lg">★</span>
-                  ))}
+              {reviews.slice(0, 3).map((review) => (
+                <div key={review.id} className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className={`${i < review.rating ? 'text-secondary' : 'text-slate-300'} text-lg`}>★</span>
+                      ))}
+                    </div>
+                    <p className="text-slate-600 text-xs italic leading-relaxed">
+                      "{review.comment}"
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-800">{review.name}</span>
+                    <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">{review.category}</span>
+                  </div>
                 </div>
-                <p className="text-slate-655 text-xs italic leading-relaxed">
-                  "Our family had 500 physical shares of Tata Motors from 1996. After my father passed, we had no idea how to demat them without a Will. KIRS drafted all succession bonds and guided us through court certification. Absolute experts!"
-                </p>
-                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">Amitesh Sen</span>
-                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Heir</span>
-                </div>
-              </div>
-
-              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-secondary text-lg">★</span>
-                  ))}
-                </div>
-                <p className="text-slate-655 text-xs italic leading-relaxed">
-                  "I was living in New Jersey and trying to claim my deceased uncle's Reliance dividends from IEPF. The RTA rejected my documents twice due to spelling mismatches. The NRI desk at KIRS managed everything with embassy notarizations. Outstanding."
-                </p>
-                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">Dr. Rajesh Patel</span>
-                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified NRI Desk</span>
-                </div>
-              </div>
-
-              <div className="bg-slate-50 p-6 rounded border border-slate-200 shadow-sm space-y-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-secondary text-lg">★</span>
-                  ))}
-                </div>
-                <p className="text-slate-655 text-xs italic leading-relaxed">
-                  "Highly professional work. My physical share certificate had signature differences from my bank account. They resolved the signature mismatch via Form ISR-2 updates and helped me convert everything to Demat in 2 months."
-                </p>
-                <div className="pt-2 border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-800">Kavitha Sharma</span>
-                  <span className="text-[9px] bg-success/20 text-success font-bold px-2 py-0.5 rounded uppercase">Verified Owner</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
