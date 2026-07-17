@@ -81,6 +81,8 @@ interface Review {
 export default function Home() {
   const [guideForm, setGuideForm] = useState({ name: "", email: "", phone: "" });
   const [guideSubmitted, setGuideSubmitted] = useState(false);
+  const [guideLoading, setGuideLoading] = useState(false);
+  const [guideErrorMsg, setGuideErrorMsg] = useState("");
   const [reviews, setReviews] = useState<Review[]>([]);
 
   React.useEffect(() => {
@@ -101,10 +103,37 @@ export default function Home() {
     fetchReviews();
   }, []);
 
-  const handleGuideSubmit = (e: React.FormEvent) => {
+  const handleGuideSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (guideForm.name && guideForm.email) {
-      setGuideSubmitted(true);
+    if (guideForm.name && guideForm.email && guideForm.phone) {
+      setGuideLoading(true);
+      setGuideErrorMsg("");
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/contact/`, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            type: "guide",
+            ...guideForm
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to submit request.");
+        }
+
+        setGuideSubmitted(true);
+      } catch (error: any) {
+        console.error("Error submitting guide request", error);
+        setGuideErrorMsg(error.message || "Failed to submit. Please try again.");
+      } finally {
+        setGuideLoading(false);
+      }
     }
   };
 
@@ -564,12 +593,12 @@ export default function Home() {
         </section>
       )}
 
-      {/* 9. Advanced Lead Generation Box (Guide Download Magnet) (Commented Out)
+      {/* 9. Advanced Lead Generation Box (Guide Download Magnet) */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary text-white rounded-lg shadow-2xl overflow-hidden border border-secondary/20 relative">
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/15 blur-xl rounded-full"></div>
-
+ 
             <div className="p-8 sm:p-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
               <div className="md:col-span-7 space-y-4">
                 <div className="inline-block bg-slate-800 text-secondary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded border border-secondary/20">
@@ -596,7 +625,7 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-
+ 
               <div className="md:col-span-5 bg-slate-900 p-6 rounded border border-slate-850 shadow-inner">
                 {guideSubmitted ? (
                   <div className="text-center py-8 space-y-3">
@@ -611,6 +640,13 @@ export default function Home() {
                 ) : (
                   <form onSubmit={handleGuideSubmit} className="space-y-4">
                     <h4 className="text-xs font-semibold uppercase tracking-wider text-secondary">Enter details for PDF link</h4>
+                    
+                    {guideErrorMsg && (
+                      <div className="p-2.5 bg-red-950 border border-red-800 text-red-200 rounded text-[10px]">
+                        {guideErrorMsg}
+                      </div>
+                    )}
+                    
                     <div>
                       <label className="sr-only">Full Name</label>
                       <input
@@ -646,10 +682,17 @@ export default function Home() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                      disabled={guideLoading}
+                      className="w-full bg-secondary hover:bg-yellow-600 disabled:bg-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed text-primary font-bold text-xs py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      <Download className="w-3.5 h-3.5" />
-                      Get PDF Handbook
+                      {guideLoading ? (
+                        "Requesting..."
+                      ) : (
+                        <>
+                          <Download className="w-3.5 h-3.5" />
+                          Get PDF Handbook
+                        </>
+                      )}
                     </button>
                     <p className="text-[9px] text-slate-500 text-center leading-normal">
                       We respect your privacy. Secure document protocols apply.
@@ -661,7 +704,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      */}
     </div>
   );
 }

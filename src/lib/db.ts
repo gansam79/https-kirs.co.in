@@ -58,6 +58,19 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
+    // 5. Create queries table for general leads (guide, drafts, subscriptions, eligibility)
+    await query(`
+      CREATE TABLE IF NOT EXISTS queries (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        type VARCHAR(50) NOT NULL,
+        name VARCHAR(255),
+        email VARCHAR(255),
+        phone VARCHAR(50),
+        details TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `);
+
     // 2. Create reviews table
     await query(`
       CREATE TABLE IF NOT EXISTS reviews (

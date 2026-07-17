@@ -11,6 +11,8 @@ export default function DocumentChecklistPage() {
   // Newsletter / download capture state
   const [emailForm, setEmailForm] = useState({ name: "", email: "", phone: "" });
   const [downloaded, setDownloaded] = useState(false);
+  const [draftLoading, setDraftLoading] = useState(false);
+  const [draftErrorMsg, setDraftErrorMsg] = useState("");
 
   const activeService = servicesData.find((s) => s.slug === selectedSlug) || servicesData[0];
 
@@ -21,11 +23,41 @@ export default function DocumentChecklistPage() {
     }));
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (emailForm.name && emailForm.email) {
-      setDownloaded(true);
-      setTimeout(() => setDownloaded(false), 3000);
+      setDraftLoading(true);
+      setDraftErrorMsg("");
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/contact/`, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            type: "draft",
+            name: emailForm.name,
+            email: emailForm.email,
+            service: activeService.title
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to submit request.");
+        }
+
+        setDownloaded(true);
+        setEmailForm({ name: "", email: "", phone: "" });
+        setTimeout(() => setDownloaded(false), 5000);
+      } catch (error: any) {
+        console.error("Error submitting template request", error);
+        setDraftErrorMsg(error.message || "Failed to submit. Please try again.");
+      } finally {
+        setDraftLoading(false);
+      }
     }
   };
 
@@ -157,37 +189,53 @@ export default function DocumentChecklistPage() {
                   ✓ Pre-draft formats shared! Check your email.
                 </p>
               ) : (
-                <form onSubmit={handleEmailSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                  <div className="sm:col-span-4">
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      required
-                      value={emailForm.name}
-                      onChange={(e) => setEmailForm({ ...emailForm, name: e.target.value })}
-                      className="w-full text-xs p-2.5 bg-slate-950 border border-slate-800 focus:outline-none focus:border-secondary text-white rounded"
-                    />
-                  </div>
-                  <div className="sm:col-span-5">
-                    <input
-                      type="email"
-                      placeholder="Email Address"
-                      required
-                      value={emailForm.email}
-                      onChange={(e) => setEmailForm({ ...emailForm, email: e.target.value })}
-                      className="w-full text-xs p-2.5 bg-slate-950 border border-slate-800 focus:outline-none focus:border-secondary text-white rounded"
-                    />
-                  </div>
-                  <div className="sm:col-span-3">
-                    <button
-                      type="submit"
-                      className="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs py-2.5 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1"
-                    >
-                      <span>Get Drafts</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </form>
+                <div className="space-y-3">
+                  {draftErrorMsg && (
+                    <div className="p-2.5 bg-red-950 border border-red-800 text-red-200 rounded text-[10px]">
+                      {draftErrorMsg}
+                    </div>
+                  )}
+                  <form onSubmit={handleEmailSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                    <div className="sm:col-span-4">
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        required
+                        disabled={draftLoading}
+                        value={emailForm.name}
+                        onChange={(e) => setEmailForm({ ...emailForm, name: e.target.value })}
+                        className="w-full text-xs p-2.5 bg-slate-950 border border-slate-800 focus:outline-none focus:border-secondary text-white rounded disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="sm:col-span-5">
+                      <input
+                        type="email"
+                        placeholder="Email Address"
+                        required
+                        disabled={draftLoading}
+                        value={emailForm.email}
+                        onChange={(e) => setEmailForm({ ...emailForm, email: e.target.value })}
+                        className="w-full text-xs p-2.5 bg-slate-950 border border-slate-800 focus:outline-none focus:border-secondary text-white rounded disabled:opacity-50"
+                      />
+                    </div>
+                    <div className="sm:col-span-3">
+                      <button
+                        type="submit"
+                        disabled={draftLoading}
+                        className="w-full bg-secondary hover:bg-yellow-600 disabled:bg-slate-700 disabled:text-slate-400 disabled:cursor-not-allowed text-primary font-bold text-xs py-2.5 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        {draftLoading ? (
+                          <span>Sending...</span>
+                        ) : (
+                          <>
+                            <span>Get Drafts</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               )}
             </div>
 

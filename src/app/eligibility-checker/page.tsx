@@ -37,6 +37,8 @@ export default function EligibilityCheckerPage() {
     phone: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSelect = (field: keyof CheckerState, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -60,10 +62,37 @@ export default function EligibilityCheckerPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.phone && formData.email) {
-      setIsSubmitted(true);
+      setLoading(true);
+      setErrorMsg("");
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/contact/`, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            type: "eligibility",
+            ...formData
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to submit eligibility check.");
+        }
+
+        setIsSubmitted(true);
+      } catch (error: any) {
+        console.error("Error submitting eligibility checker", error);
+        setErrorMsg(error.message || "Failed to submit. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -81,6 +110,7 @@ export default function EligibilityCheckerPage() {
     });
     setCurrentStep(0);
     setIsSubmitted(false);
+    setErrorMsg("");
   };
 
   // Diagnostic logic
@@ -316,6 +346,12 @@ export default function EligibilityCheckerPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <h3 className="text-sm font-semibold text-primary">Enter your contact info to generate diagnostic report</h3>
                   
+                  {errorMsg && (
+                    <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded text-xs">
+                      {errorMsg}
+                    </div>
+                  )}
+                  
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1">
@@ -353,10 +389,17 @@ export default function EligibilityCheckerPage() {
 
                   <button
                     type="submit"
-                    className="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                    disabled={loading}
+                    className="w-full bg-secondary hover:bg-yellow-600 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed text-primary font-bold text-xs py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    Generate Diagnostic Report
-                    <ArrowRight className="w-4 h-4" />
+                    {loading ? (
+                      "Generating Report..."
+                    ) : (
+                      <>
+                        Generate Diagnostic Report
+                        <ArrowRight className="w-4 h-4" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

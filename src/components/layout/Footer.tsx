@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck, Loader2 } from "lucide-react";
 import Logo from "./Logo";
 
 const recoveryServices = [
@@ -26,12 +26,38 @@ const quickLinks = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribeLoading, setSubscribeLoading] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setSubscribed(true);
-      setEmail("");
+      setSubscribeLoading(true);
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/contact/`, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            type: "subscribe",
+            email: email
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to subscribe.");
+        }
+
+        setSubscribed(true);
+        setEmail("");
+      } catch (error: any) {
+        console.error("Error subscribing to newsletter", error);
+      } finally {
+        setSubscribeLoading(false);
+      }
     }
   };
 
@@ -94,15 +120,21 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter email address"
-                  className="bg-slate-900 border border-slate-800 text-slate-100 text-xs px-3 py-2.5 rounded-l focus:outline-none focus:border-secondary flex-1"
+                  className="bg-slate-900 border border-slate-800 text-slate-100 text-xs px-3 py-2.5 rounded-l focus:outline-none focus:border-secondary flex-1 disabled:opacity-50"
                   required
+                  disabled={subscribeLoading}
                 />
                 <button
                   type="submit"
-                  className="bg-slate-800 text-secondary hover:bg-secondary hover:text-primary px-3 rounded-r transition-colors flex items-center justify-center"
+                  disabled={subscribeLoading}
+                  className="bg-slate-800 text-secondary hover:bg-secondary hover:text-primary px-3 rounded-r transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label="Subscribe"
                 >
-                  <Send className="w-4 h-4" />
+                  {subscribeLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
                 </button>
               </form>
             )}
