@@ -35,7 +35,7 @@ export function LocalBusinessSchema() {
     "email": "info@kirs.co.in",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "33/1B/1, Dattanagar, Katraj",
+      "streetAddress": "33/1B/1, Datta Nagar, Katraj",
       "addressLocality": "Pune",
       "addressRegion": "Maharashtra",
       "postalCode": "411046",

@@ -126,9 +126,13 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-              Recover Your Lost Shares, Mutual Funds, Deposites, Insurance <br />
-              {/* <span className="text-gradient-gold font-serif">IEPF Claims</span> & Hidden Investments */}
+              Recover Your Lost of Shares, Dividend, <br className="hidden md:inline" />
+              Mutual Fund, Deposits, Insurance, etc.
             </h1>
+
+            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/15 border border-[#D4AF37]/35 rounded px-4 py-2 mt-4 text-[#D4AF37] font-serif italic text-base sm:text-lg font-semibold tracking-wide">
+              <span>Worked on that and resolved.</span>
+            </div>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
               India's trusted partner for physical share dematerialization, deceased inheritance transmission, signature updates, and complex documentation services.
@@ -245,27 +249,48 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-16">
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center mb-16">
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <TrendingUp className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Shares & Mutual Fund</h4>
-              <p className="text-xs text-slate-500">Transmission, Physical to Demat, and complete portfolio recovery.</p>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">1) IEPF Process & Lost of shares, Dividend</h4>
+              <p className="text-xs text-slate-500">Advisory on Form IEPF-5 filing, dividend recoveries, and SEBI compliance guidelines.</p>
             </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <Award className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">2) Lost of Mutual Fund</h4>
+              <p className="text-xs text-slate-500">Reclaim misplaced folios, resolve duplicate certificate issues, and process registry corrections.</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <Building className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Bank Deposits</h4>
-              <p className="text-xs text-slate-500">FD, Saving, and dormant account retrieval following central bank (DEA Fund) guidelines.</p>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">3) Unclaimed Bank & NBFC Deposit</h4>
+              <p className="text-xs text-slate-500">Retrieve long-term inactive savings, current accounts, and dormant fixed deposits (FD).</p>
             </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-colors">
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
               <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
                 <ShieldCheck className="w-6 h-6" />
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2">Unclaimed Insurance</h4>
-              <p className="text-xs text-slate-500">Life insurance maturity, death benefits, and survival claims.</p>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">4) Unclaimed Insurance Policy</h4>
+              <p className="text-xs text-slate-500">Claim pending life insurance maturity proceed sums, death claims, and survival benefits.</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <Users className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">5) Missing & Unclaimed Pension Amount</h4>
+              <p className="text-xs text-slate-500">Track and retrieve forgotten workplace pension funds and accumulated provident fund assets.</p>
+            </div>
+            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
+              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
+                <Scale className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">6) Court Support</h4>
+              <p className="text-xs text-slate-500">Expert coordination for court Succession Certificates, Legal Heirship Certificates, and Will Probates.</p>
             </div>
           </div>
 

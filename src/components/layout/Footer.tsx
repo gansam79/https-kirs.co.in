@@ -144,7 +144,7 @@ export default function Footer() {
             <li className="flex gap-2.5 items-start">
               <MapPin className="w-4 h-4 text-secondary shrink-0 mt-1" />
               <span className="text-slate-400">
-                33/1B/1, Dattanagar, Katraj,
+                33/1B/1, Datta Nagar, Katraj,
                 <br />
                 Pune, Maharashtra, 411046, India
               </span>
