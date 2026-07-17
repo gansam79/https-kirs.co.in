@@ -50,7 +50,8 @@ const filesToCopy = [
   'package.json',
   'package-lock.json',
   'next.config.js',
-  '.env'
+  '.env',
+  '.htaccess'
 ];
 
 filesToCopy.forEach(file => {

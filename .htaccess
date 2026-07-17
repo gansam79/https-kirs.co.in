@@ -1,0 +1,9 @@
+# Enable Phusion Passenger for Node.js
+<IfModule mod_passenger.c>
+    PassengerEnabled on
+    PassengerAppRoot "/home/u686584126/domains/kirs.co.in/public_html"
+    PassengerBaseURI "/"
+    PassengerAppType node
+    PassengerStartupFile server.js
+    PassengerNodejs "/opt/alt/alt-nodejs22/root/usr/bin/node"
+</IfModule>
