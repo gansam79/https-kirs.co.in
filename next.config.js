@@ -1,8 +1,6 @@
-import type { NextConfig } from "next";
-
 const basePath = "";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   basePath,
   trailingSlash: true,
   env: {
@@ -13,4 +11,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

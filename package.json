@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "next build && node deploy-tool/copy.js && node deploy-tool/zip.js && node deploy-tool/deploy.js"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",

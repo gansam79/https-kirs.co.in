@@ -50,7 +50,7 @@ conn.on('ready', () => {
         'echo "Unzipping deploy.zip into public_html..."',
         'unzip -o deploy.zip; echo "Unzip completed with status $?"',
         'echo "Fixing file and directory permissions recursively to 755 to prevent 500 Server Errors..."',
-        'chmod -R 755 .next public server.js package.json next.config.ts',
+        'chmod -R 755 .next public server.js package.json next.config.js',
         'echo "Cleaning up ZIP archive..."',
         'rm -f deploy.zip',
         'echo "Running npm install via Node 22..."',
