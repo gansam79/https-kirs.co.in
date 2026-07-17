@@ -13,11 +13,18 @@ fs.mkdirSync(deployDir);
 console.log('Copying files for deployment...');
 
 // Helper to copy with filter
-function copyDir(src, dest, excludePattern) {
+function copyDir(src, dest) {
   fs.cpSync(src, dest, {
     recursive: true,
     filter: (srcPath) => {
-      if (excludePattern && (srcPath.includes(excludePattern) || srcPath.replace(/\\/g, '/').includes(excludePattern))) {
+      const normalizedPath = srcPath.replace(/\\/g, '/');
+      // Exclude development dev folder and cache folders at any level
+      if (
+        normalizedPath.includes('/cache/') || 
+        normalizedPath.endsWith('/cache') ||
+        normalizedPath.includes('/dev/') || 
+        normalizedPath.endsWith('/dev')
+      ) {
         return false;
       }
       return true;
@@ -25,12 +32,12 @@ function copyDir(src, dest, excludePattern) {
   });
 }
 
-// Copy .next folder (exclude cache)
+// Copy .next folder (exclude cache and dev)
 const nextSrc = path.join(rootDir, '.next');
 const nextDest = path.join(deployDir, '.next');
 if (fs.existsSync(nextSrc)) {
   console.log('Copying .next...');
-  copyDir(nextSrc, nextDest, '.next/cache');
+  copyDir(nextSrc, nextDest);
 } else {
   console.error('Error: .next folder not found! Run next build first.');
   process.exit(1);
