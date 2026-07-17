@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node deploy-tool/copy.js && node deploy-tool/zip.js",
     "start": "next start",
     "lint": "eslint",
     "deploy": "next build && node deploy-tool/copy.js && node deploy-tool/zip.js && node deploy-tool/deploy.js"
