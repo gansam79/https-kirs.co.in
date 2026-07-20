@@ -51,6 +51,17 @@ if (fs.existsSync(publicSrc)) {
   copyDir(publicSrc, publicDest);
 }
 
+// Copy .next/static to public/_next/static for Passenger static file serving
+const nextStaticSrc = path.join(rootDir, '.next', 'static');
+const nextStaticDest = path.join(deployDir, 'public', '_next', 'static');
+if (fs.existsSync(nextStaticSrc)) {
+  console.log('Copying .next/static to public/_next/static...');
+  if (!fs.existsSync(path.join(deployDir, 'public', '_next'))) {
+    fs.mkdirSync(path.join(deployDir, 'public', '_next'), { recursive: true });
+  }
+  copyDir(nextStaticSrc, nextStaticDest);
+}
+
 // Copy files
 const filesToCopy = [
   'server.js',
@@ -71,5 +82,13 @@ filesToCopy.forEach(file => {
     console.log(`Warning: ${file} not found locally.`);
   }
 });
+
+// Create tmp folder and restart.txt inside deploy folder to auto-restart Passenger on extraction
+const tmpDest = path.join(deployDir, 'tmp');
+if (!fs.existsSync(tmpDest)) {
+  fs.mkdirSync(tmpDest);
+}
+fs.writeFileSync(path.join(tmpDest, 'restart.txt'), 'restart');
+console.log('Created tmp/restart.txt inside deploy folder.');
 
 console.log('Copy step completed successfully!');

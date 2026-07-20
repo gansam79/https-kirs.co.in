@@ -1,4 +1,4 @@
-const basePath = "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH !== undefined ? process.env.NEXT_PUBLIC_BASE_PATH : "/stagging";
 
 const nextConfig = {
   basePath,

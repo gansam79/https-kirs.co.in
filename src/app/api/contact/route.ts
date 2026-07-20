@@ -166,7 +166,7 @@ export async function POST(request: Request) {
         `;
       } else if (formType === "eligibility") {
         mailSubject = `New Lead: Eligibility Checker Inquiry from ${name}`;
-        
+
         const friendlyApproxValue = {
           under_1l: "Under ₹1 Lakh",
           "1_to_5l": "₹1 Lakh to ₹5 Lakhs",

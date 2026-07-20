@@ -84,14 +84,15 @@ export default function Home() {
   const [guideLoading, setGuideLoading] = useState(false);
   const [guideErrorMsg, setGuideErrorMsg] = useState("");
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [services, setServices] = useState(servicesData);
 
   React.useEffect(() => {
-    async function fetchReviews() {
+    async function fetchData() {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/reviews/`);
-        if (response.ok) {
-          const data = await response.json();
+        const reviewsRes = await fetch(`${basePath}/api/reviews/`);
+        if (reviewsRes.ok) {
+          const data = await reviewsRes.json();
           if (data && data.length > 0) {
             setReviews(data);
           }
@@ -99,8 +100,20 @@ export default function Home() {
       } catch (err) {
         console.error("Failed to load reviews from database:", err);
       }
+
+      try {
+        const servicesRes = await fetch(`${basePath}/api/services/`);
+        if (servicesRes.ok) {
+          const data = await servicesRes.json();
+          if (data && data.length > 0) {
+            setServices(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load services from database API:", err);
+      }
     }
-    fetchReviews();
+    fetchData();
   }, []);
 
   const handleGuideSubmit = async (e: React.FormEvent) => {
@@ -278,49 +291,97 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center mb-16">
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <TrendingUp className="w-6 h-6" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <Link href="/services/iepf-process-lost-shares-dividend" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">1) IEPF Process & Lost of shares, Dividend</h4>
+                  <p className="text-xs text-slate-500">Advisory on Form IEPF-5 filing, dividend recoveries, and SEBI compliance guidelines.</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">1) IEPF Process & Lost of shares, Dividend</h4>
-              <p className="text-xs text-slate-500">Advisory on Form IEPF-5 filing, dividend recoveries, and SEBI compliance guidelines.</p>
-            </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <Award className="w-6 h-6" />
+            </Link>
+            <Link href="/services/lost-mutual-fund" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <Award className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">2) Lost of Mutual Fund</h4>
+                  <p className="text-xs text-slate-500">Reclaim misplaced folios, resolve duplicate certificate issues, and process registry corrections.</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">2) Lost of Mutual Fund</h4>
-              <p className="text-xs text-slate-500">Reclaim misplaced folios, resolve duplicate certificate issues, and process registry corrections.</p>
-            </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <Building className="w-6 h-6" />
+            </Link>
+            <Link href="/services/unclaimed-bank-nbfc-deposit" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <Building className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">3) Unclaimed Bank & NBFC Deposit</h4>
+                  <p className="text-xs text-slate-500">Retrieve long-term inactive savings, current accounts, and dormant fixed deposits (FD).</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">3) Unclaimed Bank & NBFC Deposit</h4>
-              <p className="text-xs text-slate-500">Retrieve long-term inactive savings, current accounts, and dormant fixed deposits (FD).</p>
-            </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <ShieldCheck className="w-6 h-6" />
+            </Link>
+            <Link href="/services/unclaimed-insurance-policy" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">4) Unclaimed Insurance Policy</h4>
+                  <p className="text-xs text-slate-500">Claim pending life insurance maturity proceed sums, death claims, and survival benefits.</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">4) Unclaimed Insurance Policy</h4>
-              <p className="text-xs text-slate-500">Claim pending life insurance maturity proceed sums, death claims, and survival benefits.</p>
-            </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <Users className="w-6 h-6" />
+            </Link>
+            <Link href="/services/missing-unclaimed-pension-amount" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">5) Missing & Unclaimed Pension Amount</h4>
+                  <p className="text-xs text-slate-500">Track and retrieve forgotten workplace pension funds and accumulated provident fund assets.</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">5) Missing & Unclaimed Pension Amount</h4>
-              <p className="text-xs text-slate-500">Track and retrieve forgotten workplace pension funds and accumulated provident fund assets.</p>
-            </div>
-            <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 hover:border-secondary/60 transition-all hover:scale-[1.01]">
-              <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary">
-                <Scale className="w-6 h-6" />
+            </Link>
+            <Link href="/services/court-support" className="group">
+              <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
+                    <Scale className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">6) Court Support</h4>
+                  <p className="text-xs text-slate-500">Expert coordination for court Succession Certificates, Legal Heirship Certificates, and Will Probates.</p>
+                </div>
+                <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mt-4 flex items-center justify-center gap-1">
+                  <span>Explore Service</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
-              <h4 className="font-serif font-bold text-primary mb-2 text-sm sm:text-base">6) Court Support</h4>
-              <p className="text-xs text-slate-500">Expert coordination for court Succession Certificates, Legal Heirship Certificates, and Will Probates.</p>
-            </div>
+            </Link>
           </div>
 
           {/* 
@@ -381,7 +442,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {servicesData.slice(0, 10).map((service) => (
+            {services.map((service) => (
               <div
                 key={service.slug}
                 className="bg-slate-50 rounded p-6 shadow-sm border border-slate-200/80 hover:shadow-lg hover:border-[#D4AF37]/50 transition-all duration-300 flex flex-col justify-between"
@@ -459,7 +520,10 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Founder visual */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-80 h-96 border-4 border-secondary rounded shadow-2xl overflow-hidden bg-primary">
+              <div
+                className="relative w-80 h-96 border-4 border-secondary rounded shadow-2xl overflow-hidden bg-primary max-w-full"
+                style={{ maxWidth: "320px", maxHeight: "384px" }}
+              >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/founder.png`}
                   alt="Mr. Pradip Samgir - Founder & Chief Consultant"

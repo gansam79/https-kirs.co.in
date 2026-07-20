@@ -3,13 +3,31 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight, ShieldCheck, Scale, PhoneCall } from "lucide-react";
+import { Menu, X, ArrowRight, PhoneCall } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
+const servicesDropdown = [
+  { name: "IEPF & Shares", href: "/services/iepf-process-lost-shares-dividend" },
+  { name: "Lost Mutual Fund", href: "/services/lost-mutual-fund" },
+  { name: "Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit" },
+  { name: "Insurance Policy", href: "/services/unclaimed-insurance-policy" },
+  { name: "Pension & Retirement", href: "/services/missing-unclaimed-pension-amount" },
+  { name: "Court Support", href: "/services/court-support" },
+];
+
+const desksDropdown = [
+  { name: "Indian - Individual/HUF", href: "/services/indian-desk-individual-huf-proprietorship-partnership" },
+  { name: "Indian - Corporate/LLP", href: "/services/indian-desk-corporate-llp" },
+  { name: "Foreign - NRI/NRE/NRO", href: "/services/foreign-desk-nri-nre-nro" },
+  { name: "Foreign - FII/FPI", href: "/services/foreign-desk-fii-fpi" },
+  { name: "Trademark Registration", href: "/services/trademark-registration" },
+];
+
 const navLinks = [
   { name: "About KIRS", href: "/about" },
-  { name: "Services", href: "/services" },
+  { name: "Services", href: "/services", hasDropdown: true, items: servicesDropdown },
+  { name: "Special Desks", href: "/services", hasDropdown: true, items: desksDropdown },
   { name: "Regulatory Awareness", href: "/regulatory-awareness" },
   { name: "Eligibility Checker", href: "/eligibility-checker" },
   { name: "Doc Checklist", href: "/document-checklist" },
@@ -52,8 +70,55 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-2.5 xl:gap-4.5">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+                const isActive = link.hasDropdown
+                  ? link.items.some((sub) => pathname === sub.href)
+                  : pathname === link.href || pathname.startsWith(link.href + "/");
+                
                 const words = link.name.split(" ");
+
+                if (link.hasDropdown) {
+                  return (
+                    <div key={link.name} className="relative group/dropdown h-12 flex items-center">
+                      <Link
+                        href={link.href}
+                        className={`text-[10px] xl:text-[11px] font-bold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary px-1 relative ${
+                          isActive ? "text-secondary" : "text-slate-300"
+                        }`}
+                      >
+                        {words.length === 1 ? (
+                          <span className="py-2 flex items-center gap-1">
+                            {words[0]}
+                            <span className="text-[7px] opacity-75 group-hover/dropdown:rotate-180 transition-transform">▼</span>
+                          </span>
+                        ) : (
+                          <div className="flex flex-col leading-[1.25] items-center py-1">
+                            <span>{words[0]}</span>
+                            <span className="flex items-center gap-1">
+                              {words[1]}
+                              <span className="text-[6px] opacity-75 group-hover/dropdown:rotate-180 transition-transform">▼</span>
+                            </span>
+                          </div>
+                        )}
+                        <span className={`absolute bottom-0 left-0 h-[2px] bg-secondary transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover/dropdown:w-full"
+                          }`}></span>
+                      </Link>
+                      
+                      {/* Dropdown Panel */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 w-56 bg-primary border border-slate-800 rounded shadow-2xl p-2 hidden group-hover/dropdown:block hover:block z-50">
+                        {link.items.map((sub) => (
+                          <Link
+                            key={sub.name}
+                            href={sub.href}
+                            className="block px-3 py-2 text-[10px] uppercase tracking-wider font-bold text-slate-100 hover:text-secondary hover:bg-slate-900 rounded transition-colors"
+                          >
+                            {sub.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.name}
@@ -115,15 +180,42 @@ export default function Header() {
               transition={{ duration: 0.3 }}
               className="lg:hidden bg-primary border-t border-slate-800"
             >
-              <div className="px-4 pt-4 pb-6 space-y-3">
+              <div className="px-4 pt-4 pb-6 space-y-4">
                 {navLinks.map((link) => {
+                  if (link.hasDropdown) {
+                    return (
+                      <div key={link.name} className="space-y-1 py-1">
+                        <span className="block px-3 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                          {link.name}
+                        </span>
+                        <div className="pl-4 border-l border-slate-800 space-y-1">
+                          {link.items.map((sub) => {
+                            const isSubActive = pathname === sub.href;
+                            return (
+                              <Link
+                                key={sub.name}
+                                href={sub.href}
+                                onClick={() => setIsOpen(false)}
+                                className={`block py-1.5 px-3 rounded text-sm font-medium transition-colors ${isSubActive
+                                    ? "bg-slate-800 text-secondary"
+                                    : "text-slate-300 hover:bg-slate-800 hover:text-white"
+                                  }`}
+                              >
+                                {sub.name}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  }
                   const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
                   return (
                     <Link
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className={`block py-2 px-3 rounded text-base font-medium transition-colors ${isActive
+                      className={`block py-2 px-3 rounded text-sm font-medium transition-colors ${isActive
                           ? "bg-slate-800 text-secondary"
                           : "text-slate-300 hover:bg-slate-800 hover:text-white"
                         }`}

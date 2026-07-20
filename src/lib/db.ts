@@ -1,4 +1,6 @@
 import mysql from "mysql2/promise";
+import { servicesData } from "@/data/servicesData";
+import { blogData } from "@/data/blogData";
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || "193.203.184.226",
@@ -16,7 +18,7 @@ export async function query<T = any>(sql: string, params: any[] = []): Promise<T
   return results as T;
 }
 
-// Function to initialize tables
+// Function to initialize tables and seed static data if empty
 export async function initializeDatabase() {
   try {
     // 1. Create contacts table
@@ -35,14 +37,13 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // Ensure the service column exists in the table if it was created previously without it
     try {
       await query(`ALTER TABLE contacts ADD COLUMN service VARCHAR(255) AFTER company;`);
     } catch (err) {
       // Ignore if column already exists
     }
 
-    // 4. Create service_enquiries table
+    // 2. Create service_enquiries table
     await query(`
       CREATE TABLE IF NOT EXISTS service_enquiries (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -58,7 +59,7 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // 5. Create queries table for general leads (guide, drafts, subscriptions, eligibility)
+    // 3. Create queries table for general leads (guide, drafts, subscriptions, eligibility)
     await query(`
       CREATE TABLE IF NOT EXISTS queries (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +72,7 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // 2. Create reviews table
+    // 4. Create reviews table
     await query(`
       CREATE TABLE IF NOT EXISTS reviews (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +86,7 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // 3. Pre-populate initial reviews if the table is empty
+    // 5. Pre-populate initial reviews if table is empty
     const reviewsCount = await query<any[]>("SELECT COUNT(*) as count FROM reviews");
     if (reviewsCount[0].count === 0) {
       const initialReviews = [
@@ -133,6 +134,82 @@ export async function initializeDatabase() {
         );
       }
       console.log("Database initialized with seed review data.");
+    }
+
+    // 6. Create services table
+    await query(`
+      CREATE TABLE IF NOT EXISTS services (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        short_desc TEXT,
+        long_desc LONGTEXT,
+        timeline VARCHAR(100),
+        eligibility JSON,
+        documents JSON,
+        faqs JSON,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `);
+
+    // Seed services if table is empty
+    const servicesCount = await query<any[]>("SELECT COUNT(*) as count FROM services");
+    if (servicesCount[0].count === 0) {
+      for (const s of servicesData) {
+        await query(
+          `INSERT INTO services (slug, title, short_desc, long_desc, timeline, eligibility, documents, faqs) 
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            s.slug,
+            s.title,
+            s.shortDesc,
+            s.longDesc,
+            s.timeline,
+            JSON.stringify(s.eligibility),
+            JSON.stringify(s.documents),
+            JSON.stringify(s.faqs),
+          ]
+        );
+      }
+      console.log("Database initialized with seed services data.");
+    }
+
+    // 7. Create blogs table
+    await query(`
+      CREATE TABLE IF NOT EXISTS blogs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        slug VARCHAR(255) UNIQUE NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        category VARCHAR(100),
+        date VARCHAR(100),
+        read_time VARCHAR(100),
+        excerpt TEXT,
+        content JSON,
+        keywords JSON,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    `);
+
+    // Seed blogs if table is empty
+    const blogsCount = await query<any[]>("SELECT COUNT(*) as count FROM blogs");
+    if (blogsCount[0].count === 0) {
+      for (const b of blogData) {
+        await query(
+          `INSERT INTO blogs (slug, title, category, date, read_time, excerpt, content, keywords) 
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            b.slug,
+            b.title,
+            b.category,
+            b.date,
+            b.readTime,
+            b.excerpt,
+            JSON.stringify(b.content),
+            JSON.stringify(b.keywords),
+          ]
+        );
+      }
+      console.log("Database initialized with seed blog data.");
     }
   } catch (error) {
     console.error("Database initialization failed:", error);

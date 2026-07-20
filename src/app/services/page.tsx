@@ -1,14 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search, ChevronRight, FileSpreadsheet, Hourglass, HelpCircle, CheckSquare, Award } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
 
 export default function ServicesPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [services, setServices] = useState<Service[]>(servicesData);
 
-  const filteredServices = servicesData.filter((service) =>
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+        const response = await fetch(`${basePath}/api/services/`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setServices(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load services from database API:", err);
+      }
+    }
+    fetchServices();
+  }, []);
+
+  const filteredServices = services.filter((service) =>
     service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     service.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
     service.longDesc.toLowerCase().includes(searchQuery.toLowerCase())
@@ -25,7 +44,7 @@ export default function ServicesPage() {
           </h1>
           <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
           <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Choose from our 5 specialized areas of asset restoration and documentation consulting. We help clear mismatches and compile compliance files.
+            Choose from our 11 specialized areas of asset restoration, institutional special desks, and documentation consulting. We help clear mismatches and compile compliance files.
           </p>
         </div>
 

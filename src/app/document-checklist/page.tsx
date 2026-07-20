@@ -7,7 +7,7 @@ import { servicesData, Service } from "@/data/servicesData";
 export default function DocumentChecklistPage() {
   const [selectedSlug, setSelectedSlug] = useState<string>("iepf-claim-recovery");
   const [completedItems, setCompletedItems] = useState<Record<string, boolean>>({});
-  
+
   // Newsletter / download capture state
   const [emailForm, setEmailForm] = useState({ name: "", email: "", phone: "" });
   const [downloaded, setDownloaded] = useState(false);
@@ -32,7 +32,7 @@ export default function DocumentChecklistPage() {
         const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
         const response = await fetch(`${basePath}/api/contact/`, {
           method: "POST",
-          headers: { 
+          headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -68,7 +68,7 @@ export default function DocumentChecklistPage() {
   return (
     <div className="bg-slate-50 min-h-screen py-12 font-sans print:bg-white print:py-0">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
+
         {/* Title Block */}
         <div className="text-center space-y-3 mb-8 print:hidden">
           <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Documentation Hub</span>
@@ -81,7 +81,7 @@ export default function DocumentChecklistPage() {
 
         {/* Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left Navigation: Service Selector (print hidden) */}
           <div className="lg:col-span-4 bg-white border border-slate-200 rounded-lg p-5 shadow-sm space-y-2 print:hidden">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 block mb-3">
@@ -94,11 +94,10 @@ export default function DocumentChecklistPage() {
                   setSelectedSlug(s.slug);
                   setCompletedItems({});
                 }}
-                className={`w-full text-left px-3 py-2.5 rounded text-xs font-semibold transition-colors flex items-center justify-between ${
-                  selectedSlug === s.slug
+                className={`w-full text-left px-3 py-2.5 rounded text-xs font-semibold transition-colors flex items-center justify-between ${selectedSlug === s.slug
                     ? "bg-slate-900 text-white"
                     : "text-slate-650 hover:bg-slate-100 hover:text-primary"
-                }`}
+                  }`}
               >
                 <span>{s.title}</span>
               </button>
@@ -107,7 +106,7 @@ export default function DocumentChecklistPage() {
 
           {/* Right Area: Interactive Checklist (print focus area) */}
           <div className="lg:col-span-8 bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-sm space-y-6 print:border-0 print:shadow-none">
-            
+
             {/* Header of Checklist */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
               <div>
@@ -134,11 +133,10 @@ export default function DocumentChecklistPage() {
                   <div
                     key={idx}
                     onClick={() => handleToggleItem(doc)}
-                    className={`p-3.5 rounded border flex gap-3 items-start cursor-pointer transition-all ${
-                      isChecked
+                    className={`p-3.5 rounded border flex gap-3 items-start cursor-pointer transition-all ${isChecked
                         ? "border-emerald-250 bg-emerald-50/20"
                         : "border-slate-200 hover:border-slate-350 bg-slate-50/50"
-                    }`}
+                      }`}
                   >
                     <button
                       type="button"
@@ -183,7 +181,7 @@ export default function DocumentChecklistPage() {
               <p className="text-[11px] text-slate-350 leading-relaxed">
                 Need customized, pre-drafted Indemnity Bonds, Affidavits, Form ISR-1, or Succession petitions? Share your email to receive standard Microsoft Word formats.
               </p>
-              
+
               {downloaded ? (
                 <p className="text-secondary text-xs font-semibold py-2 animate-pulse">
                   ✓ Pre-draft formats shared! Check your email.

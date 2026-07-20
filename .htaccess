@@ -1,8 +1,19 @@
-# Enable Phusion Passenger for Node.js
+# Direct static asset serving via Apache to prevent unstyled CSS flashes on staging
+RewriteEngine On
+
+# Allow Apache to serve physical files and directories directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Direct rewrite for Next.js static assets under /stagging/
+RewriteRule ^_next/static/(.*)$ public/_next/static/$1 [L]
+
+# Enable Phusion Passenger for Node.js on Hostinger Staging Subdirectory
 <IfModule mod_passenger.c>
     PassengerEnabled on
-    PassengerAppRoot "/home/u686584126/domains/kirs.co.in/public_html"
-    PassengerBaseURI "/"
+    PassengerAppRoot "/home/u686584126/domains/kirs.co.in/public_html/stagging"
+    PassengerBaseURI "/stagging"
     PassengerAppType node
     PassengerStartupFile server.js
     PassengerNodejs "/opt/alt/alt-nodejs22/root/usr/bin/node"

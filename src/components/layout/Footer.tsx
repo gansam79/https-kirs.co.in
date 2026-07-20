@@ -5,12 +5,21 @@ import Link from "next/link";
 import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck, Loader2 } from "lucide-react";
 import Logo from "./Logo";
 
-const recoveryServices = [
-  { name: "IEPF Process", href: "/services/iepf-process-assistance" },
-  { name: "Lost of Shares & Mutual Fund Recovery", href: "/services/lost-shares-mutual-fund-recovery" },
-  { name: "Unclaimed Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit-recovery" },
-  { name: "Unclaimed Insurance Recovery", href: "/services/unclaimed-insurance-recovery" },
-  { name: "Unclaimed Pension & Retirement Benefits Recovery", href: "/services/unclaimed-pension-retirement-benefits-recovery" },
+const coreServices = [
+  { name: "IEPF & Lost Shares", href: "/services/iepf-process-lost-shares-dividend" },
+  { name: "Lost Mutual Fund", href: "/services/lost-mutual-fund" },
+  { name: "Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit" },
+  { name: "Unclaimed Insurance", href: "/services/unclaimed-insurance-policy" },
+  { name: "Pension Amount", href: "/services/missing-unclaimed-pension-amount" },
+  { name: "Court Support", href: "/services/court-support" },
+];
+
+const specialDesks = [
+  { name: "Indian - Individual & HUF", href: "/services/indian-desk-individual-huf-proprietorship-partnership" },
+  { name: "Indian - Corporate & LLP", href: "/services/indian-desk-corporate-llp" },
+  { name: "Foreign - NRI / NRE / NRO", href: "/services/foreign-desk-nri-nre-nro" },
+  { name: "Foreign - FII & FPI Desk", href: "/services/foreign-desk-fii-fpi" },
+  { name: "Trademark Registration", href: "/services/trademark-registration" },
 ];
 
 const quickLinks = [
@@ -36,7 +45,7 @@ export default function Footer() {
         const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
         const response = await fetch(`${basePath}/api/contact/`, {
           method: "POST",
-          headers: { 
+          headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -95,21 +104,21 @@ export default function Footer() {
       </div>
 
       {/* Main Links Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* About Column */}
-        <div className="md:col-span-6 lg:col-span-4 space-y-4">
+        <div className="md:col-span-6 lg:col-span-3 space-y-4">
           <Link href="/" className="inline-block text-left" aria-label="KIRS - Kalavati Investment & Recovery Services">
             <Logo variant="horizontal" light={true} className="!items-start" />
           </Link>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            India's premier financial consultancies dedicated to recovering lost assets, IEPF claims, dividends, and forgotten inheritance shares.
+          <p className="text-slate-400 text-xs leading-relaxed">
+            India's premier financial consultancy dedicated to recovering lost assets, IEPF claims, dividends, and forgotten inheritance shares.
           </p>
           <div className="pt-2">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white mb-3">
               Subscribe to Investor Alerts
             </h4>
             {subscribed ? (
-              <p className="text-secondary text-sm font-medium flex items-center gap-1.5 animate-pulse">
+              <p className="text-secondary text-xs font-medium flex items-center gap-1.5 animate-pulse">
                 <ShieldCheck className="w-4 h-4 text-secondary" />
                 Successfully joined updates!
               </p>
@@ -141,11 +150,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Services Column */}
-        <div className="md:col-span-6 lg:col-span-3">
-          <h4 className="font-serif text-base text-white font-medium mb-4">Recovery Services</h4>
-          <ul className="space-y-2 text-sm">
-            {recoveryServices.map((service) => (
+        {/* Core Services Column */}
+        <div className="md:col-span-6 lg:col-span-2">
+          <h4 className="font-serif text-sm text-white font-semibold mb-4 uppercase tracking-wider">Recovery Services</h4>
+          <ul className="space-y-2 text-xs">
+            {coreServices.map((service) => (
               <li key={service.name}>
                 <Link href={service.href} className="text-slate-400 hover:text-white transition-colors">
                   {service.name}
@@ -155,10 +164,24 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Special Desks Column */}
+        <div className="md:col-span-6 lg:col-span-2">
+          <h4 className="font-serif text-sm text-white font-semibold mb-4 uppercase tracking-wider">Special Desks</h4>
+          <ul className="space-y-2 text-xs">
+            {specialDesks.map((desk) => (
+              <li key={desk.name}>
+                <Link href={desk.href} className="text-slate-400 hover:text-white transition-colors">
+                  {desk.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Quick Links Column */}
         <div className="md:col-span-6 lg:col-span-2">
-          <h4 className="font-serif text-base text-white font-medium mb-4">Resources</h4>
-          <ul className="space-y-2 text-sm">
+          <h4 className="font-serif text-sm text-white font-semibold mb-4 uppercase tracking-wider">Resources</h4>
+          <ul className="space-y-2 text-xs">
             {quickLinks.map((link) => (
               <li key={link.name}>
                 <Link href={link.href} className="text-slate-400 hover:text-white transition-colors">
@@ -171,10 +194,10 @@ export default function Footer() {
 
         {/* Contact Column */}
         <div className="md:col-span-6 lg:col-span-3 space-y-4">
-          <h4 className="font-serif text-base text-white font-medium mb-4">Expert Office</h4>
-          <ul className="space-y-3.5 text-sm">
+          <h4 className="font-serif text-sm text-white font-semibold mb-4 uppercase tracking-wider">Expert Office</h4>
+          <ul className="space-y-3 text-xs">
             <li className="flex gap-2.5 items-start">
-              <MapPin className="w-4 h-4 text-secondary shrink-0 mt-1" />
+              <MapPin className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
               <span className="text-slate-400">
                 33/1B/1, Datta Nagar, Katraj,
                 <br />
