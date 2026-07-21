@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
   --background: #FFFFFF;
@@ -9,9 +10,9 @@
   --light-bg: #F8FAFC;
   --border: #E2E8F0;
   
-  --font-serif: var(--font-playfair), Georgia, serif;
-  --font-sans: var(--font-inter), sans-serif;
-  --font-numbers: var(--font-poppins), sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-numbers: 'Poppins', sans-serif;
 }
 
 @theme {
@@ -23,9 +24,9 @@
   --color-light-bg: var(--light-bg);
   --color-border-custom: var(--border);
   
-  --font-serif: var(--font-serif);
-  --font-sans: var(--font-sans);
-  --font-numbers: var(--font-numbers);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-numbers: 'Poppins', sans-serif;
   
   --animate-gold-sheen: gold-sheen 3s infinite linear;
   --animate-float: float 6s ease-in-out infinite;

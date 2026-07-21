@@ -1,7 +1,7 @@
 import React from "react";
 import { ShieldCheck, Users, Search, Landmark, Scale, Award } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
+import { getBasePath } from "@/lib/basePath";
 
 const coreValues = [
   {
@@ -98,12 +98,10 @@ export default function AboutPage() {
           {/* Avatar container */}
           <div className="lg:col-span-4 flex justify-center">
             <div className="relative w-64 h-80 border-4 border-secondary rounded shadow-lg overflow-hidden bg-primary flex items-center justify-center">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/founder.png`}
+              <img
+                src={`${getBasePath()}/founder.png`}
                 alt="Mr. Pradip Samgir - Chief Consultant"
-                fill
-                sizes="(max-width: 768px) 100vw, 256px"
-                className="object-cover object-top"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-slate-900/10 to-transparent z-10 flex flex-col justify-end p-5 text-center text-white">
                 <span className="text-[9px] text-secondary font-bold uppercase tracking-widest">Chief Advisory Board</span>

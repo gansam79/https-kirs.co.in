@@ -1,8 +1,5 @@
-"use client";
-
 import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   ShieldCheck,
@@ -22,6 +19,7 @@ import {
 import { motion } from "framer-motion";
 import { servicesData } from "@/data/servicesData";
 import { OrganizationSchema, LocalBusinessSchema } from "@/components/layout/JsonLd";
+import { getBasePath } from "@/lib/basePath";
 
 const authorityLogos = [
   { name: "IEPF", desc: "Investor Education & Protection Fund" },
@@ -88,9 +86,9 @@ export default function Home() {
 
   React.useEffect(() => {
     async function fetchData() {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+      const basePath = getBasePath();
       try {
-        const reviewsRes = await fetch(`${basePath}/api/reviews/`);
+        const reviewsRes = await fetch(`${basePath}/api/reviews`);
         if (reviewsRes.ok) {
           const data = await reviewsRes.json();
           if (data && data.length > 0) {
@@ -102,7 +100,7 @@ export default function Home() {
       }
 
       try {
-        const servicesRes = await fetch(`${basePath}/api/services/`);
+        const servicesRes = await fetch(`${basePath}/api/services`);
         if (servicesRes.ok) {
           const data = await servicesRes.json();
           if (data && data.length > 0) {
@@ -168,13 +166,10 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-              Recover Your Lost of Shares, Dividend, <br className="hidden md:inline" />
-              Mutual Fund, Deposits, Insurance, etc.
+              Recover Your Lost Shares, <br className="hidden md:inline" />
+              Mutual Funds, Deposites, <br className="hidden md:inline" />
+              Insurance
             </h1>
-
-            <div className="inline-flex items-center gap-2 bg-[#D4AF37]/15 border border-[#D4AF37]/35 rounded px-4 py-2 mt-4 text-[#D4AF37] font-serif italic text-base sm:text-lg font-semibold tracking-wide">
-              <span>Worked on that and resolved.</span>
-            </div>
 
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
               India's trusted partner for physical share dematerialization, deceased inheritance transmission, signature updates, and complex documentation services.
@@ -183,14 +178,14 @@ export default function Home() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                href="/eligibility-checker"
+                to="/eligibility-checker"
                 className="w-full sm:w-auto bg-secondary hover:bg-yellow-600 text-primary font-bold px-8 py-4 rounded shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all duration-200"
               >
                 Check Claim Eligibility
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/contact"
+                to="/contact"
                 className="w-full sm:w-auto border border-slate-700 hover:border-white text-white font-semibold px-8 py-4 rounded text-sm uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200"
               >
                 Schedule Free Consultation
@@ -292,7 +287,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            <Link href="/services/iepf-process-lost-shares-dividend" className="group">
+            <Link to="/services/iepf-process-lost-shares-dividend" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -307,7 +302,7 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-            <Link href="/services/lost-mutual-fund" className="group">
+            <Link to="/services/lost-mutual-fund" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -322,7 +317,7 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-            <Link href="/services/unclaimed-bank-nbfc-deposit" className="group">
+            <Link to="/services/unclaimed-bank-nbfc-deposit" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -337,7 +332,7 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-            <Link href="/services/unclaimed-insurance-policy" className="group">
+            <Link to="/services/unclaimed-insurance-policy" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -352,7 +347,7 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-            <Link href="/services/missing-unclaimed-pension-amount" className="group">
+            <Link to="/services/missing-unclaimed-pension-amount" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -367,7 +362,7 @@ export default function Home() {
                 </div>
               </div>
             </Link>
-            <Link href="/services/court-support" className="group">
+            <Link to="/services/court-support" className="group">
               <div className="bg-slate-50 p-6 rounded shadow-sm border border-secondary/20 group-hover:border-secondary group-hover:shadow-md transition-all group-hover:scale-[1.02] text-center h-full flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary group-hover:bg-primary/10 transition-colors">
@@ -459,7 +454,7 @@ export default function Home() {
                     Est. Timeline: {service.timeline.split(" ")[0]} {service.timeline.split(" ")[1] || ""}
                   </span>
                   <Link
-                    href={`/services/${service.slug}`}
+                    to={`/services/${service.slug}`}
                     className="text-primary hover:text-secondary font-semibold text-xs flex items-center gap-1 group transition-colors"
                   >
                     View Details
@@ -472,7 +467,7 @@ export default function Home() {
 
           <div className="text-center mt-12">
             <Link
-              href="/services"
+              to="/services"
               className="inline-flex items-center gap-1.5 bg-primary text-white hover:bg-slate-900 font-bold px-6 py-3 rounded text-xs uppercase tracking-wider shadow transition-colors"
             >
               Explore All Recovery Services
@@ -524,13 +519,10 @@ export default function Home() {
                 className="relative w-80 h-96 border-4 border-secondary rounded shadow-2xl overflow-hidden bg-primary max-w-full"
                 style={{ maxWidth: "320px", maxHeight: "384px" }}
               >
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/founder.png`}
+                <img
+                  src={`${getBasePath()}/founder.png`}
                   alt="Mr. Pradip Samgir - Founder & Chief Consultant"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 320px"
-                  className="object-cover object-top"
-                  priority
+                  className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-slate-900/10 to-transparent z-10 flex flex-col justify-end p-6 text-white text-center">
                   <span className="text-[10px] text-secondary font-bold uppercase tracking-widest">Founder & Chief Consultant</span>
@@ -624,7 +616,7 @@ export default function Home() {
               </p>
               <div className="mt-5">
                 <Link
-                  href="/reviews"
+                  to="/reviews"
                   className="inline-flex items-center gap-2 bg-primary hover:bg-slate-900 hover:scale-[1.02] text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded shadow transition-all duration-200"
                 >
                   View & Submit Reviews

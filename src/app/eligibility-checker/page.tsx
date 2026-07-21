@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, ClipboardList, AlertTriangle, ShieldCheck, Scale, ArrowRight, ArrowLeft, RotateCcw } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft, AlertCircle, FileText, Building2, HelpCircle, Loader2 } from "lucide-react";
+import { getBasePath } from "@/lib/basePath";
 
 interface CheckerState {
   assetType: string;
@@ -68,8 +69,8 @@ export default function EligibilityCheckerPage() {
       setLoading(true);
       setErrorMsg("");
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/contact/`, {
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/contact`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json"

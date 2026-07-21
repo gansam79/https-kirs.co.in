@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Star, MessageSquare, CheckCircle2, ThumbsUp, PlusCircle, AlertCircle } from "lucide-react";
+import { getBasePath } from "@/lib/basePath";
 
 interface Review {
   id: number;
@@ -76,11 +77,10 @@ export default function ReviewsPage() {
   React.useEffect(() => {
     async function fetchReviews() {
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/reviews/`);
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/reviews`);
         if (response.ok) {
           const data = await response.json();
-          // Fallback to initial reviews if db is empty
           if (data && data.length > 0) {
             setReviews(data);
           }
@@ -100,8 +100,8 @@ export default function ReviewsPage() {
     }
     
     try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-      const response = await fetch(`${basePath}/api/reviews/`, {
+      const basePath = getBasePath();
+      const response = await fetch(`${basePath}/api/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -119,21 +119,20 @@ export default function ReviewsPage() {
       }
 
       // Re-fetch updated reviews list from database
-      const fetchResponse = await fetch(`${basePath}/api/reviews/`);
+      const fetchResponse = await fetch(`${basePath}/api/reviews`);
       if (fetchResponse.ok) {
         const data = await fetchResponse.json();
         if (data && data.length > 0) {
           setReviews(data);
         }
       } else {
-        // Fallback: update local state if fetch fails
         const newReview: Review = {
           id: Date.now(),
           name,
           rating,
           category,
           comment,
-          date: "Just now (Pending Moderation)",
+          date: "Just now",
           likes: 0,
         };
         setReviews([newReview, ...reviews]);
@@ -141,8 +140,6 @@ export default function ReviewsPage() {
 
       setIsSubmitted(true);
       setError("");
-      
-      // Reset Form
       setName("");
       setEmail("");
       setComment("");
@@ -154,14 +151,13 @@ export default function ReviewsPage() {
   };
 
   const handleLike = async (id: number) => {
-    // Optimistic local state update
     setReviews(
       reviews.map((r) => (r.id === id ? { ...r, likes: r.likes + 1 } : r))
     );
 
     try {
-      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-      await fetch(`${basePath}/api/reviews/?id=${id}`, {
+      const basePath = getBasePath();
+      await fetch(`${basePath}/api/reviews?id=${id}`, {
         method: "PATCH"
       });
     } catch (err) {

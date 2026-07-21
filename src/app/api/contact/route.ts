@@ -107,8 +107,8 @@ export async function POST(request: Request) {
         port: parseInt(process.env.SMTP_PORT || "465"),
         secure: process.env.SMTP_SECURE !== "false", // true for 465, false for 587
         auth: {
-          user: process.env.SMTP_USER || "info@kirs.co.in",
-          pass: process.env.SMTP_PASS || "Kirs@2026Smtp",
+          user: process.env.SMTP_USER || "website@kirs.co.in",
+          pass: process.env.SMTP_PASS || "WebsiteEmail@25",
         },
       });
 
@@ -320,7 +320,7 @@ export async function POST(request: Request) {
       }
 
       const mailOptions = {
-        from: `"${senderName}" <${process.env.SMTP_USER || "info@kirs.co.in"}>`,
+        from: `"${senderName}" <${process.env.SMTP_USER || "website@kirs.co.in"}>`,
         to: process.env.SMTP_TO || "info@kirs.co.in",
         replyTo: email || undefined,
         subject: mailSubject,

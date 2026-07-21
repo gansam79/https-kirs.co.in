@@ -7,8 +7,8 @@ export function OrganizationSchema() {
     "@type": "Organization",
     "name": "KIRS (Kalavati Investment & Recovery Services)",
     "alternateName": "Kalavati Investment & Recovery Services",
-    "url": "https://https-kirs.co.in",
-    "logo": "https://https-kirs.co.in/logo.png",
+    "url": "https://kirs.co.in",
+    "logo": "https://kirs.co.in/logo-header.jpeg",
     "sameAs": [
       "https://www.linkedin.com/company/kirs-india",
       "https://twitter.com/kirs_india"
@@ -30,7 +30,7 @@ export function LocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "FinancialService",
     "name": "KIRS (Kalavati Investment & Recovery Services)",
-    "image": "https://https-kirs.co.in/cover.png",
+    "image": "https://kirs.co.in/logo-header.jpeg",
     "telephone": "+919823662901",
     "email": "info@kirs.co.in",
     "address": {
@@ -46,7 +46,7 @@ export function LocalBusinessSchema() {
       "latitude": 18.4529,
       "longitude": 73.8554
     },
-    "url": "https://https-kirs.co.in",
+    "url": "https://kirs.co.in",
     "priceRange": "$$",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",

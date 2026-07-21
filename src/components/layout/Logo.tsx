@@ -1,6 +1,5 @@
-"use client";
-
 import React from "react";
+import { getBasePath } from "@/lib/basePath";
 
 interface LogoProps {
   className?: string;
@@ -9,16 +8,13 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", variant = "full", light = false }: LogoProps) {
-  // Deep Navy Blue
-  const blueColor = light ? "#FFFFFF" : "#0F172A";
-  // Classic Gold
   const goldColor = "#D4AF37";
-  // Subtext gray/slate
   const textGray = light ? "#E2E8F0" : "#475569";
+  const basePath = getBasePath();
 
   const renderIcon = (sizeClass = "w-12 h-12", logoName = "logo.jpeg") => (
     <div className={`${sizeClass} shrink-0 relative flex items-center justify-center bg-white rounded-md overflow-hidden shadow-sm border border-slate-700/10`}>
-      <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${logoName}`} alt="KI&RS Logo" className="w-full h-full object-contain" />
+      <img src={`${basePath}/${logoName}`} alt="KI&RS Logo" className="w-full h-full object-contain" />
     </div>
   );
 
@@ -59,13 +55,10 @@ export default function Logo({ className = "", variant = "full", light = false }
     );
   }
 
-  // Default: variant === "full"
   return (
     <div className={`flex flex-col items-center text-center ${className}`}>
-      {/* Logo Icon */}
       {renderIcon("w-24 h-24 sm:w-28 sm:h-28", "logo.jpeg")}
 
-      {/* KI&RS Text */}
       <h2
         className="font-serif text-3xl sm:text-4xl font-bold tracking-widest mt-3"
         style={{ color: light ? "#FFFFFF" : "#0F172A" }}
@@ -73,7 +66,6 @@ export default function Logo({ className = "", variant = "full", light = false }
         KI<span style={{ color: goldColor }}>&</span>RS
       </h2>
 
-      {/* Decorative Gold Line with Center Diamond */}
       <div className="w-full max-w-[320px] flex items-center justify-center gap-2 my-2.5 select-none">
         <div className="h-[1px] flex-1" style={{ backgroundColor: goldColor }} />
         <div
@@ -83,14 +75,12 @@ export default function Logo({ className = "", variant = "full", light = false }
         <div className="h-[1px] flex-1" style={{ backgroundColor: goldColor }} />
       </div>
 
-      {/* Subtitle */}
       <p
         className="text-[11px] sm:text-xs font-serif tracking-wide uppercase font-medium"
         style={{ color: light ? "#ECEFF1" : "#334155" }}
       >
         Kalavati Investment & Recovery Services
       </p>
-      {/* Tagline */}
       <p
         className="text-[10px] sm:text-[11px] font-serif tracking-wide mt-1.5"
         style={{ color: goldColor }}

@@ -1,7 +1,6 @@
-"use client";
-
 import React, { useState } from "react";
 import { CalendarRange, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { getBasePath } from "@/lib/basePath";
 
 const availableSlots = [
   "10:00 AM - 10:30 AM",
@@ -49,8 +48,8 @@ export default function ScheduleForm({ defaultService = "", compact = false }: S
       setLoading(true);
       setErrorMsg("");
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/contact/`, {
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/contact`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json"

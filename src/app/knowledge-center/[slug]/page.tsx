@@ -1,19 +1,53 @@
-import React from "react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Calendar, Bookmark, BookOpen, AlertCircle } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft, Clock, Calendar, Bookmark, BookOpen, AlertCircle, HelpCircle } from "lucide-react";
 import { blogData, BlogPost } from "@/data/blogData";
+import { getBasePath } from "@/lib/basePath";
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function BlogPostPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const [post, setPost] = useState<BlogPost | null>(
+    blogData.find((p) => p.slug === slug) || null
+  );
 
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
-  const post = blogData.find((p) => p.slug === slug);
+  useEffect(() => {
+    async function fetchBlogDetail() {
+      if (!slug) return;
+      try {
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/blogs/${slug}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.slug) {
+            setPost(data);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching blog post:", err);
+      }
+    }
+    fetchBlogDetail();
+  }, [slug]);
 
   if (!post) {
-    notFound();
+    return (
+      <div className="min-h-screen bg-slate-50 py-20 text-center font-sans">
+        <div className="max-w-md mx-auto space-y-4 bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+          <HelpCircle className="w-12 h-12 text-slate-350 mx-auto" />
+          <h2 className="font-serif text-xl font-bold text-slate-800">Article Not Found</h2>
+          <p className="text-slate-500 text-xs">
+            The requested knowledge article could not be found.
+          </p>
+          <Link
+            to="/knowledge-center"
+            className="inline-flex items-center gap-1.5 bg-primary text-white text-xs px-5 py-2.5 rounded font-bold uppercase tracking-wider"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Knowledge Center
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -23,7 +57,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* Navigation Breadcrumbs */}
         <div className="flex items-center justify-between">
           <Link
-            href="/knowledge-center"
+            to="/knowledge-center"
             className="inline-flex items-center gap-1 text-slate-500 hover:text-primary text-xs font-semibold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -86,7 +120,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
             
             <Link
-              href="/contact"
+              to="/contact"
               className="w-full sm:w-auto text-center bg-primary hover:bg-slate-900 text-white font-bold text-xs px-5 py-2.5 rounded uppercase tracking-wider transition-colors shadow-md border border-slate-800"
             >
               Consult an Expert
@@ -106,10 +140,4 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  return blogData.map((post) => ({
-    slug: post.slug,
-  }));
 }

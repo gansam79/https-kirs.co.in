@@ -1,17 +1,35 @@
-"use client";
-
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Search, BookOpen, Clock, Calendar, ChevronRight, HelpCircle } from "lucide-react";
 import { blogData, BlogPost } from "@/data/blogData";
+import { getBasePath } from "@/lib/basePath";
 
 export default function KnowledgeCenterPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [posts, setPosts] = useState<BlogPost[]>(blogData);
+
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/blogs`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setPosts(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load blog posts from API:", err);
+      }
+    }
+    fetchBlogs();
+  }, []);
 
   const categories = ["All", "IEPF Recovery", "Demat Conversion", "Share Transmission"];
 
-  const filteredPosts = blogData.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -104,7 +122,7 @@ export default function KnowledgeCenterPage() {
                     </span>
                   </div>
                   <h3 className="font-serif text-base font-bold text-primary hover:text-secondary leading-snug">
-                    <Link href={`/knowledge-center/${post.slug}`}>{post.title}</Link>
+                    <Link to={`/knowledge-center/${post.slug}`}>{post.title}</Link>
                   </h3>
                   <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">
                     {post.excerpt}
@@ -116,7 +134,7 @@ export default function KnowledgeCenterPage() {
                     Published: {post.date}
                   </span>
                   <Link
-                    href={`/knowledge-center/${post.slug}`}
+                    to={`/knowledge-center/${post.slug}`}
                     className="text-primary hover:text-secondary font-bold text-xs flex items-center gap-0.5 group transition-all"
                   >
                     Read Guide
@@ -137,7 +155,7 @@ export default function KnowledgeCenterPage() {
             </p>
           </div>
           <Link
-            href="/contact"
+            to="/contact"
             className="bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs px-6 py-3 rounded uppercase tracking-wider whitespace-nowrap transition-colors shadow-md shrink-0"
           >
             Schedule Free Consultation

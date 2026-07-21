@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"], // Prevents indexing of backend routes if added later
     },
-    sitemap: "https://https-kirs.co.in/sitemap.xml",
+    sitemap: "https://kirs.co.in/sitemap.xml",
   };
 }

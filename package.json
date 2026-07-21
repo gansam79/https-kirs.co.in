@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && node deploy-tool/copy.js && node deploy-tool/zip.js",
-    "start": "next start",
-    "lint": "eslint",
-    "deploy": "next build && node deploy-tool/copy.js && node deploy-tool/zip.js && node deploy-tool/deploy.js"
+    "dev": "vite",
+    "build": "vite build && node deploy-tool/copy-vite.js",
+    "start": "vite preview",
+    "backend": "node backend/server.js",
+    "lint": "eslint"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.17.0",
     "mysql2": "^3.22.6",
-    "next": "16.2.7",
     "nodemailer": "^8.0.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.77.0",
+    "react-router-dom": "^6.23.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -26,9 +26,10 @@
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^9",
-    "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^5.2.11"
   }
 }

@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 import { blogData } from "@/data/blogData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://https-kirs.co.in";
+  const baseUrl = "https://kirs.co.in";
 
   // Static Pages
   const staticPages = [

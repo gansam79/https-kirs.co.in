@@ -1,6 +1,5 @@
-import React from "react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   Calendar,
@@ -13,39 +12,67 @@ import {
   CalendarRange
 } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
-import { FaqSchema, BreadcrumbSchema } from "@/components/layout/JsonLd";
-import DownloadButton from "./DownloadButton";
 import ScheduleForm from "@/components/layout/ScheduleForm";
+import { getBasePath } from "@/lib/basePath";
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
+export default function ServiceDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const [service, setService] = useState<Service | null>(
+    servicesData.find((s) => s.slug === slug) || null
+  );
+  const [loading, setLoading] = useState(false);
 
-export default async function ServiceDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const service = servicesData.find((s) => s.slug === slug);
+  useEffect(() => {
+    async function fetchServiceDetail() {
+      if (!slug) return;
+      try {
+        setLoading(true);
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/services/${slug}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.slug) {
+            setService(data);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching service detail:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchServiceDetail();
+  }, [slug]);
 
   if (!service) {
-    notFound();
+    return (
+      <div className="min-h-screen bg-slate-50 py-20 text-center font-sans">
+        <div className="max-w-md mx-auto space-y-4 bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+          <HelpCircle className="w-12 h-12 text-slate-350 mx-auto" />
+          <h2 className="font-serif text-xl font-bold text-slate-800">Service Not Found</h2>
+          <p className="text-slate-500 text-xs">
+            The service requested could not be located in our registry.
+          </p>
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-1.5 bg-primary text-white text-xs px-5 py-2.5 rounded font-bold uppercase tracking-wider"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to All Services
+          </Link>
+        </div>
+      </div>
+    );
   }
-
-  const faqItems = service.faqs;
-  const breadcrumbItems = [
-    { name: "Home", item: "https://https-kirs.co.in" },
-    { name: "Services", item: "https://https-kirs.co.in/services" },
-    { name: service.title, item: `https://https-kirs.co.in/services/${service.slug}` }
-  ];
 
   return (
     <div className="bg-slate-50 min-h-screen py-10 font-sans">
-      <FaqSchema faqs={faqItems} />
-      <BreadcrumbSchema items={breadcrumbItems} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Back Link & Breadcrumbs */}
         <div className="flex items-center justify-between">
           <Link
-            href="/services"
+            to="/services"
             className="inline-flex items-center gap-1 text-slate-500 hover:text-primary text-xs font-semibold transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -114,7 +141,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <span className="w-1.5 h-6 bg-secondary rounded-full"></span>
                   Required Document List
                 </h2>
-                {/* <DownloadButton /> */}
               </div>
               <p className="text-slate-500 text-xs">
                 Make sure you compile high-resolution, self-attested copies of the following documents:
@@ -157,7 +183,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           {/* Right Column: Lead Sidebar & Sticky Disclaimer */}
           <div className="space-y-6">
-                        {/* Quick Consultancy Query Form (Replaced with common ScheduleForm component) */}
              <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200 space-y-4">
                <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
                  <CalendarRange className="w-5 h-5 text-secondary" />
@@ -184,10 +209,4 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  return servicesData.map((service) => ({
-    slug: service.slug,
-  }));
 }

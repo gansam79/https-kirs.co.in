@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { ShieldAlert, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -57,7 +57,7 @@ export default function CookieConsent() {
             {/* Description */}
             <p className="text-[10px] text-slate-300 leading-relaxed">
               We collect essential details to evaluate asset recoverability (e.g. folio data). Under India's Digital Personal Data Protection (DPDP) Act and GDPR rules, we request your consent to process submitted documents for documentation audits. We do not sell data. View our{" "}
-              <Link href="/privacy-policy" className="text-secondary hover:underline">
+              <Link to="/privacy-policy" className="text-secondary hover:underline">
                 Privacy Policy
               </Link>{" "}
               for specifics.

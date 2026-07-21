@@ -1,9 +1,8 @@
-"use client";
-
 import React, { useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck, Loader2 } from "lucide-react";
 import Logo from "./Logo";
+import { getBasePath } from "@/lib/basePath";
 
 const coreServices = [
   { name: "IEPF & Lost Shares", href: "/services/iepf-process-lost-shares-dividend" },
@@ -42,8 +41,8 @@ export default function Footer() {
     if (email) {
       setSubscribeLoading(true);
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/contact/`, {
+        const basePath = getBasePath();
+        const response = await fetch(`${basePath}/api/contact`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -85,12 +84,12 @@ export default function Footer() {
           </div>
           <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
             <Link
-              href="/eligibility-checker"
+              to="/eligibility-checker"
               className="w-full sm:w-auto text-center bg-secondary hover:bg-yellow-600 text-primary font-bold px-6 py-3 rounded text-sm transition-all duration-200"
             >
               Analyze Eligibility
             </Link>
-            <Link
+            <a
               href="https://wa.me/919823662901"
               target="_blank"
               rel="noopener noreferrer"
@@ -98,7 +97,7 @@ export default function Footer() {
             >
               <MessageCircle className="w-4 h-4 text-[#25D366]" />
               WhatsApp Experts
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -107,7 +106,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* About Column */}
         <div className="md:col-span-6 lg:col-span-3 space-y-4">
-          <Link href="/" className="inline-block text-left" aria-label="KIRS - Kalavati Investment & Recovery Services">
+          <Link to="/" className="inline-block text-left" aria-label="KIRS - Kalavati Investment & Recovery Services">
             <Logo variant="horizontal" light={true} className="!items-start" />
           </Link>
           <p className="text-slate-400 text-xs leading-relaxed">
@@ -156,7 +155,7 @@ export default function Footer() {
           <ul className="space-y-2 text-xs">
             {coreServices.map((service) => (
               <li key={service.name}>
-                <Link href={service.href} className="text-slate-400 hover:text-white transition-colors">
+                <Link to={service.href} className="text-slate-400 hover:text-white transition-colors">
                   {service.name}
                 </Link>
               </li>
@@ -170,7 +169,7 @@ export default function Footer() {
           <ul className="space-y-2 text-xs">
             {specialDesks.map((desk) => (
               <li key={desk.name}>
-                <Link href={desk.href} className="text-slate-400 hover:text-white transition-colors">
+                <Link to={desk.href} className="text-slate-400 hover:text-white transition-colors">
                   {desk.name}
                 </Link>
               </li>
@@ -184,7 +183,7 @@ export default function Footer() {
           <ul className="space-y-2 text-xs">
             {quickLinks.map((link) => (
               <li key={link.name}>
-                <Link href={link.href} className="text-slate-400 hover:text-white transition-colors">
+                <Link to={link.href} className="text-slate-400 hover:text-white transition-colors">
                   {link.name}
                 </Link>
               </li>
@@ -238,10 +237,10 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 text-[11px] text-slate-500">
             <p>© {new Date().getFullYear()} KIRS. All Rights Reserved.</p>
             <div className="flex gap-4">
-              <Link href="/privacy-policy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
-              <Link href="/terms-of-use" className="hover:text-slate-300 transition-colors">Terms of Use</Link>
-              <Link href="/compliance-notice" className="hover:text-slate-300 transition-colors">Compliance Notice</Link>
-              <Link href="/cookie-policy" className="hover:text-slate-300 transition-colors">Cookie Settings</Link>
+              <Link to="/privacy-policy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-use" className="hover:text-slate-300 transition-colors">Terms of Use</Link>
+              <Link to="/compliance-notice" className="hover:text-slate-300 transition-colors">Compliance Notice</Link>
+              <Link to="/cookie-policy" className="hover:text-slate-300 transition-colors">Cookie Settings</Link>
             </div>
           </div>
         </div>
