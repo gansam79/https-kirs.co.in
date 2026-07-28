@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight, PhoneCall } from "lucide-react";
+import { Menu, X, ArrowRight, PhoneCall, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
+
+const interactiveToolsDropdown = [
+  { name: "Unclaimed Asset Calculator", href: "/asset-calculator" },
+  { name: "RTA & IEPF Search Directory", href: "/rta-directory" },
+  { name: "7-Step Recovery Roadmap", href: "/recovery-roadmap" },
+  { name: "Claim Eligibility Checker", href: "/eligibility-checker" },
+  { name: "RTA Document Checklist", href: "/document-checklist" },
+];
 
 const servicesDropdown = [
   { name: "IEPF & Shares", href: "/services/iepf-process-lost-shares-dividend" },
@@ -23,11 +31,10 @@ const desksDropdown = [
 
 const navLinks = [
   { name: "About KIRS", href: "/about" },
+  { name: "Interactive Tools", href: "/asset-calculator", hasDropdown: true, items: interactiveToolsDropdown, isHighlighted: true },
   { name: "Services", href: "/services", hasDropdown: true, items: servicesDropdown },
   { name: "Special Desks", href: "/services", hasDropdown: true, items: desksDropdown },
   { name: "Regulatory Awareness", href: "/regulatory-awareness" },
-  { name: "Eligibility Checker", href: "/eligibility-checker" },
-  { name: "Doc Checklist", href: "/document-checklist" },
   { name: "Knowledge Center", href: "/knowledge-center" },
 ];
 
@@ -54,7 +61,7 @@ export default function Header() {
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
           ? "bg-primary/95 backdrop-blur-md border-b border-slate-800 shadow-lg py-3"
-          : "bg-primary py-5"
+          : "bg-primary py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,7 +86,7 @@ export default function Header() {
                     <Link
                       to={link.href}
                       className={`text-[10px] xl:text-[11px] font-bold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary px-1 relative ${
-                        isActive ? "text-secondary" : "text-slate-300"
+                        isActive ? "text-secondary" : link.isHighlighted ? "text-[#D4AF37]" : "text-slate-300"
                       }`}
                     >
                       {words.length === 1 ? (
@@ -89,7 +96,10 @@ export default function Header() {
                         </span>
                       ) : (
                         <div className="flex flex-col leading-[1.25] items-center py-1">
-                          <span>{words[0]}</span>
+                          <span className="flex items-center gap-1">
+                            {link.isHighlighted && <Sparkles className="w-3 h-3 text-secondary animate-pulse" />}
+                            {words[0]}
+                          </span>
                           <span className="flex items-center gap-1">
                             {words[1]}
                             <span className="text-[6px] opacity-75 group-hover/dropdown:rotate-180 transition-transform">▼</span>
@@ -102,7 +112,7 @@ export default function Header() {
                     </Link>
                     
                     {/* Dropdown Panel */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-60 bg-primary border border-slate-800 rounded shadow-2xl p-2 hidden group-hover/dropdown:block hover:block z-50">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-primary border border-slate-800 rounded shadow-2xl p-2 hidden group-hover/dropdown:block hover:block z-50">
                       {link.items.map((sub) => (
                         <Link
                           key={sub.name}
@@ -142,27 +152,26 @@ export default function Header() {
           </nav>
 
           {/* Right CTAs */}
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4.5 shrink-0">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0">
             <Link
-              to="/contact"
-              className="text-slate-300 text-[10px] xl:text-[11px] font-bold uppercase tracking-wider hover:text-white flex items-center gap-1.5 transition-colors whitespace-nowrap h-12"
+              to="/asset-calculator"
+              className="bg-[#D4AF37] hover:bg-yellow-500 text-primary font-bold text-[9.5px] xl:text-[11px] px-3.5 py-2 rounded shadow transition-all duration-200 flex items-center gap-1.5 uppercase tracking-wider hover:scale-[1.03]"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-secondary" />
-              Schedule Call
+              <Sparkles className="w-3.5 h-3.5" />
+              Valuation Calculator
             </Link>
             <Link
               to="/eligibility-checker"
-              className="bg-secondary hover:bg-yellow-600 hover:shadow-lg hover:shadow-secondary/20 active:scale-95 text-primary font-bold text-[9.5px] xl:text-[11px] px-3 xl:px-4 py-2 rounded shadow-md transition-all duration-200 flex items-center gap-1.5 uppercase tracking-wider hover:scale-[1.03] group/cta whitespace-nowrap"
+              className="border border-secondary/50 hover:border-secondary text-white font-bold text-[9.5px] xl:text-[11px] px-3 py-2 rounded transition-all duration-200 flex items-center gap-1 uppercase tracking-wider hover:scale-[1.03]"
             >
               Check Eligibility
-              <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-0.5 transition-transform" />
             </Link>
           </div>
 
           {/* Mobile Hamburger Trigger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-slate-300 hover:text-white p-1"
+            className="lg:hidden text-slate-300 hover:text-white p-1 cursor-pointer"
             aria-label="Toggle Menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -228,19 +237,11 @@ export default function Header() {
               })}
               <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
                 <Link
-                  to="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-center gap-2 py-2 px-3 rounded text-base font-medium text-slate-300 hover:bg-slate-800"
-                >
-                  <PhoneCall className="w-4 h-4 text-secondary" />
-                  Book Free Consultation
-                </Link>
-                <Link
-                  to="/eligibility-checker"
+                  to="/asset-calculator"
                   onClick={() => setIsOpen(false)}
                   className="w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-center py-3 rounded text-sm uppercase tracking-wider block"
                 >
-                  Check Eligibility Now
+                  Unclaimed Asset Calculator
                 </Link>
               </div>
             </div>

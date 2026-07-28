@@ -14,7 +14,10 @@ import {
   CheckCircle,
   Building,
   UserCheck,
-  Scale
+  Scale,
+  Calculator,
+  Sparkles,
+  Layers
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { servicesData } from "@/data/servicesData";
@@ -395,6 +398,101 @@ export default function Home() {
             </div>
           </div>
           */}
+        </div>
+      </section>
+
+      {/* Interactive Financial Tools & Calculators Showcase */}
+      <section className="py-16 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(212,175,55,0.08),transparent_50%)] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-2 bg-slate-800 border border-secondary/30 rounded-full px-4 py-1.5 text-xs text-[#D4AF37] font-medium">
+              <Sparkles className="w-3.5 h-3.5 text-secondary" />
+              <span>Self-Service Financial Valuation & Registry Tools</span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">
+              Interactive Capital Market Tools
+            </h2>
+            <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+              Calculate lost share multipliers, search corporate registrar databases, and trace step-by-step IEPF claim protocols in seconds.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Tool 1: Asset Calculator */}
+            <div className="bg-slate-950 border border-slate-800 hover:border-secondary/50 rounded-lg p-6 transition-all duration-300 space-y-4 flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                  <Calculator className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-secondary">Calculator Engine</span>
+                  <h3 className="font-serif text-xl font-bold text-white mt-1">Unclaimed Asset Value Estimator</h3>
+                </div>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  Calculate split multipliers (100 shares to 100,000+ shares), bonus share expansions, and accumulated dividend wealth for top Indian blue-chips.
+                </p>
+              </div>
+              <Link
+                to="/asset-calculator"
+                className="inline-flex items-center justify-between w-full bg-secondary hover:bg-yellow-600 text-primary font-bold text-xs py-3 px-4 rounded uppercase tracking-wider transition-colors mt-4"
+              >
+                <span>Launch Valuation Tool</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Tool 2: RTA Directory */}
+            <div className="bg-slate-950 border border-slate-800 hover:border-secondary/50 rounded-lg p-6 transition-all duration-300 space-y-4 flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                  <Search className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-secondary">Registry Directory</span>
+                  <h3 className="font-serif text-xl font-bold text-white mt-1">RTA & IEPF Corporate Search</h3>
+                </div>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  Search 40+ listed Indian companies, map designated RTAs (KFintech, Link Intime, Bigshare, CAMS), and download SEBI forms (ISR-1, ISR-2, ISR-4).
+                </p>
+              </div>
+              <Link
+                to="/rta-directory"
+                className="inline-flex items-center justify-between w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-3 px-4 rounded uppercase tracking-wider transition-colors mt-4 border border-slate-700"
+              >
+                <span>Search Registrars</span>
+                <ArrowRight className="w-4 h-4 text-secondary" />
+              </Link>
+            </div>
+
+            {/* Tool 3: Recovery Roadmap */}
+            <div className="bg-slate-950 border border-slate-800 hover:border-secondary/50 rounded-lg p-6 transition-all duration-300 space-y-4 flex flex-col justify-between group">
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-secondary">Protocol Stepper</span>
+                  <h3 className="font-serif text-xl font-bold text-white mt-1">7-Step Recovery Roadmap</h3>
+                </div>
+                <p className="text-slate-400 text-xs leading-relaxed">
+                  Explore the step-by-step claim lifecycle simulator with estimated timelines, mandatory checklists, and common RTA rejection pitfalls.
+                </p>
+              </div>
+              <Link
+                to="/recovery-roadmap"
+                className="inline-flex items-center justify-between w-full bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs py-3 px-4 rounded uppercase tracking-wider transition-colors mt-4 border border-slate-700"
+              >
+                <span>View Protocol Steps</span>
+                <ArrowRight className="w-4 h-4 text-secondary" />
+              </Link>
+            </div>
+
+          </div>
+
         </div>
       </section>
 

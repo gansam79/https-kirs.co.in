@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import AIChatAssistant from "./components/chat/AIChatAssistant";
 
 // Pages
 import HomePage from "./app/page";
@@ -18,6 +19,9 @@ import ContactPage from "./app/contact/page";
 import PrivacyPolicyPage from "./app/privacy-policy/page";
 import TermsOfUsePage from "./app/terms-of-use/page";
 import ComplianceNoticePage from "./app/compliance-notice/page";
+import AssetCalculatorPage from "./app/asset-calculator/page";
+import RtaDirectoryPage from "./app/rta-directory/page";
+import RecoveryRoadmapPage from "./app/recovery-roadmap/page";
 
 // ScrollToTop Helper Component
 function ScrollToTop() {
@@ -34,7 +38,7 @@ export default function App() {
   return (
     <BrowserRouter basename={baseUrl}>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen font-sans bg-slate-50 text-slate-800 antialiased">
+      <div className="flex flex-col min-h-screen font-sans bg-slate-50 text-slate-800 antialiased relative">
         <Header />
         <main className="flex-grow">
           <Routes>
@@ -43,6 +47,9 @@ export default function App() {
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/regulatory-awareness" element={<RegulatoryAwarenessPage />} />
+            <Route path="/asset-calculator" element={<AssetCalculatorPage />} />
+            <Route path="/rta-directory" element={<RtaDirectoryPage />} />
+            <Route path="/recovery-roadmap" element={<RecoveryRoadmapPage />} />
             <Route path="/eligibility-checker" element={<EligibilityCheckerPage />} />
             <Route path="/document-checklist" element={<DocumentChecklistPage />} />
             <Route path="/knowledge-center" element={<KnowledgeCenterPage />} />
@@ -57,6 +64,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <AIChatAssistant />
       </div>
     </BrowserRouter>
   );
