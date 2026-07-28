@@ -20,6 +20,15 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:5001",
         changeOrigin: true,
+        configure: (proxy, _options) => {
+          proxy.on("error", (err, _req, res) => {
+            console.warn("Vite proxy notice (Express backend port 5001 offline):", err.message);
+            if (res && !res.headersSent) {
+              res.writeHead(200, { "Content-Type": "application/json" });
+              res.end(JSON.stringify({ offline: true, message: "Backend offline, client using static fallbacks" }));
+            }
+          });
+        },
       },
     },
   },

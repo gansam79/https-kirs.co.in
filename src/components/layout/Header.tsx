@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 const servicesDropdown = [
-  { name: "IEPF & Shares", href: "/services/iepf-process-lost-shares-dividend" },
+  { name: "Recovery of Shares (IEPF)", href: "/recovery-of-shares" },
+  { name: "IEPF & Shares Process", href: "/services/iepf-process-lost-shares-dividend" },
   { name: "Lost Mutual Fund", href: "/services/lost-mutual-fund" },
   { name: "Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit" },
   { name: "Insurance Policy", href: "/services/unclaimed-insurance-policy" },

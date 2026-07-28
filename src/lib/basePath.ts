@@ -5,3 +5,8 @@ export const getBasePath = (): string => {
   }
   return "";
 };
+
+// Backend API endpoints on Hostinger (Phusion Passenger) are served from domain root /api
+export const getApiBasePath = (): string => {
+  return "";
+};

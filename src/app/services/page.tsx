@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, ChevronRight, FileSpreadsheet, Hourglass, HelpCircle, CheckSquare, Award } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 export default function ServicesPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,16 +11,16 @@ export default function ServicesPage() {
   useEffect(() => {
     async function fetchServices() {
       try {
-        const basePath = getBasePath();
-        const response = await fetch(`${basePath}/api/services`);
+        const apiPath = getApiBasePath();
+        const response = await fetch(`${apiPath}/api/services`);
         if (response.ok) {
           const data = await response.json();
-          if (data && data.length > 0) {
+          if (data && !data.offline && Array.isArray(data) && data.length > 0) {
             setServices(data);
           }
         }
       } catch (err) {
-        console.error("Failed to load services from database API:", err);
+        console.warn("Failed to load services from database API:", err);
       }
     }
     fetchServices();

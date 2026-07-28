@@ -14,12 +14,13 @@ import {
   CheckCircle,
   Building,
   UserCheck,
-  Scale
+  Scale,
+  Sparkles
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { servicesData } from "@/data/servicesData";
 import { OrganizationSchema, LocalBusinessSchema } from "@/components/layout/JsonLd";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 const authorityLogos = [
   { name: "IEPF", desc: "Investor Education & Protection Fund" },
@@ -86,29 +87,29 @@ export default function Home() {
 
   React.useEffect(() => {
     async function fetchData() {
-      const basePath = getBasePath();
+      const apiPath = getApiBasePath();
       try {
-        const reviewsRes = await fetch(`${basePath}/api/reviews`);
+        const reviewsRes = await fetch(`${apiPath}/api/reviews`);
         if (reviewsRes.ok) {
           const data = await reviewsRes.json();
-          if (data && data.length > 0) {
+          if (data && !data.offline && Array.isArray(data) && data.length > 0) {
             setReviews(data);
           }
         }
       } catch (err) {
-        console.error("Failed to load reviews from database:", err);
+        console.warn("Reviews fetch notice (using default reviews):", err);
       }
 
       try {
-        const servicesRes = await fetch(`${basePath}/api/services`);
+        const servicesRes = await fetch(`${apiPath}/api/services`);
         if (servicesRes.ok) {
           const data = await servicesRes.json();
-          if (data && data.length > 0) {
+          if (data && !data.offline && Array.isArray(data) && data.length > 0) {
             setServices(data);
           }
         }
       } catch (err) {
-        console.error("Failed to load services from database API:", err);
+        console.warn("Services fetch notice (using default services):", err);
       }
     }
     fetchData();
@@ -120,8 +121,8 @@ export default function Home() {
       setGuideLoading(true);
       setGuideErrorMsg("");
       try {
-        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-        const response = await fetch(`${basePath}/api/contact/`, {
+        const apiPath = getApiBasePath();
+        const response = await fetch(`${apiPath}/api/contact`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json"
@@ -269,6 +270,106 @@ export default function Home() {
             </motion.div>
           </div>
           */}
+        </div>
+      </section>
+
+      {/* Dedicated Featured Section: Recovery of Shares From IEPF */}
+      <section className="bg-gradient-to-r from-primary via-slate-900 to-slate-950 text-white py-16 border-y border-slate-800 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+            {/* Left Info Column */}
+            <div className="lg:w-1/2 space-y-5 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" /> Featured Specialization
+              </div>
+              <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold leading-tight">
+                Recovery of Shares From IEPF <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-yellow-300 to-amber-400">
+                  Claim Unclaimed & Lost Shares
+                </span>
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                Under Section 124(6) of the Companies Act 2013, physical or demat shares with unclaimed dividends for 7 consecutive years are transferred to the IEPF Authority. We offer specialized legal drafting, RTA coordination, duplicate certificate issuance (Form ISR-4), and MCA Form IEPF-5 filing.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700/60 text-left">
+                  <div className="font-bold text-white text-xs sm:text-sm">Form IEPF-5 Claim</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">MCA Portal & Nodal Verification</div>
+                </div>
+                <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700/60 text-left">
+                  <div className="font-bold text-white text-xs sm:text-sm">Duplicate Shares</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">ISR-4 & Newspaper Notice</div>
+                </div>
+                <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700/60 text-left">
+                  <div className="font-bold text-white text-xs sm:text-sm">Transmission Claim</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Deceased Shareholder Succession</div>
+                </div>
+                <div className="bg-slate-800/80 p-3 rounded-lg border border-slate-700/60 text-left">
+                  <div className="font-bold text-white text-xs sm:text-sm">Direct Demat Credit</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Shares & Dividends Refunded</div>
+                </div>
+              </div>
+
+              <div className="pt-3 flex flex-wrap justify-center lg:justify-start gap-4">
+                <Link
+                  to="/recovery-of-shares"
+                  className="bg-secondary hover:bg-yellow-500 text-primary font-bold px-6 py-3 rounded-xl text-sm shadow-lg flex items-center gap-2 transition-all"
+                >
+                  Explore Complete Share Recovery Guide <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/eligibility-checker"
+                  className="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all"
+                >
+                  Check Claim Eligibility
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Interactive Highlights Card */}
+            <div className="lg:w-1/2 w-full">
+              <div className="bg-slate-900/90 backdrop-blur border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-2xl space-y-4">
+                <h3 className="font-serif font-bold text-white text-lg flex items-center justify-between border-b border-slate-800 pb-3">
+                  <span>IEPF & Share Recovery Spectrum</span>
+                  <Award className="w-5 h-5 text-secondary" />
+                </h3>
+                
+                <div className="space-y-3">
+                  <div className="bg-slate-800/60 p-3.5 rounded-xl border border-slate-700/50 flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold text-white text-xs sm:text-sm">Lost Physical Share Certificates</h4>
+                      <p className="text-slate-400 text-xs mt-0.5">Filing FIR, publishing newspaper notices, drafting indemnity bonds & Form ISR-4.</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-800/60 p-3.5 rounded-xl border border-slate-700/50 flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold text-white text-xs sm:text-sm">Unclaimed Dividends & IEPF Transfers</h4>
+                      <p className="text-slate-400 text-xs mt-0.5">Tracking MCA IEPF master ledgers, filing Form IEPF-5, and coordinating with RTA Nodal Officers.</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-800/60 p-3.5 rounded-xl border border-slate-700/50 flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-bold text-white text-xs sm:text-sm">Inherited Shares Transmission</h4>
+                      <p className="text-slate-400 text-xs mt-0.5">Legal heir documentation, NOCs, family genealogy, and Succession Certificate support.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-2 text-center">
+                  <Link to="/recovery-of-shares" className="text-xs text-secondary font-bold hover:underline inline-flex items-center gap-1">
+                    View full scenario matrix, checklists & turnaround timeline <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node deploy-tool/copy-vite.js",
+    "build:staging": "node deploy-tool/build-staging.js",
     "start": "vite preview",
     "backend": "node backend/server.js",
     "lint": "eslint"

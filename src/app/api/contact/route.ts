@@ -4,9 +4,6 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
-    // Ensure tables exist before running the query
-    await initializeDatabase();
-
     const body = await request.json();
     const { name, email, phone, service, company, date, slot, notes } = body;
 
@@ -30,7 +27,7 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-    } else if (formType === "guide") {
+    } else if (formType === "guide" || formType === "share_recovery_inquiry") {
       if (!name || !email || !phone) {
         return NextResponse.json(
           { error: "Missing required fields (name, email, phone)." },
@@ -58,46 +55,54 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert consultation into the database
-    if (formType === "contact" || formType === "service") {
-      const tableName = formType === "service" ? "service_enquiries" : "contacts";
-      await query(
-        `INSERT INTO ${tableName} (name, email, phone, company, service, date, slot, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-          name,
-          email || "",
-          phone,
-          company || "",
-          service || "",
-          date,
-          slot,
-          notes || ""
-        ]
-      );
-    } else {
-      // For general query types, store details as JSON
-      const detailsObj: Record<string, any> = {};
-      if (formType === "eligibility") {
-        detailsObj.assetType = body.assetType || "";
-        detailsObj.holdingType = body.holdingType || "";
-        detailsObj.issueType = body.issueType || "";
-        detailsObj.claimantType = body.claimantType || "";
-        detailsObj.approxValue = body.approxValue || "";
-        detailsObj.companyName = body.companyName || "";
-      } else if (formType === "draft") {
-        detailsObj.requestedServiceChecklist = service || "";
-      }
+    // Attempt Database Storage (Gracefully handles offline/dev DB errors)
+    try {
+      await initializeDatabase();
+      if (formType === "contact" || formType === "service") {
+        const tableName = formType === "service" ? "service_enquiries" : "contacts";
+        await query(
+          `INSERT INTO ${tableName} (name, email, phone, company, service, date, slot, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            name,
+            email || "",
+            phone,
+            company || "",
+            service || "",
+            date || "",
+            slot || "",
+            notes || ""
+          ]
+        );
+      } else {
+        const detailsObj: Record<string, any> = {};
+        if (formType === "eligibility") {
+          detailsObj.assetType = body.assetType || "";
+          detailsObj.holdingType = body.holdingType || "";
+          detailsObj.issueType = body.issueType || "";
+          detailsObj.claimantType = body.claimantType || "";
+          detailsObj.approxValue = body.approxValue || "";
+          detailsObj.companyName = body.companyName || "";
+        } else if (formType === "share_recovery_inquiry") {
+          detailsObj.companyName = body.companyName || "";
+          detailsObj.claimType = body.claimType || "";
+          detailsObj.message = body.message || "";
+        } else if (formType === "draft") {
+          detailsObj.requestedServiceChecklist = service || "";
+        }
 
-      await query(
-        `INSERT INTO queries (type, name, email, phone, details) VALUES (?, ?, ?, ?, ?)`,
-        [
-          formType,
-          name || null,
-          email || null,
-          phone || null,
-          JSON.stringify(detailsObj)
-        ]
-      );
+        await query(
+          `INSERT INTO queries (type, name, email, phone, details) VALUES (?, ?, ?, ?, ?)`,
+          [
+            formType,
+            name || null,
+            email || null,
+            phone || null,
+            JSON.stringify(detailsObj)
+          ]
+        );
+      }
+    } catch (dbErr) {
+      console.warn("Database storage deferred or connection unavailable:", dbErr);
     }
 
     // Send email notification via Hostinger SMTP

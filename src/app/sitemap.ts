@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Static Pages
   const staticPages = [
     "",
+    "/recovery-of-shares",
     "/about",
     "/contact",
     "/services",

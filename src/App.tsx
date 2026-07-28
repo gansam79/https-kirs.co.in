@@ -8,6 +8,7 @@ import HomePage from "./app/page";
 import AboutPage from "./app/about/page";
 import ServicesPage from "./app/services/page";
 import ServiceDetailPage from "./app/services/[slug]/page";
+import RecoveryOfSharesPage from "./app/recovery-of-shares/page";
 import RegulatoryAwarenessPage from "./app/regulatory-awareness/page";
 import EligibilityCheckerPage from "./app/eligibility-checker/page";
 import DocumentChecklistPage from "./app/document-checklist/page";
@@ -42,6 +43,7 @@ export default function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/recovery-of-shares" element={<RecoveryOfSharesPage />} />
             <Route path="/regulatory-awareness" element={<RegulatoryAwarenessPage />} />
             <Route path="/eligibility-checker" element={<EligibilityCheckerPage />} />
             <Route path="/document-checklist" element={<DocumentChecklistPage />} />

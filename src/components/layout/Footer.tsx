@@ -5,7 +5,8 @@ import Logo from "./Logo";
 import { getBasePath } from "@/lib/basePath";
 
 const coreServices = [
-  { name: "IEPF & Lost Shares", href: "/services/iepf-process-lost-shares-dividend" },
+  { name: "Recovery of Shares (IEPF)", href: "/recovery-of-shares" },
+  { name: "IEPF & Lost Shares Process", href: "/services/iepf-process-lost-shares-dividend" },
   { name: "Lost Mutual Fund", href: "/services/lost-mutual-fund" },
   { name: "Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit" },
   { name: "Unclaimed Insurance", href: "/services/unclaimed-insurance-policy" },

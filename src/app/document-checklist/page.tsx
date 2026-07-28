@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Download, CheckSquare, Square, Info, ShieldCheck, Mail, ArrowRight, Printer } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 export default function DocumentChecklistPage() {
   const [selectedSlug, setSelectedSlug] = useState<string>("iepf-claim-recovery");
@@ -30,8 +30,8 @@ export default function DocumentChecklistPage() {
       setDraftLoading(true);
       setDraftErrorMsg("");
       try {
-        const basePath = getBasePath();
-        const response = await fetch(`${basePath}/api/contact`, {
+        const apiPath = getApiBasePath();
+        const response = await fetch(`${apiPath}/api/contact`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

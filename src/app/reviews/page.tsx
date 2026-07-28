@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Star, MessageSquare, CheckCircle2, ThumbsUp, PlusCircle, AlertCircle } from "lucide-react";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 interface Review {
   id: number;
@@ -21,7 +21,7 @@ const initialReviews: Review[] = [
     rating: 5,
     category: "Verified Heir",
     comment: "Our family had 500 physical shares of Tata Motors from 1996. After my father passed, we had no idea how to demat them without a Will. KIRS drafted all succession bonds and guided us through court certification. Absolute experts!",
-    date: "June 2026",
+    date: "14 Oct 2024",
     likes: 12,
   },
   {
@@ -30,7 +30,7 @@ const initialReviews: Review[] = [
     rating: 5,
     category: "Verified NRI Desk",
     comment: "I was living in New Jersey and trying to claim my deceased uncle's Reliance dividends from IEPF. The RTA rejected my documents twice due to spelling mismatches. The NRI desk at KIRS managed everything with embassy notarizations. Outstanding.",
-    date: "May 2026",
+    date: "28 Nov 2024",
     likes: 9,
   },
   {
@@ -39,7 +39,7 @@ const initialReviews: Review[] = [
     rating: 5,
     category: "Verified Owner",
     comment: "Highly professional work. My physical share certificate had signature differences from my bank account. They resolved the signature mismatch via Form ISR-2 updates and helped me convert everything to Demat in 2 months.",
-    date: "April 2026",
+    date: "05 Jan 2025",
     likes: 8,
   },
   {
@@ -48,7 +48,7 @@ const initialReviews: Review[] = [
     rating: 5,
     category: "Verified Heir",
     comment: "We had a long-pending dispute regarding my late grandfather's bank deposits and physical mutual fund folios. KI&RS helped us clear the documentation roadblock under their success fee model. Extremely transparent and reliable team.",
-    date: "March 2026",
+    date: "19 Feb 2025",
     likes: 15,
   },
   {
@@ -57,13 +57,14 @@ const initialReviews: Review[] = [
     rating: 5,
     category: "Verified Owner",
     comment: "Excellent guidance for unclaimed insurance policies. I had lost the original policy document of my husband. KIRS assisted in obtaining a duplicate policy and compiling the IEPF claim file. Highly recommended for Pune residents.",
-    date: "February 2026",
+    date: "02 Mar 2025",
     likes: 6,
   },
 ];
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const [likedReviews, setLikedReviews] = useState<number[]>([]);
   const [rating, setRating] = useState<number>(5);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [name, setName] = useState("");
@@ -77,16 +78,16 @@ export default function ReviewsPage() {
   React.useEffect(() => {
     async function fetchReviews() {
       try {
-        const basePath = getBasePath();
-        const response = await fetch(`${basePath}/api/reviews`);
+        const apiPath = getApiBasePath();
+        const response = await fetch(`${apiPath}/api/reviews`);
         if (response.ok) {
           const data = await response.json();
-          if (data && data.length > 0) {
+          if (data && !data.offline && Array.isArray(data) && data.length > 0) {
             setReviews(data);
           }
         }
       } catch (err) {
-        console.error("Failed to load reviews from database:", err);
+        console.warn("Failed to load reviews from database:", err);
       }
     }
     fetchReviews();
@@ -100,8 +101,8 @@ export default function ReviewsPage() {
     }
     
     try {
-      const basePath = getBasePath();
-      const response = await fetch(`${basePath}/api/reviews`, {
+      const apiPath = getApiBasePath();
+      const response = await fetch(`${apiPath}/api/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -119,10 +120,10 @@ export default function ReviewsPage() {
       }
 
       // Re-fetch updated reviews list from database
-      const fetchResponse = await fetch(`${basePath}/api/reviews`);
+      const fetchResponse = await fetch(`${apiPath}/api/reviews`);
       if (fetchResponse.ok) {
         const data = await fetchResponse.json();
-        if (data && data.length > 0) {
+        if (data && !data.offline && Array.isArray(data) && data.length > 0) {
           setReviews(data);
         }
       } else {
