@@ -15,13 +15,13 @@ export default function ContactPage() {
         
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-secondary">Expert Consultation</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-secondary">Expert Consultation</span>
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-primary font-bold tracking-tight">
-            Schedule a Free Consultation Call
+            Contact Us
           </h1>
           <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
           <p className="text-slate-500 text-sm leading-relaxed">
-            Connect with a senior relationship manager to evaluate your unclaimed shares, IEPF claims, and RTA discrepancies.
+            Get in touch with our expert relationship managers to evaluate your unclaimed shares, IEPF claims, and RTA discrepancies.
           </p>
         </div>
 

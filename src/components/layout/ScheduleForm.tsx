@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CalendarRange, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath } from "../../lib/basePath";
 
 const availableSlots = [
   "10:00 AM - 10:30 AM",
@@ -44,7 +44,7 @@ export default function ScheduleForm({ defaultService = "", compact = false }: S
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.phone && formData.date && formData.slot) {
+    if (formData.name && formData.phone) {
       setLoading(true);
       setErrorMsg("");
       try {
@@ -223,57 +223,13 @@ export default function ScheduleForm({ defaultService = "", compact = false }: S
         </div>
       </div>
 
-      <div className={`grid grid-cols-1 ${compact ? "" : "sm:grid-cols-2"} gap-4`}>
-        <div className="space-y-1">
-          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Target Corporate Holdings</label>
-          <input
-            type="text"
-            placeholder="e.g. Reliance, Tata Shares"
-            value={formData.company}
-            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-            className="w-full text-xs p-3 border border-slate-200 rounded focus:outline-none focus:border-secondary text-slate-800 bg-slate-50 focus:bg-white"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-2">
-          <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Choose Date *</label>
-            <input
-              type="date"
-              required
-              min={new Date().toISOString().split("T")[0]}
-              value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-              className="w-full text-xs p-3 border border-slate-200 rounded focus:outline-none focus:border-secondary text-slate-800 bg-slate-50 focus:bg-white"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Choose Slot *</label>
-            <select
-              required
-              value={formData.slot}
-              onChange={(e) => setFormData({ ...formData, slot: e.target.value })}
-              className="w-full text-xs p-3 border border-slate-200 rounded focus:outline-none focus:border-secondary text-slate-800 bg-slate-50 focus:bg-white"
-            >
-              <option value="">Select Slot</option>
-              {availableSlots.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
       <div className="space-y-1">
         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Describe your share issue details</label>
         <textarea
           placeholder="e.g. In possession of physical shares of Reliance, signature matches issues, dividends unclaimed..."
           value={formData.notes}
           onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-          className={`w-full text-xs p-3 border border-slate-200 rounded focus:outline-none focus:border-secondary text-slate-800 bg-slate-50 focus:bg-white ${compact ? "h-16" : "h-20"} resize-none`}
+          className={`w-full text-xs p-3 border border-slate-200 rounded focus:outline-none focus:border-secondary text-slate-800 bg-slate-50 focus:bg-white ${compact ? "h-20" : "h-24"} resize-none`}
         />
       </div>
 

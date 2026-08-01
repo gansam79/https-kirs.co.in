@@ -1,8 +1,10 @@
 const mysql = require("mysql2/promise");
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+require("dotenv").config(); // fallback for production passenger environment
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
+  host: process.env.DB_HOST || "193.203.184.226",
   user: process.env.DB_USER || "u686584126_kirsdb",
   password: process.env.DB_PASSWORD || "Kirs@2026Db",
   database: process.env.DB_NAME || "u686584126_kirsdb",

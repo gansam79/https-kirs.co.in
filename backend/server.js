@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 require('dotenv').config();
 
 const { query, initializeDatabase } = require('./db');
@@ -202,23 +204,36 @@ app.patch('/api/reviews', async (req, res) => {
 app.post('/api/contact', async (req, res) => {
   try {
     const body = req.body;
-    const { name, email, phone, service, company, date, slot, notes } = body;
+    const name = body.name || '';
+    const email = body.email || '';
+    const phone = body.phone || '';
+    const company = body.company || body.companyName || '';
+    const service = body.service || body.claimType || body.assetType || body.type || 'General Contact';
+    const date = body.date || '';
+    const slot = body.slot || '';
+    const notes = body.notes || body.message || (typeof body.details === 'object' ? JSON.stringify(body.details) : body.details || '');
     let formType = body.type || (service ? 'service' : 'contact');
 
-    // DB Insertion (Deferred/Soft fails if DB offline)
+    // DB Insertion into contacts table (ALWAYS inserted into contacts table for phpMyAdmin visibility)
     try {
-      if (formType === 'contact' || formType === 'service') {
-        const table = formType === 'service' ? 'service_enquiries' : 'contacts';
+      await query(
+        `INSERT INTO contacts (name, email, phone, company, service, date, slot, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [name, email, phone, company, service, date, slot, notes]
+      );
+
+      // If service-specific inquiry, also log into service_enquiries table
+      if (formType === 'service' || formType === 'share_recovery_inquiry') {
         await query(
-          `INSERT INTO ${table} (name, email, phone, company, service, date, slot, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-          [name || '', email || '', phone || '', company || '', service || '', date || '', slot || '', notes || '']
-        );
-      } else {
-        await query(
-          'INSERT INTO queries (type, name, email, phone, details) VALUES (?, ?, ?, ?, ?)',
-          [formType, name || null, email || null, phone || null, JSON.stringify(body)]
+          `INSERT INTO service_enquiries (name, email, phone, company, service, date, slot, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+          [name, email, phone, company, service, date, slot, notes]
         );
       }
+
+      // Also log full payload into queries table for complete audit history
+      await query(
+        'INSERT INTO queries (type, name, email, phone, details) VALUES (?, ?, ?, ?, ?)',
+        [formType, name || null, email || null, phone || null, JSON.stringify(body)]
+      );
     } catch (dbErr) {
       console.warn('Backend DB Storage Notice:', dbErr.message);
     }

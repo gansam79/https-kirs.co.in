@@ -5,21 +5,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 const servicesDropdown = [
-  { name: "Recovery of Shares (IEPF)", href: "/recovery-of-shares" },
-  { name: "IEPF & Shares Process", href: "/services/iepf-process-lost-shares-dividend" },
-  { name: "Lost Mutual Fund", href: "/services/lost-mutual-fund" },
-  { name: "Bank & NBFC Deposit", href: "/services/unclaimed-bank-nbfc-deposit" },
-  { name: "Insurance Policy", href: "/services/unclaimed-insurance-policy" },
-  { name: "Pension & Retirement", href: "/services/missing-unclaimed-pension-amount" },
-  { name: "Court Support", href: "/services/court-support" },
+  { name: "RECOVERY OF SHARES (IEPF)", href: "/recovery-of-shares" },
+  { name: "IEPF & SHARES PROCESS", href: "/services/iepf-process-lost-shares-dividend" },
+  { name: "LOST MUTUAL FUND", href: "/services/lost-mutual-fund" },
+  { name: "BANK & NBFC DEPOSIT", href: "/services/unclaimed-bank-nbfc-deposit" },
+  { name: "INSURANCE POLICY", href: "/services/unclaimed-insurance-policy" },
+  { name: "PENSION & RETIREMENT", href: "/services/missing-unclaimed-pension-amount" },
+  { name: "COURT SUPPORT", href: "/services/court-support" },
 ];
 
 const desksDropdown = [
-  { name: "Indian - Individual/HUF", href: "/services/indian-desk-individual-huf-proprietorship-partnership" },
-  { name: "Indian - Corporate/LLP", href: "/services/indian-desk-corporate-llp" },
-  { name: "Foreign - NRI/NRE/NRO", href: "/services/foreign-desk-nri-nre-nro" },
-  { name: "Foreign - FII/FPI", href: "/services/foreign-desk-fii-fpi" },
-  { name: "Trademark Registration", href: "/services/trademark-registration" },
+  { name: "INDIAN - INDIVIDUAL / HUF", href: "/services/indian-desk-individual-huf-proprietorship-partnership" },
+  { name: "INDIAN - CORPORATE / LLP", href: "/services/indian-desk-corporate-llp" },
+  { name: "FOREIGN - NRI / NRE / NRO", href: "/services/foreign-desk-nri-nre-nro" },
+  { name: "FOREIGN - FII / FPI DESK", href: "/services/foreign-desk-fii-fpi" },
+  { name: "TRADEMARK REGISTRATION", href: "/services/trademark-registration" },
 ];
 
 const navLinks = [
@@ -79,36 +79,36 @@ export default function Header() {
                   <div key={link.name} className="relative group/dropdown h-12 flex items-center">
                     <Link
                       to={link.href}
-                      className={`text-[10px] xl:text-[11px] font-bold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary px-1 relative ${
-                        isActive ? "text-secondary" : "text-slate-300"
+                      className={`text-[10.5px] xl:text-[11.5px] font-extrabold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary px-1.5 relative ${
+                        isActive ? "text-secondary" : "text-slate-200"
                       }`}
                     >
                       {words.length === 1 ? (
-                        <span className="py-2 flex items-center gap-1">
+                        <span className="py-2 flex items-center gap-1.5">
                           {words[0]}
-                          <span className="text-[7px] opacity-75 group-hover/dropdown:rotate-180 transition-transform">▼</span>
+                          <span className="text-[8px] transition-transform duration-200 group-hover/dropdown:rotate-180">▲</span>
                         </span>
                       ) : (
-                        <div className="flex flex-col leading-[1.25] items-center py-1">
+                        <div className="flex flex-col leading-tight items-center py-1">
                           <span>{words[0]}</span>
                           <span className="flex items-center gap-1">
                             {words[1]}
-                            <span className="text-[6px] opacity-75 group-hover/dropdown:rotate-180 transition-transform">▼</span>
+                            <span className="text-[7.5px] transition-transform duration-200 group-hover/dropdown:rotate-180">▲</span>
                           </span>
                         </div>
                       )}
-                      <span className={`absolute bottom-0 left-0 h-[2px] bg-secondary transition-all duration-300 ${
+                      <span className={`absolute bottom-0 left-0 h-[2.5px] bg-secondary transition-all duration-300 ${
                         isActive ? "w-full" : "w-0 group-hover/dropdown:w-full"
                       }`}></span>
                     </Link>
                     
                     {/* Dropdown Panel */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-60 bg-primary border border-slate-800 rounded shadow-2xl p-2 hidden group-hover/dropdown:block hover:block z-50">
+                    <div className="absolute top-full left-0 w-64 bg-[#090F1E] border border-slate-800 rounded-lg shadow-2xl p-2 hidden group-hover/dropdown:block hover:block z-50">
                       {link.items.map((sub) => (
                         <Link
                           key={sub.name}
                           to={sub.href}
-                          className="block px-3 py-2 text-[10px] uppercase tracking-wider font-bold text-slate-100 hover:text-secondary hover:bg-slate-900 rounded transition-colors"
+                          className="block px-3.5 py-2.5 text-[11px] uppercase tracking-wider font-extrabold text-slate-100 hover:text-secondary hover:bg-slate-900/90 rounded transition-colors"
                         >
                           {sub.name}
                         </Link>
@@ -122,19 +122,19 @@ export default function Header() {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={`text-[10px] xl:text-[11px] font-bold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary relative px-1 group/link ${
-                    isActive ? "text-secondary" : "text-slate-300"
+                  className={`text-[10.5px] xl:text-[11.5px] font-extrabold uppercase tracking-wider text-center flex flex-col justify-center items-center h-12 transition-colors hover:text-secondary relative px-1.5 group/link ${
+                    isActive ? "text-secondary" : "text-slate-200"
                   }`}
                 >
                   {words.length === 1 ? (
                     <span className="py-2">{words[0]}</span>
                   ) : (
-                    <div className="flex flex-col leading-[1.25] items-center py-1">
+                    <div className="flex flex-col leading-tight items-center py-1">
                       <span>{words[0]}</span>
                       <span>{words[1]}</span>
                     </div>
                   )}
-                  <span className={`absolute bottom-0 left-0 h-[2px] bg-secondary transition-all duration-300 ${
+                  <span className={`absolute bottom-0 left-0 h-[2.5px] bg-secondary transition-all duration-300 ${
                     isActive ? "w-full" : "w-0 group-hover/link:w-full"
                   }`}></span>
                 </Link>
@@ -149,7 +149,7 @@ export default function Header() {
               className="text-slate-300 text-[10px] xl:text-[11px] font-bold uppercase tracking-wider hover:text-white flex items-center gap-1.5 transition-colors whitespace-nowrap h-12"
             >
               <PhoneCall className="w-3.5 h-3.5 text-secondary" />
-              Schedule Call
+              Contact Us
             </Link>
             <Link
               to="/eligibility-checker"
@@ -234,7 +234,7 @@ export default function Header() {
                   className="flex items-center justify-center gap-2 py-2 px-3 rounded text-base font-medium text-slate-300 hover:bg-slate-800"
                 >
                   <PhoneCall className="w-4 h-4 text-secondary" />
-                  Book Free Consultation
+                  Contact Us
                 </Link>
                 <Link
                   to="/eligibility-checker"

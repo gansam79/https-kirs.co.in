@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MessageSquare, X, Send, User, Bot, HelpCircle, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getBasePath } from "@/lib/basePath";
 
 interface Message {
   id: string;
@@ -143,12 +144,26 @@ export default function AIChatAssistant() {
     }, 1200);
   };
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
     
     setIsTyping(true);
-    setTimeout(() => {
+    try {
+      const basePath = getBasePath();
+      await fetch(`${basePath}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "ai_chat_assistant",
+          name: formData.name,
+          phone: formData.phone,
+          notes: formData.query || "Inquiry via AI Chat Assistant",
+        }),
+      });
+    } catch (err) {
+      console.warn("Failed to push chat lead to database:", err);
+    } finally {
       setIsTyping(false);
       setLeadSubmitted(true);
       setMessages((prev) => prev.filter((m) => m.id !== "lead-form"));
@@ -161,7 +176,7 @@ export default function AIChatAssistant() {
           timestamp: new Date(),
         },
       ]);
-    }, 1000);
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath } from "../../lib/basePath";
 
 interface LogoProps {
   className?: string;
@@ -24,32 +24,27 @@ export default function Logo({ className = "", variant = "full", light = false }
 
   if (variant === "horizontal") {
     return (
-      <div className={`flex items-center gap-3.5 ${className}`}>
-        {renderIcon("w-14 h-14 sm:w-16 sm:h-16", "logo-header.jpeg")}
-        <div className="flex items-center gap-3">
-          <div className="h-11 sm:h-12 w-[1px] bg-slate-700/50 hidden sm:block"></div>
-          <div className="flex flex-col justify-center leading-none">
-            <span
-              className="font-serif text-2xl sm:text-3xl font-bold tracking-wider"
-              style={{ color: light ? "#FFFFFF" : "#0F172A" }}
-            >
-              KI<span style={{ color: goldColor }}>&</span>RS
-            </span>
-            <div className="hidden sm:flex flex-col gap-0.5 mt-0.5">
-              <span
-                className="text-[8.5px] sm:text-[9px] font-serif tracking-widest uppercase font-semibold"
-                style={{ color: textGray }}
-              >
-                Kalavati Investment & Recovery Services
-              </span>
-              <span
-                className="text-[7.5px] sm:text-[8px] font-serif tracking-wider uppercase font-semibold"
-                style={{ color: goldColor }}
-              >
-                Your Money, Your Rights - Our Responsibility
-              </span>
-            </div>
-          </div>
+      <div className={`flex items-center gap-3 ${className}`}>
+        {renderIcon("w-12 h-12 sm:w-14 sm:h-14", "logo-header.jpeg")}
+        <div className="flex flex-col justify-center leading-tight">
+          <span
+            className="font-serif text-xl sm:text-2xl font-bold tracking-wider"
+            style={{ color: light ? "#FFFFFF" : "#0F172A" }}
+          >
+            KI<span style={{ color: goldColor }}>&</span>RS
+          </span>
+          <span
+            className="text-[8.5px] sm:text-[9.5px] font-serif tracking-wider uppercase font-semibold leading-tight mt-0.5 whitespace-nowrap"
+            style={{ color: textGray }}
+          >
+            Kalavati Investment & Recovery Services
+          </span>
+          <span
+            className="text-[7.5px] sm:text-[8.5px] font-serif tracking-wider uppercase font-semibold leading-tight mt-0.5 whitespace-nowrap"
+            style={{ color: goldColor }}
+          >
+            Your Money, Your Rights - Our Responsibility
+          </span>
         </div>
       </div>
     );

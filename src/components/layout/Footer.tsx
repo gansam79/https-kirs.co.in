@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Send, MessageCircle, AlertCircle, ShieldCheck, Loader2 } from "lucide-react";
 import Logo from "./Logo";
-import { getBasePath } from "@/lib/basePath";
+import { getBasePath } from "../../lib/basePath";
 
 const coreServices = [
   { name: "Recovery of Shares (IEPF)", href: "/recovery-of-shares" },
@@ -106,9 +106,9 @@ export default function Footer() {
       {/* Main Links Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* About Column */}
-        <div className="md:col-span-6 lg:col-span-3 space-y-4">
+        <div className="md:col-span-6 lg:col-span-4 space-y-4">
           <Link to="/" className="inline-block text-left" aria-label="KIRS - Kalavati Investment & Recovery Services">
-            <Logo variant="horizontal" light={true} className="!items-start" />
+            <Logo variant="horizontal" light={true} />
           </Link>
           <p className="text-slate-400 text-xs leading-relaxed">
             India's premier financial consultancy dedicated to recovering lost assets, IEPF claims, dividends, and forgotten inheritance shares.
@@ -193,16 +193,21 @@ export default function Footer() {
         </div>
 
         {/* Contact Column */}
-        <div className="md:col-span-6 lg:col-span-3 space-y-4">
+        <div className="md:col-span-6 lg:col-span-2 space-y-4">
           <h4 className="font-serif text-sm text-white font-semibold mb-4 uppercase tracking-wider">Expert Office</h4>
           <ul className="space-y-3 text-xs">
             <li className="flex gap-2.5 items-start">
               <MapPin className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-              <span className="text-slate-400">
+              <a
+                href="https://maps.google.com/?q=33/1B/1,+Datta+Nagar,+Katraj,+Pune,+Maharashtra,+411046,+India"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
                 33/1B/1, Datta Nagar, Katraj,
                 <br />
                 Pune, Maharashtra, 411046, India
-              </span>
+              </a>
             </li>
             <li className="flex gap-2.5 items-center">
               <Phone className="w-4 h-4 text-secondary shrink-0" />
