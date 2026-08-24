@@ -47,7 +47,7 @@ export default function ServicesPage() {
           </h1>
           <div className="w-16 h-[2px] bg-secondary mx-auto"></div>
           <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Browse our full spectrum of 11 dedicated services and specialized desks covering IEPF Form filings, physical share dematerializations, bank deposits, insurance proceed claims, and Trademark e-filing.
+            Browse our full spectrum of dedicated services and specialized desks covering IEPF Form filings, physical share dematerializations, ISIN activation for Ltd & Pvt Ltd companies, bank deposits, insurance proceed claims, and Trademark e-filing.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function ServicesPage() {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search service name, lost shares, IEPF, trademark..."
+            placeholder="Search service name, lost shares, IEPF, ISIN, trademark..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full text-xs pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:border-secondary bg-white text-slate-800 shadow-sm transition-all"

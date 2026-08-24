@@ -51,6 +51,16 @@ if (fs.existsSync(htaccessSrc)) {
   fs.copyFileSync(htaccessSrc, path.join(deployDir, '.htaccess'));
 }
 
+// Copy PHP contact handler fallbacks
+const phpSrc = path.join(rootDir, 'public', 'api', 'contact.php');
+if (fs.existsSync(phpSrc)) {
+  const apiDest = path.join(deployDir, 'api');
+  if (!fs.existsSync(apiDest)) fs.mkdirSync(apiDest, { recursive: true });
+  fs.copyFileSync(phpSrc, path.join(apiDest, 'contact.php'));
+  fs.copyFileSync(phpSrc, path.join(deployDir, 'contact.php'));
+  console.log('Copied PHP contact handler fallback to deploy/api/contact.php');
+}
+
 // Create tmp/restart.txt inside deploy & backend folders for Passenger auto-restart
 const tmpDest = path.join(deployDir, 'tmp');
 if (!fs.existsSync(tmpDest)) fs.mkdirSync(tmpDest);

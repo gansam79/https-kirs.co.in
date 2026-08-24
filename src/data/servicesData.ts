@@ -354,5 +354,40 @@ export const servicesData: Service[] = [
         answer: "You can start using the 'TM' symbol immediately after your application is e-filed and an acknowledgement receipt (containing the application number) is generated."
       }
     ]
+  },
+  {
+    slug: "isin-activation-limited-pvt-company",
+    title: "ISIN Activation for Limited & Pvt Ltd Companies",
+    shortDesc: "Mandatory ISIN creation, depository onboarding (NSDL & CDSL), RTA appointment, and share dematerialization setup for unlisted Public Limited & Private Limited Companies.",
+    longDesc: "Under MCA mandates and Section 29 of the Companies Act, unlisted Public Limited Companies and Private Limited Companies are required to facilitate the dematerialization of all their existing securities and issue new securities only in dematerialized form. Achieving compliance requires obtaining an International Securities Identification Number (ISIN) from depositories (NSDL and CDSL), appointing a SEBI-registered Registrar and Share Transfer Agent (RTA), executing tri-partite agreements, and filing half-yearly audit returns (PAS-6). We provide end-to-end consultancy and execution services for corporate entities to secure ISIN activation smoothly and maintain ongoing compliance.",
+    timeline: "2 to 4 weeks",
+    eligibility: [
+      "Unlisted Public Limited Companies required to dematerialize equity and preference shares.",
+      "Private Limited Companies complying with MCA mandatory dematerialization deadlines.",
+      "Startups and MSMEs raising fresh capital or offering ESOPs in demat form.",
+      "Promoters and corporate shareholders converting physical share certificates into demat form."
+    ],
+    documents: [
+      "Company Certificate of Incorporation, Memorandum & Articles of Association (MOA & AOA)",
+      "PAN Card and Net Worth Certificate of the Company attested by a Chartered Accountant",
+      "Board Resolution for ISIN Creation, RTA Appointment, and Tri-partite Agreement execution",
+      "Audited Financial Statements for the last 2 fiscal years",
+      "Master data list of shareholders with physical shareholding details and folio numbers",
+      "Tri-partite agreements executed between Company, RTA, and Depository (NSDL/CDSL)"
+    ],
+    faqs: [
+      {
+        question: "What is an ISIN and why is it mandatory for Private and Limited companies?",
+        answer: "An ISIN (International Securities Identification Number) is a unique 12-character alphanumeric code used to identify a company's specific security class (e.g., Equity Shares). MCA regulations mandate dematerialization for unlisted public and private companies to ensure transparency, prevent duplicate share certificates, and streamline share transfers."
+      },
+      {
+        question: "How long does it take to activate an ISIN with NSDL or CDSL?",
+        answer: "The entire process, including RTA selection, documentation validation, board resolution execution, and depository approval typically takes 2 to 4 weeks."
+      },
+      {
+        question: "What ongoing compliance is required after ISIN activation?",
+        answer: "Companies must file Form PAS-6 (Reconciliation of Share Capital Audit) on a half-yearly basis with the MCA within 60 days from the conclusion of each half-year, and maintain active depository and RTA connectivity fees."
+      }
+    ]
   }
 ];

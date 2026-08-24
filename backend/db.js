@@ -3,19 +3,29 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 require("dotenv").config(); // fallback for production passenger environment
 
+const dbHost = process.env.DB_HOST || "localhost";
+const dbUser = process.env.DB_USER || "u686584126_kirsdb";
+const dbPass = process.env.DB_PASSWORD || "Kirs@2026Db";
+const dbName = process.env.DB_NAME || "u686584126_kirsdb";
+
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "193.203.184.226",
-  user: process.env.DB_USER || "u686584126_kirsdb",
-  password: process.env.DB_PASSWORD || "Kirs@2026Db",
-  database: process.env.DB_NAME || "u686584126_kirsdb",
+  host: dbHost,
+  user: dbUser,
+  password: dbPass,
+  database: dbName,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
 });
 
 async function query(sql, params = []) {
-  const [results] = await pool.execute(sql, params);
-  return results;
+  try {
+    const [results] = await pool.execute(sql, params);
+    return results;
+  } catch (err) {
+    console.error("Database query execution error:", err.message);
+    throw err;
+  }
 }
 
 async function initializeDatabase() {
@@ -24,13 +34,13 @@ async function initializeDatabase() {
     await query(`
       CREATE TABLE IF NOT EXISTS contacts (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        phone VARCHAR(50) NOT NULL,
-        company VARCHAR(255),
-        service VARCHAR(255),
-        date VARCHAR(50),
-        slot VARCHAR(50),
+        name VARCHAR(255) NOT NULL DEFAULT '',
+        email VARCHAR(255) NOT NULL DEFAULT '',
+        phone VARCHAR(50) NOT NULL DEFAULT '',
+        company VARCHAR(255) DEFAULT '',
+        service VARCHAR(255) DEFAULT '',
+        date VARCHAR(50) DEFAULT '',
+        slot VARCHAR(50) DEFAULT '',
         notes TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -40,13 +50,13 @@ async function initializeDatabase() {
     await query(`
       CREATE TABLE IF NOT EXISTS service_enquiries (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        phone VARCHAR(50) NOT NULL,
-        company VARCHAR(255),
-        service VARCHAR(255),
-        date VARCHAR(50),
-        slot VARCHAR(50),
+        name VARCHAR(255) NOT NULL DEFAULT '',
+        email VARCHAR(255) NOT NULL DEFAULT '',
+        phone VARCHAR(50) NOT NULL DEFAULT '',
+        company VARCHAR(255) DEFAULT '',
+        service VARCHAR(255) DEFAULT '',
+        date VARCHAR(50) DEFAULT '',
+        slot VARCHAR(50) DEFAULT '',
         notes TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -56,10 +66,10 @@ async function initializeDatabase() {
     await query(`
       CREATE TABLE IF NOT EXISTS queries (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        type VARCHAR(50) NOT NULL,
-        name VARCHAR(255),
-        email VARCHAR(255),
-        phone VARCHAR(50),
+        type VARCHAR(50) NOT NULL DEFAULT 'contact',
+        name VARCHAR(255) DEFAULT '',
+        email VARCHAR(255) DEFAULT '',
+        phone VARCHAR(50) DEFAULT '',
         details TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,7 +138,7 @@ async function initializeDatabase() {
       }
     }
 
-    // 5. Create services table
+    // 6. Create services table
     await query(`
       CREATE TABLE IF NOT EXISTS services (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -144,7 +154,7 @@ async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // 6. Create blogs table
+    // 7. Create blogs table
     await query(`
       CREATE TABLE IF NOT EXISTS blogs (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -162,7 +172,7 @@ async function initializeDatabase() {
 
     console.log("MySQL Database connection and table verification successful!");
   } catch (error) {
-    console.error("Express DB Initialization Error:", error);
+    console.error("Express DB Initialization Notice:", error.message);
   }
 }
 

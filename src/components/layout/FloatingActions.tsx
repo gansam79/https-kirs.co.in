@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { MessageCircle, ArrowUp, CalendarRange, X, PhoneCall } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function FloatingActions() {
   const [showScroll, setShowScroll] = useState(false);
@@ -51,11 +51,11 @@ export default function FloatingActions() {
             className="hidden sm:block"
           >
             <Link
-              href="/contact"
-              className="bg-primary hover:bg-slate-900 border border-secondary text-white text-xs font-semibold py-2.5 px-4 rounded shadow-2xl flex items-center gap-2 transition-all duration-200 group"
+              to="/contact"
+              className="bg-[#17303B] hover:bg-[#0B1920] border border-[#D4AF37]/40 text-white text-xs font-semibold py-2.5 px-4 rounded-full shadow-2xl flex items-center gap-2 transition-all duration-200 group"
             >
-              <CalendarRange className="w-4 h-4 text-secondary group-hover:rotate-12 transition-transform" />
-              Book Call
+              <CalendarRange className="w-4 h-4 text-[#D4AF37] group-hover:rotate-12 transition-transform" />
+              Book Advisory Call
             </Link>
           </motion.div>
         )}
@@ -68,14 +68,14 @@ export default function FloatingActions() {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className="bg-[#25D366] hover:bg-[#20ba59] text-white p-3.5 rounded-full shadow-2xl flex items-center justify-center transition-colors relative group animate-pulse-gold"
+        className="bg-[#D4AF37] hover:bg-[#C5A028] text-[#0B1920] p-3.5 rounded-full shadow-2xl flex items-center justify-center transition-colors relative group shadow-[#D4AF37]/30"
         aria-label="Chat with us on WhatsApp"
       >
-        <MessageCircle className="w-6 h-6" />
+        <MessageCircle className="w-6 h-6 fill-[#0B1920]" />
         
         {/* Help tooltip */}
-        <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs py-1.5 px-3 rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-800">
-          Chat with Experts
+        <span className="absolute right-14 top-1/2 -translate-y-1/2 bg-[#0B1920] text-white text-xs py-1.5 px-3 rounded-md shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap border border-slate-700">
+          Chat with Recovery Experts
         </span>
       </motion.a>
 
@@ -87,7 +87,7 @@ export default function FloatingActions() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={scrollToTop}
-            className="bg-white hover:bg-slate-100 text-primary border border-slate-200 p-3 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200"
+            className="bg-[#17303B] hover:bg-[#D4AF37] text-[#D4AF37] hover:text-[#0B1920] border border-[#D4AF37]/40 p-3 rounded-full shadow-2xl flex items-center justify-center transition-all duration-200"
             aria-label="Scroll back to top"
           >
             <ArrowUp className="w-5 h-5" />
@@ -97,3 +97,4 @@ export default function FloatingActions() {
     </div>
   );
 }
+

@@ -8,7 +8,7 @@ interface LogoProps {
 }
 
 export default function Logo({ className = "", variant = "full", light = false }: LogoProps) {
-  const goldColor = "#D4AF37";
+  const emeraldColor = "#D4AF37";
   const textGray = light ? "#E2E8F0" : "#475569";
   const basePath = getBasePath();
 
@@ -28,20 +28,20 @@ export default function Logo({ className = "", variant = "full", light = false }
         {renderIcon("w-12 h-12 sm:w-14 sm:h-14", "logo-header.jpeg")}
         <div className="flex flex-col justify-center leading-tight">
           <span
-            className="font-serif text-xl sm:text-2xl font-bold tracking-wider"
+            className="font-roboto text-xl sm:text-2xl font-black tracking-wider uppercase"
             style={{ color: light ? "#FFFFFF" : "#0F172A" }}
           >
-            KI<span style={{ color: goldColor }}>&</span>RS
+            KI<span style={{ color: emeraldColor }}>&</span>RS
           </span>
           <span
-            className="text-[8.5px] sm:text-[9.5px] font-serif tracking-wider uppercase font-semibold leading-tight mt-0.5 whitespace-nowrap"
+            className="text-[8.5px] sm:text-[9.5px] font-roboto tracking-wider uppercase font-bold leading-tight mt-0.5 whitespace-nowrap"
             style={{ color: textGray }}
           >
             Kalavati Investment & Recovery Services
           </span>
           <span
-            className="text-[7.5px] sm:text-[8.5px] font-serif tracking-wider uppercase font-semibold leading-tight mt-0.5 whitespace-nowrap"
-            style={{ color: goldColor }}
+            className="text-[7.5px] sm:text-[8.5px] font-roboto tracking-wider uppercase font-extrabold leading-tight mt-0.5 whitespace-nowrap"
+            style={{ color: emeraldColor }}
           >
             Your Money, Your Rights - Our Responsibility
           </span>
@@ -55,30 +55,30 @@ export default function Logo({ className = "", variant = "full", light = false }
       {renderIcon("w-24 h-24 sm:w-28 sm:h-28", "logo.jpeg")}
 
       <h2
-        className="font-serif text-3xl sm:text-4xl font-bold tracking-widest mt-3"
+        className="font-roboto text-3xl sm:text-4xl font-black tracking-widest mt-3 uppercase"
         style={{ color: light ? "#FFFFFF" : "#0F172A" }}
       >
-        KI<span style={{ color: goldColor }}>&</span>RS
+        KI<span style={{ color: emeraldColor }}>&</span>RS
       </h2>
 
       <div className="w-full max-w-[320px] flex items-center justify-center gap-2 my-2.5 select-none">
-        <div className="h-[1px] flex-1" style={{ backgroundColor: goldColor }} />
+        <div className="h-[1px] flex-1" style={{ backgroundColor: emeraldColor }} />
         <div
           className="w-2 h-2 rotate-45 shrink-0"
-          style={{ backgroundColor: goldColor }}
+          style={{ backgroundColor: emeraldColor }}
         />
-        <div className="h-[1px] flex-1" style={{ backgroundColor: goldColor }} />
+        <div className="h-[1px] flex-1" style={{ backgroundColor: emeraldColor }} />
       </div>
 
       <p
-        className="text-[11px] sm:text-xs font-serif tracking-wide uppercase font-medium"
+        className="text-[11px] sm:text-xs font-roboto tracking-wider uppercase font-bold"
         style={{ color: light ? "#ECEFF1" : "#334155" }}
       >
         Kalavati Investment & Recovery Services
       </p>
       <p
-        className="text-[10px] sm:text-[11px] font-serif tracking-wide mt-1.5"
-        style={{ color: goldColor }}
+        className="text-[10px] sm:text-[11px] font-roboto tracking-wider uppercase font-extrabold mt-1.5"
+        style={{ color: emeraldColor }}
       >
         Your Money, Your Rights - Our Responsibility
       </p>

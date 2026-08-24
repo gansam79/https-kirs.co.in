@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MessageSquare, X, Send, User, Bot, HelpCircle, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitLeadForm } from "@/lib/apiSubmit";
 import { getBasePath } from "@/lib/basePath";
 
 interface Message {
@@ -150,16 +151,11 @@ export default function AIChatAssistant() {
     
     setIsTyping(true);
     try {
-      const basePath = getBasePath();
-      await fetch(`${basePath}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "ai_chat_assistant",
-          name: formData.name,
-          phone: formData.phone,
-          notes: formData.query || "Inquiry via AI Chat Assistant",
-        }),
+      await submitLeadForm({
+        type: "ai_chat_assistant",
+        name: formData.name,
+        phone: formData.phone,
+        notes: formData.query || "Inquiry via AI Chat Assistant",
       });
     } catch (err) {
       console.warn("Failed to push chat lead to database:", err);

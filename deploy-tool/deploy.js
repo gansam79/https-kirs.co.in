@@ -38,26 +38,21 @@ conn.on('ready', () => {
       console.log('Executing deployment commands on the server...');
       
       const cmd = [
-        'echo "Killing any active node processes to release file locks..."',
-        'killall -9 node 2>/dev/null',
-        'killall -9 next-router-worker 2>/dev/null',
-        'sleep 1',
+        'echo "Navigating to public_html..."',
         'cd domains/kirs.co.in/public_html',
-        'echo "Force cleaning up old backup directories and the broken .next folder..."',
-        'rm -rf .next-old .next-old-2 .next-old-3 .next-old-4 .next-old-5 .next_new .next_prod_1784047500 .next_prod_1784047600 stagging.zip',
-        'mv .next .next-old-delete 2>/dev/null',
-        'rm -rf .next .next-old-delete public server.js package.json package-lock.json next.config.ts next.config.js',
-        'echo "Unzipping deploy.zip into public_html..."',
-        'unzip -o deploy.zip; echo "Unzip completed with status $?"',
-        'echo "Fixing file and directory permissions recursively to 755 to prevent 500 Server Errors..."',
-        'chmod -R 755 .next public server.js package.json next.config.js',
-        'echo "Cleaning up ZIP archive..."',
+        'echo "Cleaning up obsolete next files..."',
+        'rm -rf .next .next-old* 2>/dev/null',
+        'echo "Unzipping latest deploy.zip into public_html..."',
+        'unzip -o deploy.zip; echo "Unzip finished with status $?"',
+        'echo "Setting permissions..."',
+        'chmod -R 755 . index.html .htaccess backend api 2>/dev/null',
+        'echo "Cleaning up deploy.zip on remote..."',
         'rm -f deploy.zip',
-        'echo "Running npm install via Node 22..."',
-        '/opt/alt/alt-nodejs22/root/usr/bin/npm install --production',
-        'echo "Touch restart.txt to reload Passenger..."',
-        'mkdir -p tmp && touch tmp/restart.txt',
-        'echo "Deployment complete!"'
+        'echo "Installing/verifying backend dependencies..."',
+        'if [ -d "backend" ]; then cd backend && (/opt/alt/alt-nodejs22/root/usr/bin/npm install --production || npm install --production) && cd ..; fi',
+        'echo "Touching restart.txt for Passenger reload..."',
+        'mkdir -p tmp backend/tmp && touch tmp/restart.txt backend/tmp/restart.txt',
+        'echo "Deployment completed successfully!"'
       ].join('; ');
       
       conn.exec(cmd, (err, stream) => {

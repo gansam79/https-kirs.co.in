@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Download, CheckSquare, Square, Info, ShieldCheck, Mail, ArrowRight, Printer } from "lucide-react";
 import { servicesData, Service } from "@/data/servicesData";
+import { submitLeadForm } from "@/lib/apiSubmit";
 import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 export default function DocumentChecklistPage() {
@@ -30,25 +31,14 @@ export default function DocumentChecklistPage() {
       setDraftLoading(true);
       setDraftErrorMsg("");
       try {
-        const apiPath = getApiBasePath();
-        const response = await fetch(`${apiPath}/api/contact`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            type: "draft",
-            name: emailForm.name,
-            email: emailForm.email,
-            service: activeService.title
-          })
+        await submitLeadForm({
+          type: "draft_checklist_request",
+          name: emailForm.name,
+          email: emailForm.email,
+          phone: emailForm.phone,
+          service: activeService.title,
+          selectedDocs: Object.keys(completedItems).filter((k) => completedItems[k]),
         });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Failed to submit request.");
-        }
 
         setDownloaded(true);
         setEmailForm({ name: "", email: "", phone: "" });

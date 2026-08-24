@@ -24,7 +24,7 @@ export function OrganizationSchema() {
   );
 }
 
-// 2. Local Business Schema (Bandra, Mumbai)
+// 2. Local Business Schema (Katraj, Pune)
 export function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",

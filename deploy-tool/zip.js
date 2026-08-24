@@ -7,7 +7,11 @@ const zipPath = path.join(rootDir, 'deploy.zip');
 
 console.log('Cleaning up existing deploy.zip...');
 if (fs.existsSync(zipPath)) {
-  fs.unlinkSync(zipPath);
+  try {
+    fs.unlinkSync(zipPath);
+  } catch (e) {
+    console.warn('Notice: Existing deploy.zip was locked, Compress-Archive will overwrite.');
+  }
 }
 
 console.log('Zipping deploy folder to deploy.zip...');

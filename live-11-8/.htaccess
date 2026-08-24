@@ -1,0 +1,45 @@
+# Hostinger Apache Configuration for React SPA (Vite) + Express Backend API at Root (https://kirs.co.in/)
+<IfModule mod_headers.c>
+  # Disable caching on index.html so browsers never load stale HTML
+  <FilesMatch "^index\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Force HTTPS and redirect www.kirs.co.in to non-www https://kirs.co.in/ (301 Permanent Redirect)
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\.kirs\.co\.in$ [NC]
+  RewriteRule ^(.*)$ https://kirs.co.in/$1 [L,R=301]
+
+  # 2. Return 404 for obsolete Next.js requests (e.g. /_next/...) so old cached HTML doesn't parse index.html as JS
+  RewriteCond %{REQUEST_URI} ^/_next/ [NC]
+  RewriteRule ^ - [R=404,L]
+
+  # 3. Allow direct physical static assets (JS, CSS, images, icons) to be served by Apache
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 4. Exclude /api requests from SPA rewrite so Node.js Passenger handles them
+  RewriteCond %{REQUEST_URI} ^/api [NC]
+  RewriteRule ^ - [L]
+
+  # 5. Forward all React SPA client-side routes (e.g. /services, /reviews, /about) to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Enable Phusion Passenger for Node.js Express Backend in /backend/
+<IfModule mod_passenger.c>
+    PassengerEnabled on
+    PassengerAppRoot "/home/u686584126/domains/kirs.co.in/public_html/backend"
+    PassengerBaseURI "/api"
+    PassengerAppType node
+    PassengerStartupFile server.js
+    PassengerNodejs "/opt/alt/alt-nodejs22/root/usr/bin/node"
+</IfModule>

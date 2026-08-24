@@ -152,27 +152,32 @@ export async function initializeDatabase() {
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     `);
 
-    // Seed services if table is empty
-    const servicesCount = await query<any[]>("SELECT COUNT(*) as count FROM services");
-    if (servicesCount[0].count === 0) {
-      for (const s of servicesData) {
-        await query(
-          `INSERT INTO services (slug, title, short_desc, long_desc, timeline, eligibility, documents, faqs) 
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-          [
-            s.slug,
-            s.title,
-            s.shortDesc,
-            s.longDesc,
-            s.timeline,
-            JSON.stringify(s.eligibility),
-            JSON.stringify(s.documents),
-            JSON.stringify(s.faqs),
-          ]
-        );
-      }
-      console.log("Database initialized with seed services data.");
+    // Sync services from servicesData
+    for (const s of servicesData) {
+      await query(
+        `INSERT INTO services (slug, title, short_desc, long_desc, timeline, eligibility, documents, faqs) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+         ON DUPLICATE KEY UPDATE
+           title = VALUES(title),
+           short_desc = VALUES(short_desc),
+           long_desc = VALUES(long_desc),
+           timeline = VALUES(timeline),
+           eligibility = VALUES(eligibility),
+           documents = VALUES(documents),
+           faqs = VALUES(faqs)`,
+        [
+          s.slug,
+          s.title,
+          s.shortDesc,
+          s.longDesc,
+          s.timeline,
+          JSON.stringify(s.eligibility),
+          JSON.stringify(s.documents),
+          JSON.stringify(s.faqs),
+        ]
+      );
     }
+    console.log("Database initialized with seed/updated services data.");
 
     // 7. Create blogs table
     await query(`

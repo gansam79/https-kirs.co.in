@@ -1,18 +1,22 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400;1,700&family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #1E293B;
-  --primary: #0F172A;
+  --background: #0B1920;
+  --foreground: #F1F5F9;
+  --primary: #17303B;
   --secondary: #D4AF37;
-  --success: #10B981;
-  --light-bg: #F8FAFC;
-  --border: #E2E8F0;
+  --accent: #C5A028;
+  --success: #D4AF37;
+  --light-bg: #11242E;
+  --mint-bg: rgba(212, 175, 55, 0.15);
+  --dark-slate: #0B1920;
+  --border: #1E3845;
   
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-numbers: 'Poppins', sans-serif;
+  --font-serif: 'Roboto', sans-serif;
+  --font-sans: 'Roboto', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-numbers: 'Roboto', sans-serif;
 }
 
 @theme {
@@ -20,27 +24,31 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --color-success: var(--success);
   --color-light-bg: var(--light-bg);
+  --color-mint-bg: var(--mint-bg);
+  --color-dark-slate: var(--dark-slate);
   --color-border-custom: var(--border);
   
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-numbers: 'Poppins', sans-serif;
+  --font-serif: 'Roboto', sans-serif;
+  --font-sans: 'Roboto', sans-serif;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-numbers: 'Roboto', sans-serif;
   
-  --animate-gold-sheen: gold-sheen 3s infinite linear;
+  --animate-emerald-glow: gold-glow 3s infinite linear;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-pulse-gold: pulse-gold 2s infinite ease-in-out;
+  --animate-pulse-emerald: pulse-gold 2s infinite ease-in-out;
 }
 
-@keyframes gold-sheen {
+@keyframes gold-glow {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
 
@@ -51,77 +59,119 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #0B1920;
+  font-family: 'Roboto', sans-serif !important;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #0B1920;
+  color: #F1F5F9;
+  font-family: 'Roboto', sans-serif !important;
   overflow-x: hidden;
 }
 
-/* Explicit font family rules matching design specification */
-.font-serif {
-  font-family: 'Playfair Display', Georgia, serif !important;
-}
-
-.font-sans {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-}
-
-.font-poppins {
-  font-family: 'Poppins', sans-serif !important;
+/* Explicit font family rules matching user directive to use Roboto everywhere */
+*, input, button, select, textarea, .font-serif, .font-sans, .font-roboto, .font-poppins {
+  font-family: 'Roboto', sans-serif !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
-/* Custom premium scrollbar */
+/* Custom Stocker scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--light-bg);
+  background: #0B1920;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #1E3845;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+  background: #D4AF37;
 }
 
-/* Premium utility classes */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+/* Stocker Nav Indicator (Bottom horizontal line with centered vertical tick T/|) */
+.stocker-nav-active {
+  position: relative;
+  color: #D4AF37 !important;
+}
+.stocker-nav-active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 2px;
+  background-color: #D4AF37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+.stocker-nav-active::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 6px;
+  background-color: #D4AF37;
+}
+
+/* Stocker Utility Classes */
+.text-gradient-emerald, .text-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #F59E0B 50%, #FBBF24 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200% auto;
 }
 
-.bg-gradient-premium {
-  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+.bg-gradient-stocker {
+  background: linear-gradient(135deg, #17303B 0%, #0B1920 100%);
 }
 
-.gold-border-glow {
-  border: 1px solid rgba(212, 175, 55, 0.3);
+.bg-gradient-emerald, .bg-gradient-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+}
+
+.emerald-border-glow, .gold-border-glow {
+  border: 1px solid rgba(212, 175, 55, 0.35);
   transition: all 0.3s ease;
 }
 
-.gold-border-glow:hover {
-  border-color: rgba(212, 175, 55, 0.8);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+.emerald-border-glow:hover, .gold-border-glow:hover {
+  border-color: rgba(212, 175, 55, 0.9);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.25);
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
 }
 
 .glass-panel-dark {
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(23, 48, 59, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
 }
+
+/* Stocker Badge Pill */
+.badge-stocker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  background-color: rgba(212, 175, 55, 0.15);
+  color: #D4AF37;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+

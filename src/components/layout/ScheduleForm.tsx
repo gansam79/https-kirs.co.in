@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CalendarRange, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
-import { getBasePath } from "../../lib/basePath";
+import { submitLeadForm } from "../../lib/apiSubmit";
 
 const availableSlots = [
   "10:00 AM - 10:30 AM",
@@ -17,6 +17,8 @@ const servicesList = [
   "Unclaimed Pension & Retirement Benefits Recovery",
   "Transmission of Shares",
   "NRI Share Recovery",
+  "Trademark Registration & E-Filing",
+  "ISIN Activation (Limited & Pvt Ltd Companies)",
   "Other / General Inquiry"
 ];
 
@@ -48,20 +50,10 @@ export default function ScheduleForm({ defaultService = "", compact = false }: S
       setLoading(true);
       setErrorMsg("");
       try {
-        const basePath = getBasePath();
-        const response = await fetch(`${basePath}/api/contact`, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(formData)
+        await submitLeadForm({
+          type: "consultation_booking",
+          ...formData
         });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Failed to save consultation request.");
-        }
 
         setBookingCode(`KIRS-MEET-${Math.floor(1000 + Math.random() * 9000)}`);
         setBooked(true);

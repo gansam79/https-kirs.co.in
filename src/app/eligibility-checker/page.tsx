@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft, AlertCircle, FileText, Building2, HelpCircle, Loader2, ClipboardList, RotateCcw } from "lucide-react";
+import { submitLeadForm } from "@/lib/apiSubmit";
 import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 interface CheckerState {
@@ -69,23 +70,10 @@ export default function EligibilityCheckerPage() {
       setLoading(true);
       setErrorMsg("");
       try {
-        const apiPath = getApiBasePath();
-        const response = await fetch(`${apiPath}/api/contact`, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            type: "eligibility",
-            ...formData
-          })
+        await submitLeadForm({
+          type: "eligibility",
+          ...formData
         });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "Failed to submit eligibility check.");
-        }
 
         setIsSubmitted(true);
       } catch (error: any) {

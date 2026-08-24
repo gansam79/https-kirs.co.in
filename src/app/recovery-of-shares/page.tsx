@@ -33,6 +33,7 @@ import {
   BadgeCheck
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { submitLeadForm } from "@/lib/apiSubmit";
 import { getBasePath, getApiBasePath } from "@/lib/basePath";
 
 // Scenarios matrix for interactive document finder
@@ -201,25 +202,10 @@ export default function RecoveryOfSharesPage() {
     setErrorMsg("");
 
     try {
-      const apiPath = getApiBasePath();
-      const response = await fetch(`${apiPath}/api/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "share_recovery_inquiry",
-          ...formState
-        })
+      await submitLeadForm({
+        type: "share_recovery_inquiry",
+        ...formState
       });
-
-      let data: any = {};
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        data = await response.json();
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || `Server responded with status ${response.status}`);
-      }
       setSubmitted(true);
     } catch (err: any) {
       console.error("Submission error:", err);
